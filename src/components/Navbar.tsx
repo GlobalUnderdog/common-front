@@ -33,7 +33,7 @@ const globalVariables = (links: number) => css`
     }
   }
   body {
-    padding-top: var(--navbarHeight);
+    margin-top: var(--navbarHeight);
   }
 `
 
