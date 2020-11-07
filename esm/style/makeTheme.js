@@ -71,11 +71,11 @@ export var makeTheme = function (theme) {
                 : __assign(__assign({}, defaultTheme.grid.rules), grid === null || grid === void 0 ? void 0 : grid.rules),
         },
         font: {
-            accent: (font === null || font === void 0 ? void 0 : font.accent) ? "\"" + font.accent + ", sans-serif\""
+            accent: (font === null || font === void 0 ? void 0 : font.accent) ? "\"" + font.accent + "\", sans-serif"
                 : defaultTheme.font.accent,
-            mono: (font === null || font === void 0 ? void 0 : font.mono) ? "\"" + font.mono + ", monospace\"" : defaultTheme.font.mono,
-            sans: (font === null || font === void 0 ? void 0 : font.sans) ? "\"" + font.sans + ", sans-serif\"" : defaultTheme.font.sans,
-            serif: (font === null || font === void 0 ? void 0 : font.serif) ? "\"" + font.serif + ", serif\"" : defaultTheme.font.serif,
+            mono: (font === null || font === void 0 ? void 0 : font.mono) ? "\"" + font.mono + "\", monospace" : defaultTheme.font.mono,
+            sans: (font === null || font === void 0 ? void 0 : font.sans) ? "\"" + font.sans + "\", sans-serif" : defaultTheme.font.sans,
+            serif: (font === null || font === void 0 ? void 0 : font.serif) ? "\"" + font.serif + "\", serif" : defaultTheme.font.serif,
             text: handleCSSRule(font === null || font === void 0 ? void 0 : font.text, defaultTheme.font.text),
             h1h6: handleCSSRule(font === null || font === void 0 ? void 0 : font.h1h6, defaultTheme.font.h1h6),
             h1: handleCSSRule(font === null || font === void 0 ? void 0 : font.h1, defaultTheme.font.h1),
