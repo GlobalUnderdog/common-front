@@ -178,7 +178,6 @@ export const defaultTheme: Theme = {
         all pages.
         */
         overflow-y: scroll;
-        margin-top: var(--navbarHeight);
       }
 
       button:focus {
