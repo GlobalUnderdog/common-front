@@ -1,0 +1,68 @@
+{
+  "name": "@globalunderdog/common-front",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "types": "esm",
+  "files": [
+    "dist",
+    "esm"
+  ],
+  "scripts": {
+    "build-cjs": "rimraf dist && rimraf pre && tsc && rollup -c && cp src/inspectlet.js dist/inspectlet.js && rimraf pre",
+    "build-esm": "rimraf esm && tsc --outDir esm --module esnext && cp src/inspectlet.js esm/inspectlet.js",
+    "build": "yarn build-cjs && yarn build-esm",
+    "push": "yarn build && git push",
+    "pushWithTags": "yarn push && git push -u origin --tags"
+  },
+  "peerDependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/css": "^10.0.7",
+    "emotion-theming": "^10.0.27",
+    "next": "^9.4.0",
+    "react-awesome-reveal": "^3.3.1",
+    "react-dom": "^16.8.5",
+    "react-ga": "^3.1.2",
+    "react-grid-system": "^7.1.1",
+    "react-scripts": "2.1.5",
+    "react-ssr-prepass": "^1.2.1",
+    "react": "^16.8.5"
+  },
+  "devDependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/css": "^10.0.9",
+    "@types/node": "^11.10.5",
+    "@types/react-dom": "16.8.5",
+    "@types/react": "16.8.5",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "emotion-theming": "^10.0.27",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^7.11.0",
+    "next": "^9.4.0",
+    "react-awesome-reveal": "^3.3.1",
+    "react-ga": "^3.1.2",
+    "react-grid-system": "^7.1.1",
+    "react-ssr-prepass": "^1.2.1",
+    "rimraf": "^2.6.3",
+    "rollup-plugin-cleanup": "^3.1.1",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "rollup-plugin-uglify": "^6.0.2",
+    "rollup": "^1.10.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.5.3"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
