@@ -1,4 +1,7 @@
-export var colorTypes = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseColor = exports.cssUnit = exports.colorTypes = void 0;
+exports.colorTypes = [
     'accent',
     'canvas',
     'danger',
@@ -13,7 +16,7 @@ export var colorTypes = [
  *
  * If a string is passed as argument no transformation happens.
  */
-export var cssUnit = function (num) {
+exports.cssUnit = function (num) {
     return typeof num === 'number' ? num + "px" : num;
 };
 /**
@@ -23,7 +26,7 @@ export var cssUnit = function (num) {
  *
  * Does nothing if the given string is not a 3 digits hex color, e.g. rgb(0,0,0).
  */
-export var parseColor = function (color) {
+exports.parseColor = function (color) {
     if (color.length === 4 && color[0] === '#') {
         // #F00 -> #FF0000
         return "#" + color

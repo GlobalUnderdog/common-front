@@ -1,12 +1,15 @@
-import { __assign } from "tslib";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TextInput = void 0;
+var tslib_1 = require("tslib");
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { useTheme } from '../style';
-export var TextInput = function (props) {
-    var theme = useTheme();
+var core_1 = require("@emotion/core");
+var style_1 = require("../style");
+exports.TextInput = function (props) {
+    var theme = style_1.useTheme();
     var id = props.id, label = props.label;
-    return (jsx("div", { css: theme.textInput.css(theme, props) },
-        label && jsx("label", { htmlFor: id }, label),
-        jsx("input", __assign({}, props))));
+    return (core_1.jsx("div", { css: theme.textInput.css(theme, props) },
+        label && core_1.jsx("label", { htmlFor: id }, label),
+        core_1.jsx("input", tslib_1.__assign({}, props))));
 };
-TextInput.defaultProps = { type: 'text' };
+exports.TextInput.defaultProps = { type: 'text' };
