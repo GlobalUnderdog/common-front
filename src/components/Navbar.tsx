@@ -114,9 +114,9 @@ const StyledContainer = styled(Container)<{ expanded: boolean }>`
       }
       ${mediaQuery.medium} {
         margin-right: 25px;
-        font-weight: 600;
       }
 
+      font-weight: 400;
       &.bold {
         font-weight: 700;
       }
