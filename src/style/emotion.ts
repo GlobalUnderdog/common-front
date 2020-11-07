@@ -4,5 +4,6 @@ import { Theme } from './theme'
 
 export { css, Global, keyframes } from '@emotion/core'
 export { SerializedStyles } from '@emotion/css'
+export { ThemeProvider } from 'emotion-theming'
 export const styled = _styled as CreateStyled<Theme>
 export const useTheme = (): Theme => _useTheme<Theme>()
