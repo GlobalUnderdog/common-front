@@ -109,11 +109,11 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     },
     font: {
       accent: font?.accent
-        ? `"${font.accent}, sans-serif"`
+        ? `"${font.accent}", sans-serif`
         : defaultTheme.font.accent,
-      mono: font?.mono ? `"${font.mono}, monospace"` : defaultTheme.font.mono,
-      sans: font?.sans ? `"${font.sans}, sans-serif"` : defaultTheme.font.sans,
-      serif: font?.serif ? `"${font.serif}, serif"` : defaultTheme.font.serif,
+      mono: font?.mono ? `"${font.mono}", monospace` : defaultTheme.font.mono,
+      sans: font?.sans ? `"${font.sans}", sans-serif` : defaultTheme.font.sans,
+      serif: font?.serif ? `"${font.serif}", serif` : defaultTheme.font.serif,
       text: handleCSSRule(font?.text, defaultTheme.font.text),
       h1h6: handleCSSRule(font?.h1h6, defaultTheme.font.h1h6),
       h1: handleCSSRule(font?.h1, defaultTheme.font.h1),
