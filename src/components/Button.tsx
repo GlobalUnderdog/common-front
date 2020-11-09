@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { CommonStyleProps, styled, jsx } from '../style'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
-import { CommonStyleProps, styled } from '../style'
 
 export type ButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,

@@ -1,5 +1,5 @@
-import { css } from '@emotion/core'
 import {
+  css,
   Breakpoints,
   ColorTheme,
   CommonStyleProps,

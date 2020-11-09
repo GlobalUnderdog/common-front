@@ -2,7 +2,7 @@ import _styled, { CreateStyled } from '@emotion/styled'
 import { useTheme as _useTheme } from 'emotion-theming'
 import { Theme } from './theme'
 
-export { css, Global, keyframes } from '@emotion/core'
+export { css, Global, keyframes, jsx } from '@emotion/core'
 export { SerializedStyles } from '@emotion/css'
 export { ThemeProvider } from 'emotion-theming'
 export const styled = _styled as CreateStyled<Theme>
