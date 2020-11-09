@@ -27,9 +27,9 @@ export const TextInput: React.FC<Props> = (props) => {
   const theme = useTheme()
   const { id, label } = props
   return (
-    <div css={theme.textInput.css(theme, props)}>
+    <div css={theme.textInput.css(theme, props)} className={props.className}>
       {label && <label htmlFor={id}>{label}</label>}
-      <input {...props} />
+      <input {...props} className={undefined} />
     </div>
   )
 }

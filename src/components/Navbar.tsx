@@ -191,9 +191,15 @@ const NavLink: React.FC<
 interface Props {
   links: NavLinkProps[]
   css?: SerializedStyles | SerializedStyles[]
+  className?: string
 }
 
-export const Navbar: React.FC<Props> = ({ links, children, css }) => {
+export const Navbar: React.FC<Props> = ({
+  links,
+  children,
+  css,
+  className,
+}) => {
   const [expanded, setExpanded] = useState(false)
 
   // Declaring all links here so we can use Array.length for CSS heights,
@@ -212,7 +218,7 @@ export const Navbar: React.FC<Props> = ({ links, children, css }) => {
   return (
     <Fragment>
       <Global styles={globalVariables(links.length)} />
-      <Wrapper expanded={expanded} css={css}>
+      <Wrapper expanded={expanded} css={css} className={className}>
         <StyledContainer expanded={expanded}>
           <Link href='/'>{children ?? <div />}</Link>
 

@@ -1,6 +1,6 @@
 import { defaultTheme } from './defaultTheme'
 import { Theme, ThemeBase } from './theme'
-import { cssUnit, parseColor, ThemeCSSRule } from './util'
+import { cssUnit, ThemeCSSRule } from './util'
 
 // Not declared in ./util since we don't want to export this function outside the package
 const handleCSSRule = (
@@ -32,69 +32,39 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
   return {
     color: {
       accent: {
-        dark: parseColor(color?.accent?.dark ?? defaultTheme.color.accent.dark),
-        normal: parseColor(
-          color?.accent?.normal ?? defaultTheme.color.accent.normal
-        ),
-        light: parseColor(
-          color?.accent?.light ?? defaultTheme.color.accent.light
-        ),
+        dark: color?.accent?.dark ?? defaultTheme.color.accent.dark,
+        normal: color?.accent?.normal ?? defaultTheme.color.accent.normal,
+        light: color?.accent?.light ?? defaultTheme.color.accent.light,
       },
       canvas: {
-        dark: parseColor(color?.canvas?.dark ?? defaultTheme.color.canvas.dark),
-        normal: parseColor(
-          color?.canvas?.normal ?? defaultTheme.color.canvas.normal
-        ),
-        light: parseColor(
-          color?.canvas?.light ?? defaultTheme.color.canvas.light
-        ),
+        dark: color?.canvas?.dark ?? defaultTheme.color.canvas.dark,
+        normal: color?.canvas?.normal ?? defaultTheme.color.canvas.normal,
+        light: color?.canvas?.light ?? defaultTheme.color.canvas.light,
       },
       danger: {
-        dark: parseColor(color?.danger?.dark ?? defaultTheme.color.danger.dark),
-        normal: parseColor(
-          color?.danger?.normal ?? defaultTheme.color.danger.normal
-        ),
-        light: parseColor(
-          color?.danger?.light ?? defaultTheme.color.danger.light
-        ),
+        dark: color?.danger?.dark ?? defaultTheme.color.danger.dark,
+        normal: color?.danger?.normal ?? defaultTheme.color.danger.normal,
+        light: color?.danger?.light ?? defaultTheme.color.danger.light,
       },
       ink: {
-        dark: parseColor(color?.ink?.dark ?? defaultTheme.color.ink.dark),
-        normal: parseColor(color?.ink?.normal ?? defaultTheme.color.ink.normal),
-        light: parseColor(color?.ink?.light ?? defaultTheme.color.ink.light),
+        dark: color?.ink?.dark ?? defaultTheme.color.ink.dark,
+        normal: color?.ink?.normal ?? defaultTheme.color.ink.normal,
+        light: color?.ink?.light ?? defaultTheme.color.ink.light,
       },
       primary: {
-        dark: parseColor(
-          color?.primary?.dark ?? defaultTheme.color.primary.dark
-        ),
-        normal: parseColor(
-          color?.primary?.normal ?? defaultTheme.color.primary.normal
-        ),
-        light: parseColor(
-          color?.primary?.light ?? defaultTheme.color.primary.light
-        ),
+        dark: color?.primary?.dark ?? defaultTheme.color.primary.dark,
+        normal: color?.primary?.normal ?? defaultTheme.color.primary.normal,
+        light: color?.primary?.light ?? defaultTheme.color.primary.light,
       },
       success: {
-        dark: parseColor(
-          color?.success?.dark ?? defaultTheme.color.success.dark
-        ),
-        normal: parseColor(
-          color?.success?.normal ?? defaultTheme.color.success.normal
-        ),
-        light: parseColor(
-          color?.success?.light ?? defaultTheme.color.success.light
-        ),
+        dark: color?.success?.dark ?? defaultTheme.color.success.dark,
+        normal: color?.success?.normal ?? defaultTheme.color.success.normal,
+        light: color?.success?.light ?? defaultTheme.color.success.light,
       },
       warning: {
-        dark: parseColor(
-          color?.warning?.dark ?? defaultTheme.color.warning.dark
-        ),
-        normal: parseColor(
-          color?.warning?.normal ?? defaultTheme.color.warning.normal
-        ),
-        light: parseColor(
-          color?.warning?.light ?? defaultTheme.color.warning.light
-        ),
+        dark: color?.warning?.dark ?? defaultTheme.color.warning.dark,
+        normal: color?.warning?.normal ?? defaultTheme.color.warning.normal,
+        light: color?.warning?.light ?? defaultTheme.color.warning.light,
       },
     },
     grid: {
