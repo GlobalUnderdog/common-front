@@ -10,6 +10,7 @@ interface NavLinkProps {
 interface Props {
     links: NavLinkProps[];
     css?: SerializedStyles | SerializedStyles[];
+    className?: string;
 }
 export declare const Navbar: React.FC<Props>;
 export {};

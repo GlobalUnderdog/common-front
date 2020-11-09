@@ -25,14 +25,6 @@ export declare type CSSUnit = string | number;
  * If a string is passed as argument no transformation happens.
  */
 export declare const cssUnit: (num: CSSUnit) => string;
-/**
- * Parses colors, the purpose of this function is to make all 3 digits HEX
- * into 6 digits. This will allow us to use HEX opacity on color variables
- * without any issues, for example `color: ${color}80` for 50% opacity.
- *
- * Does nothing if the given string is not a 3 digits hex color, e.g. rgb(0,0,0).
- */
-export declare const parseColor: (color: string) => string;
 export interface CommonStyleProps {
     color?: ColorType;
 }

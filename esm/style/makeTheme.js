@@ -1,6 +1,6 @@
 import { __assign } from "tslib";
 import { defaultTheme } from './defaultTheme';
-import { cssUnit, parseColor } from './util';
+import { cssUnit } from './util';
 // Not declared in ./util since we don't want to export this function outside the package
 var handleCSSRule = function (rules, defaultRule) {
     if (!rules)
@@ -29,39 +29,39 @@ export var makeTheme = function (theme) {
     return {
         color: {
             accent: {
-                dark: parseColor((_b = (_a = color === null || color === void 0 ? void 0 : color.accent) === null || _a === void 0 ? void 0 : _a.dark) !== null && _b !== void 0 ? _b : defaultTheme.color.accent.dark),
-                normal: parseColor((_d = (_c = color === null || color === void 0 ? void 0 : color.accent) === null || _c === void 0 ? void 0 : _c.normal) !== null && _d !== void 0 ? _d : defaultTheme.color.accent.normal),
-                light: parseColor((_f = (_e = color === null || color === void 0 ? void 0 : color.accent) === null || _e === void 0 ? void 0 : _e.light) !== null && _f !== void 0 ? _f : defaultTheme.color.accent.light),
+                dark: (_b = (_a = color === null || color === void 0 ? void 0 : color.accent) === null || _a === void 0 ? void 0 : _a.dark) !== null && _b !== void 0 ? _b : defaultTheme.color.accent.dark,
+                normal: (_d = (_c = color === null || color === void 0 ? void 0 : color.accent) === null || _c === void 0 ? void 0 : _c.normal) !== null && _d !== void 0 ? _d : defaultTheme.color.accent.normal,
+                light: (_f = (_e = color === null || color === void 0 ? void 0 : color.accent) === null || _e === void 0 ? void 0 : _e.light) !== null && _f !== void 0 ? _f : defaultTheme.color.accent.light,
             },
             canvas: {
-                dark: parseColor((_h = (_g = color === null || color === void 0 ? void 0 : color.canvas) === null || _g === void 0 ? void 0 : _g.dark) !== null && _h !== void 0 ? _h : defaultTheme.color.canvas.dark),
-                normal: parseColor((_k = (_j = color === null || color === void 0 ? void 0 : color.canvas) === null || _j === void 0 ? void 0 : _j.normal) !== null && _k !== void 0 ? _k : defaultTheme.color.canvas.normal),
-                light: parseColor((_m = (_l = color === null || color === void 0 ? void 0 : color.canvas) === null || _l === void 0 ? void 0 : _l.light) !== null && _m !== void 0 ? _m : defaultTheme.color.canvas.light),
+                dark: (_h = (_g = color === null || color === void 0 ? void 0 : color.canvas) === null || _g === void 0 ? void 0 : _g.dark) !== null && _h !== void 0 ? _h : defaultTheme.color.canvas.dark,
+                normal: (_k = (_j = color === null || color === void 0 ? void 0 : color.canvas) === null || _j === void 0 ? void 0 : _j.normal) !== null && _k !== void 0 ? _k : defaultTheme.color.canvas.normal,
+                light: (_m = (_l = color === null || color === void 0 ? void 0 : color.canvas) === null || _l === void 0 ? void 0 : _l.light) !== null && _m !== void 0 ? _m : defaultTheme.color.canvas.light,
             },
             danger: {
-                dark: parseColor((_p = (_o = color === null || color === void 0 ? void 0 : color.danger) === null || _o === void 0 ? void 0 : _o.dark) !== null && _p !== void 0 ? _p : defaultTheme.color.danger.dark),
-                normal: parseColor((_r = (_q = color === null || color === void 0 ? void 0 : color.danger) === null || _q === void 0 ? void 0 : _q.normal) !== null && _r !== void 0 ? _r : defaultTheme.color.danger.normal),
-                light: parseColor((_t = (_s = color === null || color === void 0 ? void 0 : color.danger) === null || _s === void 0 ? void 0 : _s.light) !== null && _t !== void 0 ? _t : defaultTheme.color.danger.light),
+                dark: (_p = (_o = color === null || color === void 0 ? void 0 : color.danger) === null || _o === void 0 ? void 0 : _o.dark) !== null && _p !== void 0 ? _p : defaultTheme.color.danger.dark,
+                normal: (_r = (_q = color === null || color === void 0 ? void 0 : color.danger) === null || _q === void 0 ? void 0 : _q.normal) !== null && _r !== void 0 ? _r : defaultTheme.color.danger.normal,
+                light: (_t = (_s = color === null || color === void 0 ? void 0 : color.danger) === null || _s === void 0 ? void 0 : _s.light) !== null && _t !== void 0 ? _t : defaultTheme.color.danger.light,
             },
             ink: {
-                dark: parseColor((_v = (_u = color === null || color === void 0 ? void 0 : color.ink) === null || _u === void 0 ? void 0 : _u.dark) !== null && _v !== void 0 ? _v : defaultTheme.color.ink.dark),
-                normal: parseColor((_x = (_w = color === null || color === void 0 ? void 0 : color.ink) === null || _w === void 0 ? void 0 : _w.normal) !== null && _x !== void 0 ? _x : defaultTheme.color.ink.normal),
-                light: parseColor((_z = (_y = color === null || color === void 0 ? void 0 : color.ink) === null || _y === void 0 ? void 0 : _y.light) !== null && _z !== void 0 ? _z : defaultTheme.color.ink.light),
+                dark: (_v = (_u = color === null || color === void 0 ? void 0 : color.ink) === null || _u === void 0 ? void 0 : _u.dark) !== null && _v !== void 0 ? _v : defaultTheme.color.ink.dark,
+                normal: (_x = (_w = color === null || color === void 0 ? void 0 : color.ink) === null || _w === void 0 ? void 0 : _w.normal) !== null && _x !== void 0 ? _x : defaultTheme.color.ink.normal,
+                light: (_z = (_y = color === null || color === void 0 ? void 0 : color.ink) === null || _y === void 0 ? void 0 : _y.light) !== null && _z !== void 0 ? _z : defaultTheme.color.ink.light,
             },
             primary: {
-                dark: parseColor((_1 = (_0 = color === null || color === void 0 ? void 0 : color.primary) === null || _0 === void 0 ? void 0 : _0.dark) !== null && _1 !== void 0 ? _1 : defaultTheme.color.primary.dark),
-                normal: parseColor((_3 = (_2 = color === null || color === void 0 ? void 0 : color.primary) === null || _2 === void 0 ? void 0 : _2.normal) !== null && _3 !== void 0 ? _3 : defaultTheme.color.primary.normal),
-                light: parseColor((_5 = (_4 = color === null || color === void 0 ? void 0 : color.primary) === null || _4 === void 0 ? void 0 : _4.light) !== null && _5 !== void 0 ? _5 : defaultTheme.color.primary.light),
+                dark: (_1 = (_0 = color === null || color === void 0 ? void 0 : color.primary) === null || _0 === void 0 ? void 0 : _0.dark) !== null && _1 !== void 0 ? _1 : defaultTheme.color.primary.dark,
+                normal: (_3 = (_2 = color === null || color === void 0 ? void 0 : color.primary) === null || _2 === void 0 ? void 0 : _2.normal) !== null && _3 !== void 0 ? _3 : defaultTheme.color.primary.normal,
+                light: (_5 = (_4 = color === null || color === void 0 ? void 0 : color.primary) === null || _4 === void 0 ? void 0 : _4.light) !== null && _5 !== void 0 ? _5 : defaultTheme.color.primary.light,
             },
             success: {
-                dark: parseColor((_7 = (_6 = color === null || color === void 0 ? void 0 : color.success) === null || _6 === void 0 ? void 0 : _6.dark) !== null && _7 !== void 0 ? _7 : defaultTheme.color.success.dark),
-                normal: parseColor((_9 = (_8 = color === null || color === void 0 ? void 0 : color.success) === null || _8 === void 0 ? void 0 : _8.normal) !== null && _9 !== void 0 ? _9 : defaultTheme.color.success.normal),
-                light: parseColor((_11 = (_10 = color === null || color === void 0 ? void 0 : color.success) === null || _10 === void 0 ? void 0 : _10.light) !== null && _11 !== void 0 ? _11 : defaultTheme.color.success.light),
+                dark: (_7 = (_6 = color === null || color === void 0 ? void 0 : color.success) === null || _6 === void 0 ? void 0 : _6.dark) !== null && _7 !== void 0 ? _7 : defaultTheme.color.success.dark,
+                normal: (_9 = (_8 = color === null || color === void 0 ? void 0 : color.success) === null || _8 === void 0 ? void 0 : _8.normal) !== null && _9 !== void 0 ? _9 : defaultTheme.color.success.normal,
+                light: (_11 = (_10 = color === null || color === void 0 ? void 0 : color.success) === null || _10 === void 0 ? void 0 : _10.light) !== null && _11 !== void 0 ? _11 : defaultTheme.color.success.light,
             },
             warning: {
-                dark: parseColor((_13 = (_12 = color === null || color === void 0 ? void 0 : color.warning) === null || _12 === void 0 ? void 0 : _12.dark) !== null && _13 !== void 0 ? _13 : defaultTheme.color.warning.dark),
-                normal: parseColor((_15 = (_14 = color === null || color === void 0 ? void 0 : color.warning) === null || _14 === void 0 ? void 0 : _14.normal) !== null && _15 !== void 0 ? _15 : defaultTheme.color.warning.normal),
-                light: parseColor((_17 = (_16 = color === null || color === void 0 ? void 0 : color.warning) === null || _16 === void 0 ? void 0 : _16.light) !== null && _17 !== void 0 ? _17 : defaultTheme.color.warning.light),
+                dark: (_13 = (_12 = color === null || color === void 0 ? void 0 : color.warning) === null || _12 === void 0 ? void 0 : _12.dark) !== null && _13 !== void 0 ? _13 : defaultTheme.color.warning.dark,
+                normal: (_15 = (_14 = color === null || color === void 0 ? void 0 : color.warning) === null || _14 === void 0 ? void 0 : _14.normal) !== null && _15 !== void 0 ? _15 : defaultTheme.color.warning.normal,
+                light: (_17 = (_16 = color === null || color === void 0 ? void 0 : color.warning) === null || _16 === void 0 ? void 0 : _16.light) !== null && _17 !== void 0 ? _17 : defaultTheme.color.warning.light,
             },
         },
         grid: {

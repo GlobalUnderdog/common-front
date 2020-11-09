@@ -8,5 +8,7 @@ var core_1 = require("@emotion/core");
 Object.defineProperty(exports, "css", { enumerable: true, get: function () { return core_1.css; } });
 Object.defineProperty(exports, "Global", { enumerable: true, get: function () { return core_1.Global; } });
 Object.defineProperty(exports, "keyframes", { enumerable: true, get: function () { return core_1.keyframes; } });
+var emotion_theming_2 = require("emotion-theming");
+Object.defineProperty(exports, "ThemeProvider", { enumerable: true, get: function () { return emotion_theming_2.ThemeProvider; } });
 exports.styled = styled_1.default;
 exports.useTheme = function () { return emotion_theming_1.useTheme(); };

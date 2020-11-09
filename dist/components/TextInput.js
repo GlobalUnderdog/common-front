@@ -8,8 +8,8 @@ var style_1 = require("../style");
 exports.TextInput = function (props) {
     var theme = style_1.useTheme();
     var id = props.id, label = props.label;
-    return (core_1.jsx("div", { css: theme.textInput.css(theme, props) },
+    return (core_1.jsx("div", { css: theme.textInput.css(theme, props), className: props.className },
         label && core_1.jsx("label", { htmlFor: id }, label),
-        core_1.jsx("input", tslib_1.__assign({}, props))));
+        core_1.jsx("input", tslib_1.__assign({}, props, { className: undefined }))));
 };
 exports.TextInput.defaultProps = { type: 'text' };

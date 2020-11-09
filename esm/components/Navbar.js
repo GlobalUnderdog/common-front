@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, Fragment } from 'react';
 import { Container, css, Global, mediaQuery, styled, useTheme, } from '../style';
 import { Button } from './Button';
-var globalVariables = function (links) { return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    padding-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    padding-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
+var globalVariables = function (links) { return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
 var Wrapper = styled.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
     ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n"])), function (p) { return (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight'); }, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.canvas.light; }, function (p) {
     return p.expanded ? "0 2px 2px " + p.theme.color.ink.normal + "25" : 'none';
@@ -31,7 +31,7 @@ var NavLink = function (_a) {
         jsx(Child, null))) : (jsx(Child, null));
 };
 export var Navbar = function (_a) {
-    var links = _a.links, children = _a.children, css = _a.css;
+    var links = _a.links, children = _a.children, css = _a.css, className = _a.className;
     var _b = useState(false), expanded = _b[0], setExpanded = _b[1];
     // Declaring all links here so we can use Array.length for CSS heights,
     // note that in this case Preact doesn't need `key` prop in components.
@@ -41,7 +41,7 @@ export var Navbar = function (_a) {
     });
     return (jsx(Fragment, null,
         jsx(Global, { styles: globalVariables(links.length) }),
-        jsx(Wrapper, { expanded: expanded, css: css },
+        jsx(Wrapper, { expanded: expanded, css: css, className: className },
             jsx(StyledContainer, { expanded: expanded },
                 jsx(Link, { href: '/' }, children !== null && children !== void 0 ? children : jsx("div", null)),
                 jsx("button", { className: 'toggleNavLinks', onClick: function () { return setExpanded(!expanded); } },
