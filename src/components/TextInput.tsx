@@ -8,7 +8,7 @@ type HTMLInputProps = DetailedHTMLProps<
   HTMLInputElement
 >
 
-type Props = HTMLInputProps &
+export type InputProps = HTMLInputProps &
   CommonStyleProps & {
     label?: string
     type?:
@@ -23,7 +23,7 @@ type Props = HTMLInputProps &
       | 'url'
   }
 
-export const TextInput: React.FC<Props> = (props) => {
+export const TextInput: React.FC<InputProps> = (props) => {
   const theme = useTheme()
   const { id, label } = props
   return (
