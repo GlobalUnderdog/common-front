@@ -4,7 +4,12 @@ import {
   Col as _Col,
 } from 'react-grid-system'
 import { styled } from '.'
-export { ContainerProps, RowProps, ColProps } from 'react-grid-system'
+export {
+  ContainerProps,
+  RowProps,
+  ColProps,
+  useScreenClass,
+} from 'react-grid-system'
 
 export const Container = styled(_Container)()
 export const Row = styled(_Row)()

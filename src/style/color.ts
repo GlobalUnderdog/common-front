@@ -1,51 +1,38 @@
-import { ColorSwatch } from './util'
+export const colorTypes = [
+  'accent',
+  'canvas',
+  'danger',
+  'ink',
+  'primary',
+  'success',
+  'warning',
+] as const
+export type ColorType = typeof colorTypes[number]
+
+/**
+ * Used to group shades of the same color.
+ */
+export interface ColorSwatch {
+  dark: string
+  normal: string
+  light: string
+}
 
 /**
  * Usage of generic to speed up the creation of themes when using makeTheme,
  * in this way developers can pass partial themes while just adding the values
  * over the default ones.
  */
-interface ColorThemeBase<Complete extends boolean> {
-  /** Used subtly to call attention to key elements */
-  readonly accent: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Used throughout the app, often a tame color when compared to `accent`
-   * in order to avoid overwhelming users with visual pollution.
-   */
-  readonly primary: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Color used mostly for backgrounds of the app, for example pages,
-   * inputs, cards, and other elements where textual information is
-   * conveyed.
-   */
-  readonly canvas: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Used to indicate the idea of positive results, e.g. successful responses
-   * from actions.
-   */
-  readonly success: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Used to call the attention for possible unwanted effects, e.g. asking for
-   * users permissions when deleting a file.
-   */
-  readonly danger: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Always in stark contrast when compared to `canvas`, since this color is
-   * used mostly for text color, ideally all swatches of `ink` (dark, normal, light)
-   * should be legible on the swatches of `canvas`.
-   */
-  readonly ink: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-  /**
-   * Used to indicate that something might not be possibly right, the difference
-   * from `danger` is that `warning` can be used to indicate possible
-   * possitive--but where attention is required to ensure everything is on track,
-   * e.g. users have typed a weak password.
-   */
-  readonly warning: Complete extends true ? ColorSwatch : Partial<ColorSwatch>
-}
+type ColorThemeBase<Complete extends boolean> = Complete extends true
+  ? Record<ColorType, ColorSwatch>
+  : Partial<Record<ColorType, Partial<ColorSwatch>>>
 
-/** All 3 digit HEX colors are converted to 6 digits on Theme.color */
 export type ColorTheme = ColorThemeBase<true>
 
-/** Unlike Partial<Color> this one allows for `color = { accent: { normal: '#f00' } }` */
+/**
+ * Unlike `Partial<Color>` this one allows for `color = { accent: { normal: '#f00' } }`
+ *
+ * In other words, PartialColorTheme allows not only for `Partial<Color>`
+ * but also for each `Color[type]` to be `Partial<ColorSwatch>`
+ */
 export type PartialColorTheme = Partial<ColorThemeBase<false>>
