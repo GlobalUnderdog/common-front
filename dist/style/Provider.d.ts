@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { ThemeProps } from './theme';
 import { NeedsChildrenProps } from './util';

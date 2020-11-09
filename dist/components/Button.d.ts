@@ -1,4 +1,5 @@
-/// <reference types="react" />
-export declare const Button: import("@emotion/styled-base").StyledComponent<import("react").DetailedHTMLProps<import("react").ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, {
-    color?: "accent" | "canvas" | "danger" | "ink" | "primary" | "success" | "warning" | undefined;
-}, import("../style").Theme>;
+/** @jsx jsx */
+import { CommonStyleProps } from '../style';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+export declare type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & CommonStyleProps;
+export declare const Button: import("@emotion/styled-base").StyledComponent<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, ButtonProps, import("../style").Theme>;

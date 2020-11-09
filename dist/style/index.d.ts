@@ -1,6 +1,6 @@
+export * from './color';
 export * from './emotion';
 export * from './util';
-export * from './color';
 export * from './radius';
 export * from './font';
 export * from './grid';
