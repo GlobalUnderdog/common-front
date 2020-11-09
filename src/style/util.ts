@@ -1,26 +1,7 @@
 import { ReactNode } from 'react'
+import { ColorType } from './color'
 import { SerializedStyles } from './emotion'
 import { Theme } from './theme'
-
-export const colorTypes = [
-  'accent',
-  'canvas',
-  'danger',
-  'ink',
-  'primary',
-  'success',
-  'warning',
-] as const
-export type ColorType = typeof colorTypes[number]
-
-/**
- * Used to group shades of the same color.
- */
-export interface ColorSwatch {
-  dark: string
-  normal: string
-  light: string
-}
 
 /** Makes TS complain about missing children */
 export interface NeedsChildrenProps {

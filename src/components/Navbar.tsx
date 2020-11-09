@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import Link from 'next/link'
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, ReactNode } from 'react'
 import {
   ColorType,
   Container,
@@ -192,14 +192,11 @@ interface Props {
   links: NavLinkProps[]
   css?: SerializedStyles | SerializedStyles[]
   className?: string
+  logo?: ReactNode
+  children?: never
 }
 
-export const Navbar: React.FC<Props> = ({
-  links,
-  children,
-  css,
-  className,
-}) => {
+export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
   const [expanded, setExpanded] = useState(false)
 
   // Declaring all links here so we can use Array.length for CSS heights,
@@ -220,7 +217,9 @@ export const Navbar: React.FC<Props> = ({
       <Global styles={globalVariables(links.length)} />
       <Wrapper expanded={expanded} css={css} className={className}>
         <StyledContainer expanded={expanded}>
-          <Link href='/'>{children ?? <div />}</Link>
+          {/* Pass an empty div if there's no logo so NavLinks still work */}
+          {/* (we need an element to expand the CSS Flex for .toggleNavLinks) */}
+          <Link href='/'>{logo ?? <div />}</Link>
 
           <button
             className='toggleNavLinks'
