@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
-import { CommonStyleProps, useTheme } from '../style'
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import { CommonStyleProps, useTheme, jsx } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,

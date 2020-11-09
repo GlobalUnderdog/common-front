@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
 import Link from 'next/link'
-import React, { useState, Fragment, ReactNode } from 'react'
+import { Fragment, ReactNode, useState } from 'react'
 import {
   ColorType,
   Container,
   css,
   Global,
+  jsx,
   mediaQuery,
   SerializedStyles,
   styled,
@@ -37,7 +37,12 @@ const globalVariables = (links: number) => css`
   }
 `
 
-const Wrapper = styled.div<{ expanded: boolean }>`
+interface WrapperProps {
+  expanded: boolean
+  className?: string
+}
+
+const Wrapper = styled.div<WrapperProps>`
   width: 100%;
   height: var(
     ${(p) => (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight')}
@@ -54,95 +59,96 @@ const Wrapper = styled.div<{ expanded: boolean }>`
 
   /* Ensures it is on top of all content, but the Modal */
   z-index: 888;
-`
 
-const StyledContainer = styled(Container)<{ expanded: boolean }>`
-  display: flex;
-  align-items: center;
-
-  ${mediaQuery.small} {
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-  height: 100%;
-
-  & > img {
-    width: 80px;
-    object-fit: contain;
-  }
-
-  .toggleNavLinks {
-    width: var(--navbarHeight);
-    height: var(--navbarHeight);
-    font-size: 18px;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    &:focus {
-      outline: none;
-    }
-
-    background: none;
-    border: none;
-    color: ${({ expanded, theme }) =>
-      expanded ? theme.color.primary.normal : theme.color.ink.light};
-    transition: color ease 0.3s;
-    ${mediaQuery.medium} {
-      display: none;
-    }
-  }
-
-  .links {
+  /* Container */
+  & > div {
     display: flex;
     align-items: center;
-
-    & > a {
-      font-size: 16px;
-      text-decoration: none;
-      color: ${(p) => p.theme.color.ink.light};
-      font-family: ${(p) => p.theme.font.accent};
-      &:hover {
-        color: ${(p) => p.theme.color.primary.normal};
-      }
-      transition: color ease 0.2s;
-      ${mediaQuery.small} {
-        margin-bottom: 25px;
-        display: flex;
-        align-items: center;
-        margin: 0;
-      }
-      ${mediaQuery.medium} {
-        margin-right: 25px;
-      }
-
-      font-weight: 400;
-      &.bold {
-        font-weight: 700;
-      }
-    }
 
     ${mediaQuery.small} {
-      width: 100%;
-      height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));
-      padding: 0;
-      margin: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+    height: 100%;
 
-      opacity: ${(p) => (p.expanded ? 1 : 0)};
-      pointer-events: ${(p) => (p.expanded ? 'visible' : 'none')};
-      /*
-      The animation is faster when showing the menu in order for the text
-      to render inside the wrapper.
-      */
-      transition: opacity ease ${(p) => (p.expanded ? '0.7s' : '0.15s')};
+    & > img {
+      width: 80px;
+      object-fit: contain;
     }
 
-    ${mediaQuery.medium} {
-      flex: 4;
+    .toggleNavLinks {
+      width: var(--navbarHeight);
+      height: var(--navbarHeight);
+      font-size: 18px;
+
+      display: flex;
       justify-content: flex-end;
+      align-items: center;
+      &:focus {
+        outline: none;
+      }
+
+      background: none;
+      border: none;
+      color: ${({ expanded, theme }) =>
+        expanded ? theme.color.primary.normal : theme.color.ink.light};
+      transition: color ease 0.3s;
+      ${mediaQuery.medium} {
+        display: none;
+      }
+    }
+
+    & > .links {
+      display: flex;
+      align-items: center;
+
+      ${mediaQuery.small} {
+        width: 100%;
+        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        opacity: ${(p) => (p.expanded ? 1 : 0)};
+        pointer-events: ${(p) => (p.expanded ? 'visible' : 'none')};
+        /*
+    The animation is faster when showing the menu in order for the text
+    to render inside the wrapper.
+    */
+        transition: opacity ease ${(p) => (p.expanded ? '0.7s' : '0.15s')};
+      }
+
+      ${mediaQuery.medium} {
+        flex: 4;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  a {
+    font-size: 16px;
+    text-decoration: none;
+    color: ${(p) => p.theme.color.ink.light};
+    font-family: ${(p) => p.theme.font.accent};
+    &:hover {
+      color: ${(p) => p.theme.color.primary.normal};
+    }
+    transition: color ease 0.2s;
+    ${mediaQuery.small} {
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+    ${mediaQuery.medium} {
+      margin-right: 25px;
+    }
+
+    font-weight: 400;
+    &.bold {
+      font-weight: 700;
     }
   }
 `
@@ -216,7 +222,7 @@ export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
     <Fragment>
       <Global styles={globalVariables(links.length)} />
       <Wrapper expanded={expanded} css={css} className={className}>
-        <StyledContainer expanded={expanded}>
+        <Container>
           {/* Pass an empty div if there's no logo so NavLinks still work */}
           {/* (we need an element to expand the CSS Flex for .toggleNavLinks) */}
           <Link href='/'>{logo ?? <div />}</Link>
@@ -229,7 +235,7 @@ export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
           </button>
 
           <div className='links'>{mappedLinks}</div>
-        </StyledContainer>
+        </Container>
       </Wrapper>
     </Fragment>
   )

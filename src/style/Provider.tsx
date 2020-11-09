@@ -1,13 +1,9 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { Global } from '@emotion/core'
-import { ThemeProvider } from 'emotion-theming'
 import React, { Fragment } from 'react'
 import { ScreenClassProvider, setConfiguration } from 'react-grid-system'
+import { css, Global, jsx, ThemeProvider, useTheme } from './emotion'
 import { ThemeProps } from './theme'
 import { NeedsChildrenProps } from './util'
-import { useTheme } from './emotion'
-import { css } from './emotion'
 
 const Children: React.FC = ({ children }) => {
   const theme = useTheme()
