@@ -15,6 +15,7 @@ const Children: React.FC = ({ children }) => {
   return (
     <Fragment>
       <Global styles={theme.global.css(theme)} />
+      <Global styles={theme.font.text.css(theme)} />
       <Global
         styles={css`
           h1,
