@@ -3,7 +3,6 @@ import {
   Breakpoints,
   ColorTheme,
   CommonStyleProps,
-  FontTheme,
   SerializedStyles,
   Theme,
 } from '.'
@@ -12,124 +11,50 @@ const normalizeMin =
   '/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}'
 
 const defaultColorTheme: ColorTheme = {
-  accent: {
+  secondary: {
     dark: '#077C7D',
-    normal: '#00B7B8',
+    main: '#00B7B8',
     light: '#6AE1E2',
   },
   canvas: {
     dark: '#E9E9E9',
-    normal: '#FAFAFA',
+    main: '#FAFAFA',
     light: '#FFF',
   },
-  danger: {
+  error: {
     dark: '#C62828',
-    normal: '#F44336',
+    main: '#F44336',
     light: '#FFEBEE',
   },
   ink: {
     dark: '#000',
-    normal: '#444',
+    main: '#444',
     light: '#888',
   },
   primary: {
-    dark: '#054B2',
-    normal: '#0078D4',
+    dark: '#0054B2',
+    main: '#0078D4',
     light: '#1499FF',
   },
+  info: {
+    dark: '#0277BD',
+    main: '#03A9F4',
+    light: '#81D4FA',
+  },
   success: {
-    dark: '#F8800',
-    normal: '#8BC34A',
+    dark: '#0F8800',
+    main: '#8BC34A',
     light: '#C5DBB2',
   },
   warning: {
-    dark: '#C5C00',
-    normal: '#E65100',
+    dark: '#AC5C00',
+    main: '#E69100',
     light: '#FFE0B2',
-  },
-}
-
-const defaultFontTheme: FontTheme = {
-  sans: 'sans-serif',
-  serif: 'serif',
-  mono: 'monospace',
-  accent: 'sans-serif',
-  text: {
-    css: ({ color, font }: Theme): SerializedStyles => css`
-      /*
-      Setting this in HTML so divs, spans and other elements benefit
-      from these rules
-      */
-      html {
-        color: ${color.ink.normal};
-        font-family: ${font.sans};
-        font-size: 18px;
-        /*
-        Line-height for readability based on
-        https://www.w3.org/TR/WCAG20-TECHS/C21.html#C21-description
-        */
-        line-height: 1.5;
-        ::selection {
-          background-color: ${color.primary.dark};
-          color: ${color.canvas.normal};
-        }
-        :not(button) > a {
-          color: ${color.primary.normal};
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
-    `,
-  },
-  h1h6: {
-    css: ({ color, font }: Theme): SerializedStyles => css`
-      color: ${color.ink.light};
-      font-family: ${font.accent};
-      /*
-      Since headers have bigger margins than regular text, we decrease
-      line-height in a pinch
-      */
-      line-height: 1.4;
-      font-weight: 600;
-    `,
-  },
-  h1: {
-    css: (): SerializedStyles => css`
-      font-size: 64px;
-    `,
-  },
-  h2: {
-    css: (): SerializedStyles => css`
-      font-size: 52px;
-    `,
-  },
-  h3: {
-    css: (): SerializedStyles => css`
-      font-size: 48px;
-    `,
-  },
-  h4: {
-    css: (): SerializedStyles => css`
-      font-size: 36px;
-    `,
-  },
-  h5: {
-    css: (): SerializedStyles => css`
-      font-size: 24px;
-      text-transform: uppercase;
-    `,
-  },
-  h6: {
-    css: (): SerializedStyles => css`
-      font-size: 18px;
-      text-transform: uppercase;
-    `,
   },
 }
 
 export const defaultTheme: Theme = {
   color: defaultColorTheme,
-  font: defaultFontTheme,
   radius: {
     big: 8,
     normal: 4,
@@ -156,7 +81,8 @@ export const defaultTheme: Theme = {
 
       html {
         scroll-behavior: smooth;
-        background-color: ${color.canvas.normal};
+        color: ${color.ink.main};
+        background-color: ${color.canvas.main};
       }
 
       body {
@@ -202,16 +128,12 @@ export const defaultTheme: Theme = {
     `,
   },
   button: {
-    css: (
-      { color, font, radius }: Theme,
-      p?: CommonStyleProps
-    ): SerializedStyles => {
+    css: ({ color, radius }: Theme, p?: CommonStyleProps): SerializedStyles => {
       const buttonColor = p ? p.color : undefined
       return css`
         min-width: 92px;
         padding: 12px 24px;
 
-        font-family: ${font.accent};
         font-weight: 600;
         font-size: 18px;
 
@@ -228,7 +150,7 @@ export const defaultTheme: Theme = {
             case undefined:
             case 'canvas':
             case 'ink':
-              return color.ink.normal
+              return color.ink.main
             default:
               return color.canvas.light
           }
@@ -242,7 +164,7 @@ export const defaultTheme: Theme = {
             case 'ink':
               return color.canvas.light
             default:
-              return color[buttonColor].normal
+              return color[buttonColor].main
           }
         })()};
 
@@ -265,7 +187,7 @@ export const defaultTheme: Theme = {
     },
   },
   textInput: {
-    css: ({ color, font, radius }: Theme): SerializedStyles => css`
+    css: ({ color, radius }: Theme): SerializedStyles => css`
       /* Wrapper rules */
       display: flex;
       flex-direction: column;
@@ -274,7 +196,6 @@ export const defaultTheme: Theme = {
       & > input {
         display: flex;
         align-items: center;
-        font-family: ${font.sans};
         height: 45px;
         padding: 0 4px;
 
@@ -284,7 +205,7 @@ export const defaultTheme: Theme = {
         border-radius: ${radius.normal};
         transition: border-color ease 0.2s;
         &:focus {
-          border-color: ${color.primary.normal};
+          border-color: ${color.primary.main};
         }
         &:disabled {
           color: ${color.ink.light};
@@ -293,7 +214,7 @@ export const defaultTheme: Theme = {
       }
 
       & > label {
-        color: ${color.primary.normal};
+        color: ${color.primary.main};
         font-size: 16px;
         margin: 8px 0;
       }

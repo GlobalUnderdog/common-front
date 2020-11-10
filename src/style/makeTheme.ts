@@ -26,44 +26,49 @@ const handleCSSRule = (
 
 export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
   // This ternary operation allow us to avoid `TypeError: theme is undefined`
-  const { color, font, radius, grid, button, global, textInput } = theme
+  const { color, radius, grid, button, global, textInput } = theme
     ? theme
     : ({} as Theme)
   return {
     color: {
-      accent: {
-        dark: color?.accent?.dark ?? defaultTheme.color.accent.dark,
-        normal: color?.accent?.normal ?? defaultTheme.color.accent.normal,
-        light: color?.accent?.light ?? defaultTheme.color.accent.light,
+      secondary: {
+        dark: color?.secondary?.dark ?? defaultTheme.color.secondary.dark,
+        main: color?.secondary?.main ?? defaultTheme.color.secondary.main,
+        light: color?.secondary?.light ?? defaultTheme.color.secondary.light,
       },
       canvas: {
         dark: color?.canvas?.dark ?? defaultTheme.color.canvas.dark,
-        normal: color?.canvas?.normal ?? defaultTheme.color.canvas.normal,
+        main: color?.canvas?.main ?? defaultTheme.color.canvas.main,
         light: color?.canvas?.light ?? defaultTheme.color.canvas.light,
       },
-      danger: {
-        dark: color?.danger?.dark ?? defaultTheme.color.danger.dark,
-        normal: color?.danger?.normal ?? defaultTheme.color.danger.normal,
-        light: color?.danger?.light ?? defaultTheme.color.danger.light,
+      error: {
+        dark: color?.error?.dark ?? defaultTheme.color.error.dark,
+        main: color?.error?.main ?? defaultTheme.color.error.main,
+        light: color?.error?.light ?? defaultTheme.color.error.light,
+      },
+      info: {
+        dark: color?.info?.dark ?? defaultTheme.color.info.dark,
+        main: color?.info?.main ?? defaultTheme.color.info.main,
+        light: color?.info?.light ?? defaultTheme.color.info.light,
       },
       ink: {
         dark: color?.ink?.dark ?? defaultTheme.color.ink.dark,
-        normal: color?.ink?.normal ?? defaultTheme.color.ink.normal,
+        main: color?.ink?.main ?? defaultTheme.color.ink.main,
         light: color?.ink?.light ?? defaultTheme.color.ink.light,
       },
       primary: {
         dark: color?.primary?.dark ?? defaultTheme.color.primary.dark,
-        normal: color?.primary?.normal ?? defaultTheme.color.primary.normal,
+        main: color?.primary?.main ?? defaultTheme.color.primary.main,
         light: color?.primary?.light ?? defaultTheme.color.primary.light,
       },
       success: {
         dark: color?.success?.dark ?? defaultTheme.color.success.dark,
-        normal: color?.success?.normal ?? defaultTheme.color.success.normal,
+        main: color?.success?.main ?? defaultTheme.color.success.main,
         light: color?.success?.light ?? defaultTheme.color.success.light,
       },
       warning: {
         dark: color?.warning?.dark ?? defaultTheme.color.warning.dark,
-        normal: color?.warning?.normal ?? defaultTheme.color.warning.normal,
+        main: color?.warning?.main ?? defaultTheme.color.warning.main,
         light: color?.warning?.light ?? defaultTheme.color.warning.light,
       },
     },
@@ -76,22 +81,6 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
               ...defaultTheme.grid.rules,
               ...grid?.rules,
             },
-    },
-    font: {
-      accent: font?.accent
-        ? `"${font.accent}", sans-serif`
-        : defaultTheme.font.accent,
-      mono: font?.mono ? `"${font.mono}", monospace` : defaultTheme.font.mono,
-      sans: font?.sans ? `"${font.sans}", sans-serif` : defaultTheme.font.sans,
-      serif: font?.serif ? `"${font.serif}", serif` : defaultTheme.font.serif,
-      text: handleCSSRule(font?.text, defaultTheme.font.text),
-      h1h6: handleCSSRule(font?.h1h6, defaultTheme.font.h1h6),
-      h1: handleCSSRule(font?.h1, defaultTheme.font.h1),
-      h2: handleCSSRule(font?.h2, defaultTheme.font.h2),
-      h3: handleCSSRule(font?.h3, defaultTheme.font.h3),
-      h4: handleCSSRule(font?.h4, defaultTheme.font.h4),
-      h5: handleCSSRule(font?.h5, defaultTheme.font.h5),
-      h6: handleCSSRule(font?.h6, defaultTheme.font.h6),
     },
     radius: {
       big: cssUnit(radius?.big ?? defaultTheme.radius.big),

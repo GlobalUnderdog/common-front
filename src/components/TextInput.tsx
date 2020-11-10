@@ -22,7 +22,7 @@ export type InputProps = HTMLInputProps &
       | 'url'
   }
 
-export const TextInput: React.FC<InputProps> = (props) => {
+export const Input: React.FC<InputProps> = (props) => {
   const theme = useTheme()
   const { id, label } = props
   return (
@@ -33,4 +33,4 @@ export const TextInput: React.FC<InputProps> = (props) => {
   )
 }
 
-TextInput.defaultProps = { type: 'text' }
+Input.defaultProps = { type: 'text' }

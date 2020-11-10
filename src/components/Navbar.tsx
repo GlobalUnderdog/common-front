@@ -54,7 +54,7 @@ const Wrapper = styled.div<WrapperProps>`
   color: ${(p) => p.theme.color.ink.light};
   background-color: ${(p) => p.theme.color.canvas.light};
   box-shadow: ${(p) =>
-    p.expanded ? `0 2px 2px ${p.theme.color.ink.normal}25` : 'none'};
+    p.expanded ? `0 2px 2px ${p.theme.color.ink.main}25` : 'none'};
   transition: ease 0.3s;
 
   /* Ensures it is on top of all content, but the Modal */
@@ -91,7 +91,7 @@ const Wrapper = styled.div<WrapperProps>`
       background: none;
       border: none;
       color: ${({ expanded, theme }) =>
-        expanded ? theme.color.primary.normal : theme.color.ink.light};
+        expanded ? theme.color.primary.main : theme.color.ink.light};
       transition: color ease 0.3s;
       ${mediaQuery.medium} {
         display: none;
@@ -131,9 +131,8 @@ const Wrapper = styled.div<WrapperProps>`
     font-size: 16px;
     text-decoration: none;
     color: ${(p) => p.theme.color.ink.light};
-    font-family: ${(p) => p.theme.font.accent};
     &:hover {
-      color: ${(p) => p.theme.color.primary.normal};
+      color: ${(p) => p.theme.color.primary.main};
     }
     transition: color ease 0.2s;
     ${mediaQuery.small} {
@@ -178,7 +177,7 @@ const NavLink: React.FC<
       <a
         onClick={childOnClick}
         href={href}
-        style={{ color: color ? theme.color[color].normal : undefined }}
+        style={{ color: color ? theme.color[color].main : undefined }}
       >
         {label}
       </a>

@@ -1,6 +1,5 @@
 import { Configuration } from 'react-grid-system'
 import { ColorTheme, PartialColorTheme } from './color'
-import { FontTheme, PartialFontTheme } from './font'
 import { PartialRadiusTheme, RadiusTheme } from './radius'
 import { ThemeCSSRule } from './util'
 
@@ -11,7 +10,6 @@ import { ThemeCSSRule } from './util'
  */
 export interface ThemeBase<Complete extends boolean> {
   readonly color: Complete extends true ? ColorTheme : PartialColorTheme
-  readonly font: Complete extends true ? FontTheme : PartialFontTheme
   readonly radius: Complete extends true ? RadiusTheme : PartialRadiusTheme
 
   readonly grid: {

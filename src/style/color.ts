@@ -1,20 +1,21 @@
 export const colorTypes = [
-  'accent',
   'canvas',
-  'danger',
   'ink',
   'primary',
-  'success',
+  'secondary',
+  'error',
   'warning',
+  'info',
+  'success',
 ] as const
 export type ColorType = typeof colorTypes[number]
 
 /**
  * Used to group shades of the same color.
  */
-export interface ColorSwatch {
+export interface Palette {
   dark: string
-  normal: string
+  main: string
   light: string
 }
 
@@ -24,15 +25,10 @@ export interface ColorSwatch {
  * over the default ones.
  */
 type ColorThemeBase<Complete extends boolean> = Complete extends true
-  ? Record<ColorType, ColorSwatch>
-  : Partial<Record<ColorType, Partial<ColorSwatch>>>
+  ? Record<ColorType, Palette>
+  : Partial<Record<ColorType, Partial<Palette>>>
 
+// We're not exporting ColorThemeBase since its usage of generics might
+// be confusing outside of this package.
 export type ColorTheme = ColorThemeBase<true>
-
-/**
- * Unlike `Partial<Color>` this one allows for `color = { accent: { normal: '#f00' } }`
- *
- * In other words, PartialColorTheme allows not only for `Partial<Color>`
- * but also for each `Color[type]` to be `Partial<ColorSwatch>`
- */
-export type PartialColorTheme = Partial<ColorThemeBase<false>>
+export type PartialColorTheme = ColorThemeBase<false>
