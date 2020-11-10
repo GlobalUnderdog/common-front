@@ -9,8 +9,7 @@ export { useScreenClass } from 'react-grid-system';
 import Link from 'next/link';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
-import ReactGA from 'react-ga';
-export { default as ReactGA } from 'react-ga';
+import _ReactGA from 'react-ga';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -892,6 +891,15 @@ var NavLink = function (_a) {
     return href ? (jsx(Link, { href: href, passHref: true },
         jsx(Child, null))) : (jsx(Child, null));
 };
+/**
+ * Navbar introduces 3 css variables which are available globally in the app:
+ *
+ *  * `var(--navbarHeight)`: actual height of the navbar;
+ *  * `var(--navbarLinkHeight)`: height of each link in the navbar when expanded;
+ *  * `var(--navbarExpandedHeight)`: total size of the expanded navbar;
+ *
+ * You can replace these values using Theme.global.css
+ */
 var Navbar = function (_a) {
     var links = _a.links, logo = _a.logo, css = _a.css, className = _a.className;
     var _b = useState(false), expanded = _b[0], setExpanded = _b[1];
@@ -965,6 +973,7 @@ var inspectlet = function (inspectletId) {
     setTimeout(window.ldinsp, 0);
 };
 
+var ReactGA = _ReactGA;
 var randomId = function (length) {
     if (length === void 0) { length = 10; }
     return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
@@ -984,4 +993,4 @@ var googleAnalyticsTrackPage = function (path) {
     ReactGA.pageview(path);
 };
 
-export { Breakpoints, Button, Col, Container, GlobalProvider, Input, Navbar, Row, SlideFade, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, useTheme };
+export { Breakpoints, Button, Col, Container, GlobalProvider, Input, Navbar, ReactGA, Row, SlideFade, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, useTheme };
