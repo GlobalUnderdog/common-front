@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
 import ReactGA from 'react-ga';
+export { default as ReactGA } from 'react-ga';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.

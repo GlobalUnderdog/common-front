@@ -1083,6 +1083,7 @@ Object.defineProperty(exports, 'Zoom', {
         return Reveal.Zoom;
     }
 });
+exports.ReactGA = ReactGA;
 exports.Breakpoints = Breakpoints;
 exports.Button = Button;
 exports.Col = Col;
