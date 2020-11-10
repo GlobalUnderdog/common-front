@@ -201,6 +201,15 @@ interface Props {
   children?: never
 }
 
+/**
+ * Navbar introduces 3 css variables which are available globally in the app:
+ *
+ *  * `var(--navbarHeight)`: actual height of the navbar;
+ *  * `var(--navbarLinkHeight)`: height of each link in the navbar when expanded;
+ *  * `var(--navbarExpandedHeight)`: total size of the expanded navbar;
+ *
+ * You can replace these values using Theme.global.css
+ */
 export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
   const [expanded, setExpanded] = useState(false)
 
