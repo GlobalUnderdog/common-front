@@ -9,6 +9,7 @@ export { useScreenClass } from 'react-grid-system';
 import Link from 'next/link';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
+import ReactGA from 'react-ga';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -43,19 +44,26 @@ function __rest(s, e) {
         }
     return t;
 }
-function __makeTemplateObject(cooked, raw) {
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}function __makeTemplateObject(cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 }
 
 var colorTypes = [
-    'accent',
     'canvas',
-    'danger',
     'ink',
     'primary',
-    'success',
+    'secondary',
+    'error',
     'warning',
+    'info',
+    'success',
 ];
 
 function memoize(fn) {
@@ -639,20 +647,13 @@ var mediaQuery = {
     xlarge: media + " " + minWidth(Breakpoints.xlarge),
 };
 
+/** @jsx jsx */
 var Children = function (_a) {
     var children = _a.children;
     var theme = useTheme();
     setConfiguration(theme.grid.rules);
     return (jsx(Fragment, null,
         jsx(Global, { styles: theme.global.css(theme) }),
-        jsx(Global, { styles: theme.font.text.css(theme) }),
-        jsx(Global, { styles: css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n          h1,\n          h2,\n          h3,\n          h4,\n          h5,\n          h6 {\n            ", "\n          }\n        "], ["\n          h1,\n          h2,\n          h3,\n          h4,\n          h5,\n          h6 {\n            ", "\n          }\n        "])), theme.font.h1h6.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n          h1 {\n            ", "\n          }\n        "], ["\n          h1 {\n            ", "\n          }\n        "])), theme.font.h1.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n          h2 {\n            ", "\n          }\n        "], ["\n          h2 {\n            ", "\n          }\n        "])), theme.font.h2.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n          h3 {\n            ", "\n          }\n        "], ["\n          h3 {\n            ", "\n          }\n        "])), theme.font.h3.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n          h4 {\n            ", "\n          }\n        "], ["\n          h4 {\n            ", "\n          }\n        "])), theme.font.h4.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n          h5 {\n            ", "\n          }\n        "], ["\n          h5 {\n            ", "\n          }\n        "])), theme.font.h5.css(theme)) }),
-        jsx(Global, { styles: css(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n          h6 {\n            ", "\n          }\n        "], ["\n          h6 {\n            ", "\n          }\n        "])), theme.font.h6.css(theme)) }),
         jsx(ScreenClassProvider, null, children)));
 };
 var GlobalProvider = function (_a) {
@@ -660,85 +661,52 @@ var GlobalProvider = function (_a) {
     return (jsx(ThemeProvider, { theme: theme },
         jsx(Children, { children: children })));
 };
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7;
 
 var normalizeMin = '/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}';
 var defaultColorTheme = {
-    accent: {
+    secondary: {
         dark: '#077C7D',
-        normal: '#00B7B8',
+        main: '#00B7B8',
         light: '#6AE1E2',
     },
     canvas: {
         dark: '#E9E9E9',
-        normal: '#FAFAFA',
+        main: '#FAFAFA',
         light: '#FFF',
     },
-    danger: {
+    error: {
         dark: '#C62828',
-        normal: '#F44336',
+        main: '#F44336',
         light: '#FFEBEE',
     },
     ink: {
         dark: '#000',
-        normal: '#444',
+        main: '#444',
         light: '#888',
     },
     primary: {
-        dark: '#054B2',
-        normal: '#0078D4',
+        dark: '#0054B2',
+        main: '#0078D4',
         light: '#1499FF',
     },
+    info: {
+        dark: '#0277BD',
+        main: '#03A9F4',
+        light: '#81D4FA',
+    },
     success: {
-        dark: '#F8800',
-        normal: '#8BC34A',
+        dark: '#0F8800',
+        main: '#8BC34A',
         light: '#C5DBB2',
     },
     warning: {
-        dark: '#C5C00',
-        normal: '#E65100',
+        dark: '#AC5C00',
+        main: '#E69100',
         light: '#FFE0B2',
-    },
-};
-var defaultFontTheme = {
-    sans: 'sans-serif',
-    serif: 'serif',
-    mono: 'monospace',
-    accent: 'sans-serif',
-    text: {
-        css: function (_a) {
-            var color = _a.color, font = _a.font;
-            return css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n      /*\n      Setting this in HTML so divs, spans and other elements benefit\n      from these rules\n      */\n      html {\n        color: ", ";\n        font-family: ", ";\n        font-size: 18px;\n        /*\n        Line-height for readability based on\n        https://www.w3.org/TR/WCAG20-TECHS/C21.html#C21-description\n        */\n        line-height: 1.5;\n        ::selection {\n          background-color: ", ";\n          color: ", ";\n        }\n        :not(button) > a {\n          color: ", ";\n          text-decoration: underline;\n          cursor: pointer;\n        }\n      }\n    "], ["\n      /*\n      Setting this in HTML so divs, spans and other elements benefit\n      from these rules\n      */\n      html {\n        color: ", ";\n        font-family: ", ";\n        font-size: 18px;\n        /*\n        Line-height for readability based on\n        https://www.w3.org/TR/WCAG20-TECHS/C21.html#C21-description\n        */\n        line-height: 1.5;\n        ::selection {\n          background-color: ", ";\n          color: ", ";\n        }\n        :not(button) > a {\n          color: ", ";\n          text-decoration: underline;\n          cursor: pointer;\n        }\n      }\n    "])), color.ink.normal, font.sans, color.primary.dark, color.canvas.normal, color.primary.normal);
-        },
-    },
-    h1h6: {
-        css: function (_a) {
-            var color = _a.color, font = _a.font;
-            return css(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n      color: ", ";\n      font-family: ", ";\n      /*\n      Since headers have bigger margins than regular text, we decrease\n      line-height in a pinch\n      */\n      line-height: 1.4;\n      font-weight: 600;\n    "], ["\n      color: ", ";\n      font-family: ", ";\n      /*\n      Since headers have bigger margins than regular text, we decrease\n      line-height in a pinch\n      */\n      line-height: 1.4;\n      font-weight: 600;\n    "])), color.ink.light, font.accent);
-        },
-    },
-    h1: {
-        css: function () { return css(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n      font-size: 64px;\n    "], ["\n      font-size: 64px;\n    "]))); },
-    },
-    h2: {
-        css: function () { return css(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n      font-size: 52px;\n    "], ["\n      font-size: 52px;\n    "]))); },
-    },
-    h3: {
-        css: function () { return css(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n      font-size: 48px;\n    "], ["\n      font-size: 48px;\n    "]))); },
-    },
-    h4: {
-        css: function () { return css(templateObject_6$1 || (templateObject_6$1 = __makeTemplateObject(["\n      font-size: 36px;\n    "], ["\n      font-size: 36px;\n    "]))); },
-    },
-    h5: {
-        css: function () { return css(templateObject_7$1 || (templateObject_7$1 = __makeTemplateObject(["\n      font-size: 24px;\n      text-transform: uppercase;\n    "], ["\n      font-size: 24px;\n      text-transform: uppercase;\n    "]))); },
-    },
-    h6: {
-        css: function () { return css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      font-size: 18px;\n      text-transform: uppercase;\n    "], ["\n      font-size: 18px;\n      text-transform: uppercase;\n    "]))); },
     },
 };
 var defaultTheme = {
     color: defaultColorTheme,
-    font: defaultFontTheme,
     radius: {
         big: 8,
         normal: 4,
@@ -762,22 +730,22 @@ var defaultTheme = {
     global: {
         css: function (_a) {
             var color = _a.color;
-            return css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "], ["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "])), normalizeMin, color.canvas.normal);
+            return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "], ["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "])), normalizeMin, color.ink.main, color.canvas.main);
         },
     },
     button: {
         css: function (_a, p) {
-            var color = _a.color, font = _a.font, radius = _a.radius;
+            var color = _a.color, radius = _a.radius;
             var buttonColor = p ? p.color : undefined;
-            return css(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-family: ", ";\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ", ";\n\n        /* Default background color */\n        background-color: ", ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ", ";\n        }\n      "], ["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-family: ", ";\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ",
+            return css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ", ";\n\n        /* Default background color */\n        background-color: ", ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ", ";\n        }\n      "], ["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ",
                 ";\n\n        /* Default background color */\n        background-color: ",
                 ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ",
-                ";\n        }\n      "])), font.accent, radius.normal, (function () {
+                ";\n        }\n      "])), radius.normal, (function () {
                 switch (buttonColor) {
                     case undefined:
                     case 'canvas':
                     case 'ink':
-                        return color.ink.normal;
+                        return color.ink.main;
                     default:
                         return color.canvas.light;
                 }
@@ -788,7 +756,7 @@ var defaultTheme = {
                     case 'ink':
                         return color.canvas.light;
                     default:
-                        return color[buttonColor].normal;
+                        return color[buttonColor].main;
                 }
             })(), (function () {
                 switch (buttonColor) {
@@ -804,12 +772,12 @@ var defaultTheme = {
     },
     textInput: {
         css: function (_a) {
-            var color = _a.color, font = _a.font, radius = _a.radius;
-            return css(templateObject_11 || (templateObject_11 = __makeTemplateObject(["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        font-family: ", ";\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "], ["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        font-family: ", ";\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "])), font.sans, color.canvas.light, color.ink.light, radius.normal, color.primary.normal, color.ink.light, color.canvas.dark, color.primary.normal);
+            var color = _a.color, radius = _a.radius;
+            return css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "], ["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "])), color.canvas.light, color.ink.light, radius.normal, color.primary.main, color.ink.light, color.canvas.dark, color.primary.main);
         },
     },
 };
-var templateObject_1$1, templateObject_2$1, templateObject_3$1, templateObject_4$1, templateObject_5$1, templateObject_6$1, templateObject_7$1, templateObject_8, templateObject_9, templateObject_10, templateObject_11;
+var templateObject_1, templateObject_2, templateObject_3;
 
 // Not declared in ./util since we don't want to export this function outside the package
 var handleCSSRule = function (rules, defaultRule) {
@@ -831,74 +799,64 @@ var handleCSSRule = function (rules, defaultRule) {
     };
 };
 var makeTheme = function (theme) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27;
     // This ternary operation allow us to avoid `TypeError: theme is undefined`
-    var _22 = theme
+    var _28 = theme
         ? theme
-        : {}, color = _22.color, font = _22.font, radius = _22.radius, grid = _22.grid, button = _22.button, global = _22.global, textInput = _22.textInput;
+        : {}, color = _28.color, radius = _28.radius, grid = _28.grid, button = _28.button, global = _28.global, textInput = _28.textInput;
     return {
         color: {
-            accent: {
-                dark: (_b = (_a = color === null || color === void 0 ? void 0 : color.accent) === null || _a === void 0 ? void 0 : _a.dark) !== null && _b !== void 0 ? _b : defaultTheme.color.accent.dark,
-                normal: (_d = (_c = color === null || color === void 0 ? void 0 : color.accent) === null || _c === void 0 ? void 0 : _c.normal) !== null && _d !== void 0 ? _d : defaultTheme.color.accent.normal,
-                light: (_f = (_e = color === null || color === void 0 ? void 0 : color.accent) === null || _e === void 0 ? void 0 : _e.light) !== null && _f !== void 0 ? _f : defaultTheme.color.accent.light,
+            secondary: {
+                dark: (_b = (_a = color === null || color === void 0 ? void 0 : color.secondary) === null || _a === void 0 ? void 0 : _a.dark) !== null && _b !== void 0 ? _b : defaultTheme.color.secondary.dark,
+                main: (_d = (_c = color === null || color === void 0 ? void 0 : color.secondary) === null || _c === void 0 ? void 0 : _c.main) !== null && _d !== void 0 ? _d : defaultTheme.color.secondary.main,
+                light: (_f = (_e = color === null || color === void 0 ? void 0 : color.secondary) === null || _e === void 0 ? void 0 : _e.light) !== null && _f !== void 0 ? _f : defaultTheme.color.secondary.light,
             },
             canvas: {
                 dark: (_h = (_g = color === null || color === void 0 ? void 0 : color.canvas) === null || _g === void 0 ? void 0 : _g.dark) !== null && _h !== void 0 ? _h : defaultTheme.color.canvas.dark,
-                normal: (_k = (_j = color === null || color === void 0 ? void 0 : color.canvas) === null || _j === void 0 ? void 0 : _j.normal) !== null && _k !== void 0 ? _k : defaultTheme.color.canvas.normal,
+                main: (_k = (_j = color === null || color === void 0 ? void 0 : color.canvas) === null || _j === void 0 ? void 0 : _j.main) !== null && _k !== void 0 ? _k : defaultTheme.color.canvas.main,
                 light: (_m = (_l = color === null || color === void 0 ? void 0 : color.canvas) === null || _l === void 0 ? void 0 : _l.light) !== null && _m !== void 0 ? _m : defaultTheme.color.canvas.light,
             },
-            danger: {
-                dark: (_p = (_o = color === null || color === void 0 ? void 0 : color.danger) === null || _o === void 0 ? void 0 : _o.dark) !== null && _p !== void 0 ? _p : defaultTheme.color.danger.dark,
-                normal: (_r = (_q = color === null || color === void 0 ? void 0 : color.danger) === null || _q === void 0 ? void 0 : _q.normal) !== null && _r !== void 0 ? _r : defaultTheme.color.danger.normal,
-                light: (_t = (_s = color === null || color === void 0 ? void 0 : color.danger) === null || _s === void 0 ? void 0 : _s.light) !== null && _t !== void 0 ? _t : defaultTheme.color.danger.light,
+            error: {
+                dark: (_p = (_o = color === null || color === void 0 ? void 0 : color.error) === null || _o === void 0 ? void 0 : _o.dark) !== null && _p !== void 0 ? _p : defaultTheme.color.error.dark,
+                main: (_r = (_q = color === null || color === void 0 ? void 0 : color.error) === null || _q === void 0 ? void 0 : _q.main) !== null && _r !== void 0 ? _r : defaultTheme.color.error.main,
+                light: (_t = (_s = color === null || color === void 0 ? void 0 : color.error) === null || _s === void 0 ? void 0 : _s.light) !== null && _t !== void 0 ? _t : defaultTheme.color.error.light,
+            },
+            info: {
+                dark: (_v = (_u = color === null || color === void 0 ? void 0 : color.info) === null || _u === void 0 ? void 0 : _u.dark) !== null && _v !== void 0 ? _v : defaultTheme.color.info.dark,
+                main: (_x = (_w = color === null || color === void 0 ? void 0 : color.info) === null || _w === void 0 ? void 0 : _w.main) !== null && _x !== void 0 ? _x : defaultTheme.color.info.main,
+                light: (_z = (_y = color === null || color === void 0 ? void 0 : color.info) === null || _y === void 0 ? void 0 : _y.light) !== null && _z !== void 0 ? _z : defaultTheme.color.info.light,
             },
             ink: {
-                dark: (_v = (_u = color === null || color === void 0 ? void 0 : color.ink) === null || _u === void 0 ? void 0 : _u.dark) !== null && _v !== void 0 ? _v : defaultTheme.color.ink.dark,
-                normal: (_x = (_w = color === null || color === void 0 ? void 0 : color.ink) === null || _w === void 0 ? void 0 : _w.normal) !== null && _x !== void 0 ? _x : defaultTheme.color.ink.normal,
-                light: (_z = (_y = color === null || color === void 0 ? void 0 : color.ink) === null || _y === void 0 ? void 0 : _y.light) !== null && _z !== void 0 ? _z : defaultTheme.color.ink.light,
+                dark: (_1 = (_0 = color === null || color === void 0 ? void 0 : color.ink) === null || _0 === void 0 ? void 0 : _0.dark) !== null && _1 !== void 0 ? _1 : defaultTheme.color.ink.dark,
+                main: (_3 = (_2 = color === null || color === void 0 ? void 0 : color.ink) === null || _2 === void 0 ? void 0 : _2.main) !== null && _3 !== void 0 ? _3 : defaultTheme.color.ink.main,
+                light: (_5 = (_4 = color === null || color === void 0 ? void 0 : color.ink) === null || _4 === void 0 ? void 0 : _4.light) !== null && _5 !== void 0 ? _5 : defaultTheme.color.ink.light,
             },
             primary: {
-                dark: (_1 = (_0 = color === null || color === void 0 ? void 0 : color.primary) === null || _0 === void 0 ? void 0 : _0.dark) !== null && _1 !== void 0 ? _1 : defaultTheme.color.primary.dark,
-                normal: (_3 = (_2 = color === null || color === void 0 ? void 0 : color.primary) === null || _2 === void 0 ? void 0 : _2.normal) !== null && _3 !== void 0 ? _3 : defaultTheme.color.primary.normal,
-                light: (_5 = (_4 = color === null || color === void 0 ? void 0 : color.primary) === null || _4 === void 0 ? void 0 : _4.light) !== null && _5 !== void 0 ? _5 : defaultTheme.color.primary.light,
+                dark: (_7 = (_6 = color === null || color === void 0 ? void 0 : color.primary) === null || _6 === void 0 ? void 0 : _6.dark) !== null && _7 !== void 0 ? _7 : defaultTheme.color.primary.dark,
+                main: (_9 = (_8 = color === null || color === void 0 ? void 0 : color.primary) === null || _8 === void 0 ? void 0 : _8.main) !== null && _9 !== void 0 ? _9 : defaultTheme.color.primary.main,
+                light: (_11 = (_10 = color === null || color === void 0 ? void 0 : color.primary) === null || _10 === void 0 ? void 0 : _10.light) !== null && _11 !== void 0 ? _11 : defaultTheme.color.primary.light,
             },
             success: {
-                dark: (_7 = (_6 = color === null || color === void 0 ? void 0 : color.success) === null || _6 === void 0 ? void 0 : _6.dark) !== null && _7 !== void 0 ? _7 : defaultTheme.color.success.dark,
-                normal: (_9 = (_8 = color === null || color === void 0 ? void 0 : color.success) === null || _8 === void 0 ? void 0 : _8.normal) !== null && _9 !== void 0 ? _9 : defaultTheme.color.success.normal,
-                light: (_11 = (_10 = color === null || color === void 0 ? void 0 : color.success) === null || _10 === void 0 ? void 0 : _10.light) !== null && _11 !== void 0 ? _11 : defaultTheme.color.success.light,
+                dark: (_13 = (_12 = color === null || color === void 0 ? void 0 : color.success) === null || _12 === void 0 ? void 0 : _12.dark) !== null && _13 !== void 0 ? _13 : defaultTheme.color.success.dark,
+                main: (_15 = (_14 = color === null || color === void 0 ? void 0 : color.success) === null || _14 === void 0 ? void 0 : _14.main) !== null && _15 !== void 0 ? _15 : defaultTheme.color.success.main,
+                light: (_17 = (_16 = color === null || color === void 0 ? void 0 : color.success) === null || _16 === void 0 ? void 0 : _16.light) !== null && _17 !== void 0 ? _17 : defaultTheme.color.success.light,
             },
             warning: {
-                dark: (_13 = (_12 = color === null || color === void 0 ? void 0 : color.warning) === null || _12 === void 0 ? void 0 : _12.dark) !== null && _13 !== void 0 ? _13 : defaultTheme.color.warning.dark,
-                normal: (_15 = (_14 = color === null || color === void 0 ? void 0 : color.warning) === null || _14 === void 0 ? void 0 : _14.normal) !== null && _15 !== void 0 ? _15 : defaultTheme.color.warning.normal,
-                light: (_17 = (_16 = color === null || color === void 0 ? void 0 : color.warning) === null || _16 === void 0 ? void 0 : _16.light) !== null && _17 !== void 0 ? _17 : defaultTheme.color.warning.light,
+                dark: (_19 = (_18 = color === null || color === void 0 ? void 0 : color.warning) === null || _18 === void 0 ? void 0 : _18.dark) !== null && _19 !== void 0 ? _19 : defaultTheme.color.warning.dark,
+                main: (_21 = (_20 = color === null || color === void 0 ? void 0 : color.warning) === null || _20 === void 0 ? void 0 : _20.main) !== null && _21 !== void 0 ? _21 : defaultTheme.color.warning.main,
+                light: (_23 = (_22 = color === null || color === void 0 ? void 0 : color.warning) === null || _22 === void 0 ? void 0 : _22.light) !== null && _23 !== void 0 ? _23 : defaultTheme.color.warning.light,
             },
         },
         grid: {
-            replace: (_18 = grid === null || grid === void 0 ? void 0 : grid.replace) !== null && _18 !== void 0 ? _18 : false,
+            replace: (_24 = grid === null || grid === void 0 ? void 0 : grid.replace) !== null && _24 !== void 0 ? _24 : false,
             rules: (grid === null || grid === void 0 ? void 0 : grid.replace) && (grid === null || grid === void 0 ? void 0 : grid.rules)
                 ? grid.rules
                 : __assign(__assign({}, defaultTheme.grid.rules), grid === null || grid === void 0 ? void 0 : grid.rules),
         },
-        font: {
-            accent: (font === null || font === void 0 ? void 0 : font.accent) ? "\"" + font.accent + "\", sans-serif"
-                : defaultTheme.font.accent,
-            mono: (font === null || font === void 0 ? void 0 : font.mono) ? "\"" + font.mono + "\", monospace" : defaultTheme.font.mono,
-            sans: (font === null || font === void 0 ? void 0 : font.sans) ? "\"" + font.sans + "\", sans-serif" : defaultTheme.font.sans,
-            serif: (font === null || font === void 0 ? void 0 : font.serif) ? "\"" + font.serif + "\", serif" : defaultTheme.font.serif,
-            text: handleCSSRule(font === null || font === void 0 ? void 0 : font.text, defaultTheme.font.text),
-            h1h6: handleCSSRule(font === null || font === void 0 ? void 0 : font.h1h6, defaultTheme.font.h1h6),
-            h1: handleCSSRule(font === null || font === void 0 ? void 0 : font.h1, defaultTheme.font.h1),
-            h2: handleCSSRule(font === null || font === void 0 ? void 0 : font.h2, defaultTheme.font.h2),
-            h3: handleCSSRule(font === null || font === void 0 ? void 0 : font.h3, defaultTheme.font.h3),
-            h4: handleCSSRule(font === null || font === void 0 ? void 0 : font.h4, defaultTheme.font.h4),
-            h5: handleCSSRule(font === null || font === void 0 ? void 0 : font.h5, defaultTheme.font.h5),
-            h6: handleCSSRule(font === null || font === void 0 ? void 0 : font.h6, defaultTheme.font.h6),
-        },
         radius: {
-            big: cssUnit((_19 = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _19 !== void 0 ? _19 : defaultTheme.radius.big),
-            normal: cssUnit((_20 = radius === null || radius === void 0 ? void 0 : radius.normal) !== null && _20 !== void 0 ? _20 : defaultTheme.radius.normal),
-            small: cssUnit((_21 = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _21 !== void 0 ? _21 : defaultTheme.radius.small),
+            big: cssUnit((_25 = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _25 !== void 0 ? _25 : defaultTheme.radius.big),
+            normal: cssUnit((_26 = radius === null || radius === void 0 ? void 0 : radius.normal) !== null && _26 !== void 0 ? _26 : defaultTheme.radius.normal),
+            small: cssUnit((_27 = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _27 !== void 0 ? _27 : defaultTheme.radius.small),
         },
         global: handleCSSRule(global, defaultTheme.global),
         button: handleCSSRule(button, defaultTheme.button),
@@ -906,18 +864,18 @@ var makeTheme = function (theme) {
     };
 };
 
-var Button = styled.button(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, { color: p.color }); });
-var templateObject_1$2;
+var Button = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, { color: p.color }); });
+var templateObject_1$1;
 
-var globalVariables = function (links) { return css(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
-var Wrapper = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ", ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    font-family: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
+var globalVariables = function (links) { return css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
+var Wrapper = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ", ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
     ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ",
-    ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    font-family: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"])), function (p) { return (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight'); }, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.canvas.light; }, function (p) {
-    return p.expanded ? "0 2px 2px " + p.theme.color.ink.normal + "25" : 'none';
+    ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"])), function (p) { return (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight'); }, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.canvas.light; }, function (p) {
+    return p.expanded ? "0 2px 2px " + p.theme.color.ink.main + "25" : 'none';
 }, mediaQuery.small, function (_a) {
     var expanded = _a.expanded, theme = _a.theme;
-    return expanded ? theme.color.primary.normal : theme.color.ink.light;
-}, mediaQuery.medium, mediaQuery.small, function (p) { return (p.expanded ? 1 : 0); }, function (p) { return (p.expanded ? 'visible' : 'none'); }, function (p) { return (p.expanded ? '0.7s' : '0.15s'); }, mediaQuery.medium, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.font.accent; }, function (p) { return p.theme.color.primary.normal; }, mediaQuery.small, mediaQuery.medium);
+    return expanded ? theme.color.primary.main : theme.color.ink.light;
+}, mediaQuery.medium, mediaQuery.small, function (p) { return (p.expanded ? 1 : 0); }, function (p) { return (p.expanded ? 'visible' : 'none'); }, function (p) { return (p.expanded ? '0.7s' : '0.15s'); }, mediaQuery.medium, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.primary.main; }, mediaQuery.small, mediaQuery.medium);
 var NavLink = function (_a) {
     var href = _a.href, label = _a.label, button = _a.button, color = _a.color, setExpanded = _a.setExpanded, onClick = _a.onClick;
     var theme = useTheme();
@@ -928,7 +886,7 @@ var NavLink = function (_a) {
     };
     var Child = function (_a) {
         var href = _a.href;
-        return button ? (jsx(Button, { color: color, onClick: childOnClick }, label)) : (jsx("a", { onClick: childOnClick, href: href, style: { color: color ? theme.color[color].normal : undefined } }, label));
+        return button ? (jsx(Button, { color: color, onClick: childOnClick }, label)) : (jsx("a", { onClick: childOnClick, href: href, style: { color: color ? theme.color[color].main : undefined } }, label));
     };
     return href ? (jsx(Link, { href: href, passHref: true },
         jsx(Child, null))) : (jsx(Child, null));
@@ -951,7 +909,7 @@ var Navbar = function (_a) {
                     jsx("i", { className: 'fa fa-menu' })),
                 jsx("div", { className: 'links' }, mappedLinks)))));
 };
-var templateObject_1$3, templateObject_2$2;
+var templateObject_1$2, templateObject_2$1;
 
 var translateDirection = function (direction, distance) {
     if (distance === void 0) { distance = '100%'; }
@@ -966,21 +924,21 @@ var translateDirection = function (direction, distance) {
             return "translate3d(-" + distance + ", 0, 0)";
     }
 };
-var animation = function (direction, distance) { return keyframes(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
+var animation = function (direction, distance) { return keyframes(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
 var SlideFade = function (_a) {
     var direction = _a.direction, distance = _a.distance, props = __rest(_a, ["direction", "distance"]);
     return (jsx(Reveal, __assign({}, props, { keyframes: animation(direction !== null && direction !== void 0 ? direction : 'left', distance !== null && distance !== void 0 ? distance : '100%') })));
 };
-var templateObject_1$4;
+var templateObject_1$3;
 
-var TextInput = function (props) {
+var Input = function (props) {
     var theme = useTheme();
     var id = props.id, label = props.label;
     return (jsx("div", { css: theme.textInput.css(theme, props), className: props.className },
         label && jsx("label", { htmlFor: id }, label),
         jsx("input", __assign({}, props, { className: undefined }))));
 };
-TextInput.defaultProps = { type: 'text' };
+Input.defaultProps = { type: 'text' };
 
 var inspectlet = function (inspectletId) {
     window.__insp = window.__insp || [];
@@ -1006,4 +964,23 @@ var inspectlet = function (inspectletId) {
     setTimeout(window.ldinsp, 0);
 };
 
-export { Breakpoints, Button, Col, Container, GlobalProvider, Navbar, Row, SlideFade, TextInput, colorTypes, cssUnit, defaultTheme, inspectlet, makeTheme, mediaQuery, styled, useTheme };
+var randomId = function (length) {
+    if (length === void 0) { length = 10; }
+    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
+};
+var googleAnalyticsInit = function (googleUa) {
+    var _a;
+    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
+    ReactGA.initialize(googleUa, {
+        titleCase: false,
+        gaOptions: {
+            userId: userId,
+        },
+    });
+    localStorage.setItem('google_ua_id', userId);
+};
+var googleAnalyticsTrackPage = function (path) {
+    ReactGA.pageview(path);
+};
+
+export { Breakpoints, Button, Col, Container, GlobalProvider, Input, Navbar, Row, SlideFade, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, useTheme };
