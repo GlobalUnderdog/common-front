@@ -1,4 +1,5 @@
 import ReactGA from 'react-ga'
+export { default as ReactGA } from 'react-ga'
 
 const randomId = (length = 10) =>
   [...Array(length)].map(() => ((Math.random() * 36) | 0).toString(36)).join('')
