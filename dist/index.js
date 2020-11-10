@@ -985,8 +985,29 @@ var TextInput = function (props) {
 };
 TextInput.defaultProps = { type: 'text' };
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-var inspectlet = require('./inspectlet.js');
+var inspectlet = function (inspectletId) {
+    window.__insp = window.__insp || [];
+    window.__insp.push(['wid', inspectletId]);
+    window.ldinsp = function () {
+        var _a;
+        if (typeof window.__inspld != 'undefined')
+            return;
+        window.__inspld = 1;
+        var insp = document.createElement('script');
+        insp.type = 'text/javascript';
+        insp.async = true;
+        insp.id = 'inspsync';
+        insp.src =
+            ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://cdn.inspectlet.com/inspectlet.js?wid=' +
+                inspectletId +
+                '&r=' +
+                Math.floor(new Date().getTime() / 3600000);
+        var x = document.getElementsByTagName('script')[0];
+        (_a = x.parentNode) === null || _a === void 0 ? void 0 : _a.insertBefore(insp, x);
+    };
+    setTimeout(window.ldinsp, 0);
+};
 
 Object.defineProperty(exports, 'Global', {
     enumerable: true,
