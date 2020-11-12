@@ -40,13 +40,8 @@ export type CommonStyleProps = SizeHelpers & {
 
 export type ThemeCSSFunc = (
   theme: Theme,
-  /**
-   * Props that might be commonly used in components, like color, size, etc.
-   *
-   * Available in this function so global styles (e.g. Button, InputText) can
-   * benefit from these.
-   */
-  props?: CommonStyleProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props?: any
 ) => SerializedStyles | SerializedStyles[]
 
 export interface ThemeCSSRule {

@@ -115,19 +115,6 @@ export interface ThemeBase<Complete extends boolean> {
    * not have overlapping classNames with them.
    */
   readonly modal: ThemeCSSRule
-  /**
-   * How many milliseconds does it take for the modal to show/hide on the default
-   * animation.
-   *
-   * It's possible, but not recommended, to ignore this variable when creating
-   * custom styles for modals.
-   *
-   * The side-effect of not setting this value correctly is that the modal might
-   * not complete its hiding animation before it exits
-   *
-   * Defaults to 350ms
-   */
-  readonly modalAnimTimeMS: number
 }
 
 export type Theme = ThemeBase<true>

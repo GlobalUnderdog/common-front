@@ -37,7 +37,6 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     checkbox,
     radio,
     modal,
-    modalAnimTimeMS,
   } = theme ? theme : ({} as Theme)
   return {
     color: {
@@ -104,6 +103,5 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
     radio: handleCSSRule(radio, defaultTheme.radio),
     modal: handleCSSRule(modal, defaultTheme.modal),
-    modalAnimTimeMS: modalAnimTimeMS ?? defaultTheme.modalAnimTimeMS,
   }
 }
