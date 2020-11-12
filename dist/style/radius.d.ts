@@ -8,7 +8,7 @@ import { CSSUnit } from './util';
  */
 export interface RadiusTheme {
     readonly big: CSSUnit;
-    readonly normal: CSSUnit;
+    readonly main: CSSUnit;
     readonly small: CSSUnit;
 }
 export declare type PartialRadiusTheme = Partial<RadiusTheme>;

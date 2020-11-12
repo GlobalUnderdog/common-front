@@ -16,9 +16,18 @@ export declare type CSSUnit = string | number;
  * If a string is passed as argument no transformation happens.
  */
 export declare const cssUnit: (num: CSSUnit) => string;
-export interface CommonStyleProps {
+declare type SizeHelpers = {
+    big?: true;
+    small?: never | false;
+} | {
+    big?: never | false;
+    small?: true;
+};
+export declare type CommonStyleProps = SizeHelpers & {
     color?: ColorType;
-}
+    outline?: boolean;
+    wide?: boolean;
+};
 export declare type ThemeCSSFunc = (theme: Theme, 
 /**
  * Props that might be commonly used in components, like color, size, etc.
@@ -37,3 +46,4 @@ export interface ThemeCSSRule {
     readonly replace?: boolean;
     readonly css: ThemeCSSFunc;
 }
+export {};

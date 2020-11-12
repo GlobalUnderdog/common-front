@@ -29,10 +29,10 @@ export interface ThemeBase<Complete extends boolean> {
      */
     readonly button: ThemeCSSRule;
     /**
-     * Don't forget that TextInput is a `<div/>` wrapping a `<label/>` + `<input/>`:
+     * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
      *
      * ```tsx
-     * TextInput = () => (
+     * Input = () => (
      *    <div>
      *      <label/>
      *      <input/>
@@ -40,7 +40,48 @@ export interface ThemeBase<Complete extends boolean> {
      * )
      * ```
      */
-    readonly textInput: ThemeCSSRule;
+    readonly input: ThemeCSSRule;
+    /**
+     * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
+     *
+     * ```tsx
+     * Checkbox = () => (
+     *    <div>
+     *      <input type='checkbox'/>
+     *      <label/>
+     *    </div>
+     * )
+     * ```
+     *
+     * By default we can't easily style HTML checkboxes inputs, so the default
+     * style present at `@globalunderdog/common-front` uses `input:before` as
+     * the main checkbox background/border, and `input:after` as the symbol
+     * when checked.
+     */
+    readonly checkbox: ThemeCSSRule;
+    /**
+     * CSS Classes used:
+     *
+     * * `.modalOverlay`: Background shown behind the modal;
+     * * `.modalCard`: The card displaying the modal content;
+     *
+     * These classes are global and ideally any app using this package should
+     * not have overlapping classNames with them.
+     */
+    readonly modal: ThemeCSSRule;
+    /**
+     * How many milliseconds does it take for the modal to show/hide on the default
+     * animation.
+     *
+     * It's possible, but not recommended, to ignore this variable when creating
+     * custom styles for modals.
+     *
+     * The side-effect of not setting this value correctly is that the modal might
+     * not complete its hiding animation before it exits
+     *
+     * Defaults to 350ms
+     */
+    readonly modalAnimTimeMS: number;
 }
 export declare type Theme = ThemeBase<true>;
 export declare type ThemeProps = {

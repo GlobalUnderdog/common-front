@@ -1,15 +1,18 @@
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
-import { createElement, Fragment, useState } from 'react';
-import { withEmotionCache, ThemeContext, jsx, Global, css, keyframes } from '@emotion/core';
+import React, { createElement, Fragment, useEffect, useState } from 'react';
+import { withEmotionCache, ThemeContext, jsx, Global, keyframes, css } from '@emotion/core';
 export { Global, css, jsx, keyframes } from '@emotion/core';
 import { useTheme as useTheme$1, ThemeProvider } from 'emotion-theming';
 export { ThemeProvider } from 'emotion-theming';
 import { Container as Container$1, Row as Row$1, Col as Col$1, setConfiguration, ScreenClassProvider } from 'react-grid-system';
-export { useScreenClass } from 'react-grid-system';
+export { Hidden, Visible, useScreenClass } from 'react-grid-system';
+import ReactModal from 'react-modal';
+import { wait } from '@globalunderdog/common';
 import Link from 'next/link';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
-import _ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
+export { default as ReactGA } from 'react-ga';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -43,6 +46,42 @@ function __rest(s, e) {
                 t[p[i]] = s[p[i]];
         }
     return t;
+}
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
 }
 function __spreadArrays() {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
@@ -654,6 +693,7 @@ var Children = function (_a) {
     setConfiguration(theme.grid.rules);
     return (jsx(Fragment, null,
         jsx(Global, { styles: theme.global.css(theme) }),
+        jsx(Global, { styles: theme.modal.css(theme) }),
         jsx(ScreenClassProvider, null, children)));
 };
 var GlobalProvider = function (_a) {
@@ -663,6 +703,8 @@ var GlobalProvider = function (_a) {
 };
 
 var normalizeMin = '/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}';
+var fadeIn = keyframes(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  from {opacity: 0}\n  to { opacity: 1}\n"], ["\n  from {opacity: 0}\n  to { opacity: 1}\n"])));
+var fadeOut = keyframes(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  from { opacity: 1}\n  to {opacity: 0}\n"], ["\n  from { opacity: 1}\n  to {opacity: 0}\n"])));
 var defaultColorTheme = {
     secondary: {
         dark: '#077C7D',
@@ -709,7 +751,7 @@ var defaultTheme = {
     color: defaultColorTheme,
     radius: {
         big: 8,
-        normal: 4,
+        main: 4,
         small: 2,
     },
     grid: {
@@ -730,17 +772,17 @@ var defaultTheme = {
     global: {
         css: function (_a) {
             var color = _a.color;
-            return css(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "], ["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      button:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "])), normalizeMin, color.ink.main, color.canvas.main);
+            return css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      *:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "], ["\n      ", "\n\n      html {\n        scroll-behavior: smooth;\n        color: ", ";\n        background-color: ", ";\n      }\n\n      body {\n        /*\n        Sometimes, when using react-awesome-reveal we might trigger some\n        unwanted horizontal spacing, creating issues like briefly showing the\n        horizontal scrollbar or permanently increasing the width of the page.\n        Setting width: 100% with overflow-x: hidden fixes this issue.\n        */\n        width: 100% !important;\n        max-width: 100% !important;\n        overflow-x: hidden;\n        /*\n        In OSes that have visible scrollbars changing to a page without too\n        much content might cause components to fickle, since the scrollbar\n        will show/hide according to the page's height (for example a simple\n        login page will have no scrollbar). We ensure that the overflow-y is\n        always scrollable so these OSes can have a consistent look & feel in\n        all pages.\n        */\n        overflow-y: scroll;\n      }\n\n      *:focus {\n        outline: none;\n      }\n\n      /*\n      Setting this here since icons.css is replaced with newer icons from time\n      to time.\n      */\n      @keyframes fa-spin {\n        from {\n          transform: rotateZ(0);\n        }\n        to {\n          transform: rotateZ(359deg);\n        }\n      }\n      .fa-spin {\n        animation: fa-spin 2s linear forwards infinite;\n      }\n    "])), normalizeMin, color.ink.main, color.canvas.main);
         },
     },
     button: {
         css: function (_a, p) {
             var color = _a.color, radius = _a.radius;
             var buttonColor = p ? p.color : undefined;
-            return css(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ", ";\n\n        /* Default background color */\n        background-color: ", ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ", ";\n        }\n      "], ["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ",
+            return css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ", ";\n\n        /* Default background color */\n        background-color: ", ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ", ";\n        }\n      "], ["\n        min-width: 92px;\n        padding: 12px 24px;\n\n        font-weight: 600;\n        font-size: 18px;\n\n        background: none;\n        border: none;\n        border-radius: ", ";\n        box-shadow: 0px 4px 4px #0002;\n\n        /* Colors */\n\n        /* Foreground color */\n        color: ",
                 ";\n\n        /* Default background color */\n        background-color: ",
                 ";\n\n        /* Hover colors */\n        transition: background-color ease 0.3s;\n        &:hover {\n          cursor: pointer;\n          background-color: ",
-                ";\n        }\n      "])), radius.normal, (function () {
+                ";\n        }\n      "])), radius.main, (function () {
                 switch (buttonColor) {
                     case undefined:
                     case 'canvas':
@@ -770,14 +812,27 @@ var defaultTheme = {
             })());
         },
     },
-    textInput: {
+    input: {
         css: function (_a) {
             var color = _a.color, radius = _a.radius;
-            return css(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "], ["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "])), color.canvas.light, color.ink.light, radius.normal, color.primary.main, color.ink.light, color.canvas.dark, color.primary.main);
+            return css(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "], ["\n      /* Wrapper rules */\n      display: flex;\n      flex-direction: column;\n      margin: 15px 0;\n\n      & > input {\n        display: flex;\n        align-items: center;\n        height: 45px;\n        padding: 0 4px;\n\n        background: none;\n        background-color: ", ";\n        border: 2px solid ", ";\n        border-radius: ", ";\n        transition: border-color ease 0.2s;\n        &:focus {\n          border-color: ", ";\n        }\n        &:disabled {\n          color: ", ";\n          background-color: ", ";\n        }\n      }\n\n      & > label {\n        color: ", ";\n        font-size: 16px;\n        margin: 8px 0;\n      }\n    "])), color.canvas.light, color.ink.light, radius.main, color.primary.main, color.ink.light, color.canvas.dark, color.primary.main);
         },
     },
+    checkbox: {
+        css: function (_a) {
+            var color = _a.color, radius = _a.radius;
+            return css(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n      display: flex;\n      align-items: center;\n      margin: 5px 0;\n\n      input {\n        height: 20px;\n        width: 20px;\n        box-sizing: border-box;\n        position: relative;\n        appearance: none;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        padding: 0;\n        margin-right: 10px;\n\n        border-color: ", ";\n        background-color: ", ";\n        &:hover {\n          background-color: ", ";\n        }\n\n        &:before {\n          box-sizing: border-box;\n          content: ' ';\n          position: absolute;\n          top: 0;\n          left: 0;\n\n          height: 100%;\n          width: 100%;\n          border-width: 2px;\n          border-radius: ", ";\n          border-style: solid;\n          /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n          border-color: inherit;\n          background-color: inherit;\n\n          color: ", ";\n          transition: border-color ease 0.3s, background-color ease 0.3s;\n        }\n        &:after {\n          content: ' ';\n          position: absolute;\n          top: 25%;\n          left: 25%;\n          width: 50%;\n          height: 50%;\n          opacity: 0;\n          transition: opacity ease 0.2s;\n          border-radius: ", ";\n          border: none;\n        }\n        &:checked:after {\n          opacity: 1;\n          background-color: ", ";\n        }\n\n        &:focus {\n          outline: none;\n          color: ", ";\n          border-color: ", ";\n        }\n      }\n\n      label {\n        color: ", ";\n      }\n    "], ["\n      display: flex;\n      align-items: center;\n      margin: 5px 0;\n\n      input {\n        height: 20px;\n        width: 20px;\n        box-sizing: border-box;\n        position: relative;\n        appearance: none;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        padding: 0;\n        margin-right: 10px;\n\n        border-color: ", ";\n        background-color: ", ";\n        &:hover {\n          background-color: ", ";\n        }\n\n        &:before {\n          box-sizing: border-box;\n          content: ' ';\n          position: absolute;\n          top: 0;\n          left: 0;\n\n          height: 100%;\n          width: 100%;\n          border-width: 2px;\n          border-radius: ", ";\n          border-style: solid;\n          /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n          border-color: inherit;\n          background-color: inherit;\n\n          color: ", ";\n          transition: border-color ease 0.3s, background-color ease 0.3s;\n        }\n        &:after {\n          content: ' ';\n          position: absolute;\n          top: 25%;\n          left: 25%;\n          width: 50%;\n          height: 50%;\n          opacity: 0;\n          transition: opacity ease 0.2s;\n          border-radius: ", ";\n          border: none;\n        }\n        &:checked:after {\n          opacity: 1;\n          background-color: ", ";\n        }\n\n        &:focus {\n          outline: none;\n          color: ", ";\n          border-color: ", ";\n        }\n      }\n\n      label {\n        color: ", ";\n      }\n    "])), color.primary.main, color.canvas.light, color.canvas.dark, radius.small, color.primary.main, radius.small, color.primary.main, color.ink.dark, color.ink.dark, color.ink.main);
+        },
+    },
+    modal: {
+        css: function (_a) {
+            var modalAnimTimeMS = _a.modalAnimTimeMS, radius = _a.radius, color = _a.color;
+            return css(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " ", "ms ease both;\n        &.hiding {\n          animation: ", " ", "ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "], ["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " ", "ms ease both;\n        &.hiding {\n          animation: ", " ", "ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "])), fadeIn, modalAnimTimeMS, fadeOut, modalAnimTimeMS, mediaQuery.medium, radius.big, color.canvas.light);
+        },
+    },
+    modalAnimTimeMS: 350,
 };
-var templateObject_1, templateObject_2, templateObject_3;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7;
 
 // Not declared in ./util since we don't want to export this function outside the package
 var handleCSSRule = function (rules, defaultRule) {
@@ -801,9 +856,7 @@ var handleCSSRule = function (rules, defaultRule) {
 var makeTheme = function (theme) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27;
     // This ternary operation allow us to avoid `TypeError: theme is undefined`
-    var _28 = theme
-        ? theme
-        : {}, color = _28.color, radius = _28.radius, grid = _28.grid, button = _28.button, global = _28.global, textInput = _28.textInput;
+    var _28 = theme ? theme : {}, color = _28.color, radius = _28.radius, grid = _28.grid, button = _28.button, global = _28.global, input = _28.input, checkbox = _28.checkbox, modal = _28.modal, modalAnimTimeMS = _28.modalAnimTimeMS;
     return {
         color: {
             secondary: {
@@ -855,20 +908,133 @@ var makeTheme = function (theme) {
         },
         radius: {
             big: cssUnit((_25 = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _25 !== void 0 ? _25 : defaultTheme.radius.big),
-            normal: cssUnit((_26 = radius === null || radius === void 0 ? void 0 : radius.normal) !== null && _26 !== void 0 ? _26 : defaultTheme.radius.normal),
+            main: cssUnit((_26 = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _26 !== void 0 ? _26 : defaultTheme.radius.main),
             small: cssUnit((_27 = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _27 !== void 0 ? _27 : defaultTheme.radius.small),
         },
         global: handleCSSRule(global, defaultTheme.global),
         button: handleCSSRule(button, defaultTheme.button),
-        textInput: handleCSSRule(textInput, defaultTheme.textInput),
+        input: handleCSSRule(input, defaultTheme.input),
+        checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
+        modal: handleCSSRule(modal, defaultTheme.modal),
+        modalAnimTimeMS: modalAnimTimeMS !== null && modalAnimTimeMS !== void 0 ? modalAnimTimeMS : defaultTheme.modalAnimTimeMS,
     };
 };
 
-var Button = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, { color: p.color }); });
+var Button = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, p); });
 var templateObject_1$1;
 
-var globalVariables = function (links) { return css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
-var Wrapper = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ", ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
+var Checkbox = function (_a) {
+    var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
+    var theme = useTheme();
+    return (jsx("div", { css: theme.checkbox.css(theme, props), className: className },
+        jsx("input", __assign({}, props, { type: 'checkbox' })),
+        label && jsx("label", null, label)));
+};
+
+/**
+ * Automatically hides children when `loading === true`, also allows the
+ * usage of `<Loading/>` Component inside it.
+ */
+var Form = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ", "\n"], ["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ",
+    "\n"])), function (p) {
+    return p.loading
+        ? css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "], ["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "]))) : '';
+});
+var _Loading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"
+    /**
+     * Can be used as the last child of a `<Form />` element to automatically
+     * create a loading indicator.
+     */
+])), function (p) { return (p.loading ? 1 : 0); }, function (p) { return (p.loading ? 'all' : 'none'); }, function (p) { return p.theme.color.canvas.light; }, function (p) { return p.theme.color.ink.main; });
+/**
+ * Can be used as the last child of a `<Form />` element to automatically
+ * create a loading indicator.
+ */
+var Loading = function (_a) {
+    var loading = _a.loading, className = _a.className;
+    return (jsx(_Loading, { loading: loading, className: className },
+        jsx("i", { className: 'fa fa-loading fa-spin' })));
+};
+var templateObject_1$2, templateObject_2$1, templateObject_3$1;
+
+var Input = function (_a) {
+    var className = _a.className, props = __rest(_a, ["className"]);
+    var theme = useTheme();
+    var id = props.id, label = props.label;
+    return (jsx("div", { css: theme.input.css(theme, props), className: className },
+        label && jsx("label", { htmlFor: id }, label),
+        jsx("input", __assign({}, props))));
+};
+Input.defaultProps = { type: 'text' };
+
+var commonModalProps = function (hiding, className) { return ({
+    shouldCloseOnEsc: true,
+    shouldCloseOnOverlayClick: true,
+    shouldFocusAfterRender: true,
+    overlayClassName: "modalOverlay " + (hiding ? 'hiding' : ''),
+    className: "modalCard " + (className !== null && className !== void 0 ? className : '') + " " + (hiding ? 'hiding' : ''),
+}); };
+var Modal = function (_a) {
+    var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, noHideAnimation = _a.noHideAnimation, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen", "noHideAnimation"]);
+    useEffect(function () {
+        ReactModal.setAppElement('body');
+    }, []);
+    var modalAnimTimeMS = useTheme().modalAnimTimeMS;
+    var _b = useState(false), hiding = _b[0], setHiding = _b[1];
+    var hideModal = function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!!noHideAnimation) return [3 /*break*/, 2];
+                    setHiding(true);
+                    // + 30ms so very slow computers can have smooth animations (usually
+                    // in these cases the js timeout might finish about 10-20 ms earlier
+                    // than the CSS animation)
+                    return [4 /*yield*/, wait(modalAnimTimeMS + 30)];
+                case 1:
+                    // + 30ms so very slow computers can have smooth animations (usually
+                    // in these cases the js timeout might finish about 10-20 ms earlier
+                    // than the CSS animation)
+                    _a.sent();
+                    setOpen(false);
+                    setHiding(false);
+                    _a.label = 2;
+                case 2: return [2 /*return*/];
+            }
+        });
+    }); };
+    return (React.createElement(ReactModal, __assign({}, commonModalProps(hiding, className), { isOpen: isOpen || hiding, onRequestClose: function () { return __awaiter(void 0, void 0, void 0, function () {
+            var shouldClose, _a;
+            var _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (!onRequestClose) return [3 /*break*/, 2];
+                        return [4 /*yield*/, onRequestClose()];
+                    case 1:
+                        _a = (_b = (_c.sent())) !== null && _b !== void 0 ? _b : true;
+                        return [3 /*break*/, 3];
+                    case 2:
+                        _a = true;
+                        _c.label = 3;
+                    case 3:
+                        shouldClose = _a;
+                        if (!(shouldClose && !noHideAnimation)) return [3 /*break*/, 5];
+                        return [4 /*yield*/, hideModal()];
+                    case 4:
+                        _c.sent();
+                        return [3 /*break*/, 6];
+                    case 5:
+                        setOpen(true);
+                        _c.label = 6;
+                    case 6: return [2 /*return*/];
+                }
+            });
+        }); } }, props), children));
+};
+
+var globalVariables = function (links) { return css(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
+var Wrapper = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ", ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
     ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ",
     ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"])), function (p) { return (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight'); }, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.canvas.light; }, function (p) {
     return p.expanded ? "0 2px 2px " + p.theme.color.ink.main + "25" : 'none';
@@ -918,7 +1084,7 @@ var Navbar = function (_a) {
                     jsx("i", { className: 'fa fa-menu' })),
                 jsx("div", { className: 'links' }, mappedLinks)))));
 };
-var templateObject_1$2, templateObject_2$1;
+var templateObject_1$3, templateObject_2$2;
 
 var translateDirection = function (direction, distance) {
     if (distance === void 0) { distance = '100%'; }
@@ -933,21 +1099,12 @@ var translateDirection = function (direction, distance) {
             return "translate3d(-" + distance + ", 0, 0)";
     }
 };
-var animation = function (direction, distance) { return keyframes(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
+var animation = function (direction, distance) { return keyframes(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
 var SlideFade = function (_a) {
     var direction = _a.direction, distance = _a.distance, props = __rest(_a, ["direction", "distance"]);
     return (jsx(Reveal, __assign({}, props, { keyframes: animation(direction !== null && direction !== void 0 ? direction : 'left', distance !== null && distance !== void 0 ? distance : '100%') })));
 };
-var templateObject_1$3;
-
-var Input = function (props) {
-    var theme = useTheme();
-    var id = props.id, label = props.label;
-    return (jsx("div", { css: theme.textInput.css(theme, props), className: props.className },
-        label && jsx("label", { htmlFor: id }, label),
-        jsx("input", __assign({}, props, { className: undefined }))));
-};
-Input.defaultProps = { type: 'text' };
+var templateObject_1$4;
 
 var inspectlet = function (inspectletId) {
     window.__insp = window.__insp || [];
@@ -973,7 +1130,6 @@ var inspectlet = function (inspectletId) {
     setTimeout(window.ldinsp, 0);
 };
 
-var ReactGA = _ReactGA;
 var randomId = function (length) {
     if (length === void 0) { length = 10; }
     return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
@@ -993,4 +1149,4 @@ var googleAnalyticsTrackPage = function (path) {
     ReactGA.pageview(path);
 };
 
-export { Breakpoints, Button, Col, Container, GlobalProvider, Input, Navbar, ReactGA, Row, SlideFade, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, useTheme };
+export { Breakpoints, Button, Checkbox, Col, Container, Form, GlobalProvider, Input, Loading, Modal, Navbar, Row, SlideFade, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, useTheme };
