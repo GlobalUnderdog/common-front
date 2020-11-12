@@ -34,18 +34,39 @@ export interface ThemeBase<Complete extends boolean> {
   readonly button: ThemeCSSRule
 
   /**
-   * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
+   * Don't forget that TextArea is a `<div/>` wrapping a `<label/>` + `<textarea/>`:
    *
    * ```tsx
    * Input = () => (
+   *    <div>
+   *      <label/>
+   *      <textarea/>
+   *    </div>
+   * )
+   * ```
+   */
+  readonly input: ThemeCSSRule
+  /**
+   * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
+   *
+   * ```tsx
+   * TextArea = () => (
    *    <div>
    *      <label/>
    *      <input/>
    *    </div>
    * )
    * ```
+   *
+   * By default we don't use resizable TextAreas, which is the default HTML
+   * behavior. This can be changed by setting this rule:
+   * ```css
+   * & > textarea {
+   *   resize: both; // can also be 'vertical' or 'horizontal'
+   * }
+   * ```
    */
-  readonly input: ThemeCSSRule
+  readonly textArea: ThemeCSSRule
 
   /**
    * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
@@ -69,7 +90,7 @@ export interface ThemeBase<Complete extends boolean> {
    * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
    *
    * ```tsx
-   * Checkbox = () => (
+   * Radio = () => (
    *    <div>
    *      <input type='radio'/>
    *      <label/>

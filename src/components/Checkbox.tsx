@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '../style/emotion'
-import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
 import { CommonStyleProps, useTheme } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
@@ -10,7 +10,7 @@ type HTMLInputProps = DetailedHTMLProps<
 
 export type CheckboxProps = HTMLInputProps &
   CommonStyleProps & {
-    label?: string
+    label?: ReactNode
     type?: 'checkbox'
   }
 
