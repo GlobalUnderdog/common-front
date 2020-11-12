@@ -61,10 +61,28 @@ export interface ThemeBase<Complete extends boolean> {
    *
    * By default we can't easily style HTML checkboxes inputs, so the default
    * style present at `@globalunderdog/common-front` uses `input:before` as
-   * the main checkbox background/border, and `input:after` as the symbol
-   * when checked.
+   * the checkbox background/border, and `input:after` as the filled area when
+   * checked.
    */
   readonly checkbox: ThemeCSSRule
+  /**
+   * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
+   *
+   * ```tsx
+   * Checkbox = () => (
+   *    <div>
+   *      <input type='radio'/>
+   *      <label/>
+   *    </div>
+   * )
+   * ```
+   *
+   * By default we can't easily style HTML radio inputs, so the default
+   * style present at `@globalunderdog/common-front` uses `input:before` as
+   * the radio background/border, and `input:after` as the filled area when
+   * checked.
+   */
+  readonly radio: ThemeCSSRule
 
   /**
    * CSS Classes used:
