@@ -34,6 +34,7 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     global,
     input,
     checkbox,
+    radio,
     modal,
     modalAnimTimeMS,
   } = theme ? theme : ({} as Theme)
@@ -99,6 +100,7 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     button: handleCSSRule(button, defaultTheme.button),
     input: handleCSSRule(input, defaultTheme.input),
     checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
+    radio: handleCSSRule(radio, defaultTheme.radio),
     modal: handleCSSRule(modal, defaultTheme.modal),
     modalAnimTimeMS: modalAnimTimeMS ?? defaultTheme.modalAnimTimeMS,
   }
