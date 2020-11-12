@@ -9,5 +9,5 @@ export type ButtonProps = DetailedHTMLProps<
   CommonStyleProps
 
 export const Button = styled.button<ButtonProps>`
-  ${(p) => p.theme.button.css(p.theme, { color: p.color })}
+  ${(p) => p.theme.button.css(p.theme, p)}
 `

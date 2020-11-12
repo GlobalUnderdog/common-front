@@ -11,6 +11,7 @@ const Children: React.FC = ({ children }) => {
   return (
     <Fragment>
       <Global styles={theme.global.css(theme)} />
+      <Global styles={theme.modal.css(theme)} />
       <ScreenClassProvider>{children}</ScreenClassProvider>
     </Fragment>
   )
