@@ -26,9 +26,17 @@ const handleCSSRule = (
 
 export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
   // This ternary operation allow us to avoid `TypeError: theme is undefined`
-  const { color, radius, grid, button, global, textInput } = theme
-    ? theme
-    : ({} as Theme)
+  const {
+    color,
+    radius,
+    grid,
+    button,
+    global,
+    input,
+    checkbox,
+    modal,
+    modalAnimTimeMS,
+  } = theme ? theme : ({} as Theme)
   return {
     color: {
       secondary: {
@@ -84,11 +92,14 @@ export const makeTheme = (theme?: Partial<ThemeBase<false>>): Theme => {
     },
     radius: {
       big: cssUnit(radius?.big ?? defaultTheme.radius.big),
-      normal: cssUnit(radius?.normal ?? defaultTheme.radius.normal),
+      main: cssUnit(radius?.main ?? defaultTheme.radius.main),
       small: cssUnit(radius?.small ?? defaultTheme.radius.small),
     },
     global: handleCSSRule(global, defaultTheme.global),
     button: handleCSSRule(button, defaultTheme.button),
-    textInput: handleCSSRule(textInput, defaultTheme.textInput),
+    input: handleCSSRule(input, defaultTheme.input),
+    checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
+    modal: handleCSSRule(modal, defaultTheme.modal),
+    modalAnimTimeMS: modalAnimTimeMS ?? defaultTheme.modalAnimTimeMS,
   }
 }

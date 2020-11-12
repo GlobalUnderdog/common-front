@@ -21,8 +21,21 @@ export type CSSUnit = string | number
 export const cssUnit = (num: CSSUnit): string =>
   typeof num === 'number' ? `${num}px` : num
 
-export interface CommonStyleProps {
+// Will be used by components using CommonStyleProps, enforces that only
+// one size is picked.
+type SizeHelpers =
+  | {
+      big?: true
+      small?: never | false
+    }
+  | {
+      big?: never | false
+      small?: true
+    }
+export type CommonStyleProps = SizeHelpers & {
   color?: ColorType
+  outline?: boolean
+  wide?: boolean
 }
 
 export type ThemeCSSFunc = (

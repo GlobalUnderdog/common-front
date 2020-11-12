@@ -9,6 +9,8 @@ export {
   RowProps,
   ColProps,
   useScreenClass,
+  Visible,
+  Hidden,
 } from 'react-grid-system'
 
 export const Container = styled(_Container)()

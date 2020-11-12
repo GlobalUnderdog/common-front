@@ -22,13 +22,13 @@ export type InputProps = HTMLInputProps &
       | 'url'
   }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input: React.FC<InputProps> = ({ className, ...props }) => {
   const theme = useTheme()
   const { id, label } = props
   return (
-    <div css={theme.textInput.css(theme, props)} className={props.className}>
+    <div css={theme.input.css(theme, props)} className={className}>
       {label && <label htmlFor={id}>{label}</label>}
-      <input {...props} className={undefined} />
+      <input {...props} />
     </div>
   )
 }
