@@ -65,6 +65,40 @@ const defaultColorTheme: ColorTheme = {
   },
 }
 
+const inputTextAreaBase: ThemeCSSFunc = ({ color, radius }) => css`
+  /* Wrapper rules */
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
+  & > input,
+  & > textarea {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    padding: 0 4px;
+
+    background: none;
+    background-color: ${color.canvas.light};
+    border: 2px solid ${color.ink.light};
+    border-radius: ${radius.main};
+    transition: border-color ease 0.2s;
+    &:focus {
+      border-color: ${color.primary.main};
+    }
+    &:disabled {
+      color: ${color.ink.light};
+      background-color: ${color.canvas.dark};
+    }
+  }
+
+  & > label {
+    color: ${color.primary.main};
+    font-size: 16px;
+    margin: 8px 0;
+  }
+`
+
 const radioCheckboxBase: ThemeCSSFunc = ({ color, radius }) => css`
   display: flex;
   align-items: center;
@@ -270,36 +304,17 @@ export const defaultTheme: Theme = {
     },
   },
   input: {
-    css: ({ color, radius }: Theme): SerializedStyles => css`
-      /* Wrapper rules */
-      display: flex;
-      flex-direction: column;
-      margin: 15px 0;
+    css: inputTextAreaBase,
+  },
+  textArea: {
+    css: (theme: Theme): SerializedStyles => css`
+      ${inputTextAreaBase(theme)}
 
-      & > input {
-        display: flex;
-        align-items: center;
-        height: 45px;
-        padding: 0 4px;
-
-        background: none;
-        background-color: ${color.canvas.light};
-        border: 2px solid ${color.ink.light};
-        border-radius: ${radius.main};
-        transition: border-color ease 0.2s;
-        &:focus {
-          border-color: ${color.primary.main};
-        }
-        &:disabled {
-          color: ${color.ink.light};
-          background-color: ${color.canvas.dark};
-        }
-      }
-
-      & > label {
-        color: ${color.primary.main};
-        font-size: 16px;
-        margin: 8px 0;
+      & > textarea {
+        display: block;
+        height: 290px;
+        padding: 4px;
+        resize: none;
       }
     `,
   },

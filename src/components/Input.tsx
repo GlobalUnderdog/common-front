@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
 import { CommonStyleProps, useTheme, jsx } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
@@ -9,7 +9,7 @@ type HTMLInputProps = DetailedHTMLProps<
 
 export type InputProps = HTMLInputProps &
   CommonStyleProps & {
-    label?: string
+    label?: ReactNode
     type?:
       | 'date'
       | 'email'
