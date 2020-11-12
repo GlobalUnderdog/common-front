@@ -1,9 +1,9 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
 import { CommonStyleProps } from '../style';
 declare type HTMLInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-export declare type CheckboxProps = HTMLInputProps & CommonStyleProps & {
+export declare type RadioProps = HTMLInputProps & CommonStyleProps & {
     label?: ReactNode;
-    type?: 'checkbox';
+    type?: 'radio';
 };
-export declare const Checkbox: React.FC<CheckboxProps>;
+export declare const Radio: React.FC<RadioProps>;
 export {};

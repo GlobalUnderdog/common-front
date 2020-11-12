@@ -29,18 +29,39 @@ export interface ThemeBase<Complete extends boolean> {
      */
     readonly button: ThemeCSSRule;
     /**
-     * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
+     * Don't forget that TextArea is a `<div/>` wrapping a `<label/>` + `<textarea/>`:
      *
      * ```tsx
      * Input = () => (
+     *    <div>
+     *      <label/>
+     *      <textarea/>
+     *    </div>
+     * )
+     * ```
+     */
+    readonly input: ThemeCSSRule;
+    /**
+     * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
+     *
+     * ```tsx
+     * TextArea = () => (
      *    <div>
      *      <label/>
      *      <input/>
      *    </div>
      * )
      * ```
+     *
+     * By default we don't use resizable TextAreas, which is the default HTML
+     * behavior. This can be changed by setting this rule:
+     * ```css
+     * & > textarea {
+     *   resize: both; // can also be 'vertical' or 'horizontal'
+     * }
+     * ```
      */
-    readonly input: ThemeCSSRule;
+    readonly textArea: ThemeCSSRule;
     /**
      * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
      *
@@ -55,10 +76,28 @@ export interface ThemeBase<Complete extends boolean> {
      *
      * By default we can't easily style HTML checkboxes inputs, so the default
      * style present at `@globalunderdog/common-front` uses `input:before` as
-     * the main checkbox background/border, and `input:after` as the symbol
-     * when checked.
+     * the checkbox background/border, and `input:after` as the filled area when
+     * checked.
      */
     readonly checkbox: ThemeCSSRule;
+    /**
+     * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
+     *
+     * ```tsx
+     * Radio = () => (
+     *    <div>
+     *      <input type='radio'/>
+     *      <label/>
+     *    </div>
+     * )
+     * ```
+     *
+     * By default we can't easily style HTML radio inputs, so the default
+     * style present at `@globalunderdog/common-front` uses `input:before` as
+     * the radio background/border, and `input:after` as the filled area when
+     * checked.
+     */
+    readonly radio: ThemeCSSRule;
     /**
      * CSS Classes used:
      *
