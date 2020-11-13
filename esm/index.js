@@ -1028,6 +1028,8 @@ var NavLink = function (_a) {
     var theme = useTheme();
     // Forwarded click required by Next Link for non `<a/>`
     var childOnClick = function (forwardedClick) {
+        if (onClick)
+            onClick();
         setExpanded(false);
     };
     // Forwards the right events for Next.js Link

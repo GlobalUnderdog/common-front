@@ -166,7 +166,8 @@ const NavLink: React.FC<
 
   // Forwarded click required by Next Link for non `<a/>`
   const childOnClick = (forwardedClick?: void) => {
-    if (onClick) if (forwardedClick) forwardedClick
+    if (onClick) onClick()
+    if (forwardedClick) forwardedClick
     setExpanded(false)
   }
 
