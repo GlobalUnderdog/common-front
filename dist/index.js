@@ -632,6 +632,22 @@ tags.forEach(function (tagName) {
 });
 
 var styled = newStyled;
+/**
+ * Defaults the type to Theme, however it is possible to change it.
+ *
+ * Examples:
+ *
+ * ```tsx
+ * // Using the default theme from `@globalunderdog/common-front`
+ * const theme = useTheme()
+ *
+ * // Inline example
+ * const theme = useTheme<{color: string}>()
+ *
+ * // Loading the theme from an interface
+ * const theme = useTheme<MyAppTheme>()
+ * ```
+ */
 var useTheme = function () { return emotionTheming.useTheme(); };
 
 /**
@@ -756,7 +772,7 @@ var inputTextAreaBase = function (_a) {
 };
 var radioCheckboxBase = function (_a) {
     var color = _a.color, radius = _a.radius;
-    return core.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      color: ", ";\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"], ["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      color: ", ";\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"])), color.primary.main, color.canvas.light, color.canvas.dark, radius.small, color.primary.main, radius.small, color.primary.main, color.ink.dark, color.ink.dark, color.ink.main);
+    return core.css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"], ["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"])), color.primary.main, color.canvas.light, color.canvas.dark, radius.small, color.primary.main, radius.small, color.primary.main, color.primary.dark, color.ink.main);
 };
 var defaultTheme = {
     color: defaultColorTheme,
@@ -836,19 +852,22 @@ var defaultTheme = {
         css: function (theme) { return core.css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      ", "\n      input, input:before, input:after {\n        border-radius: 999px;\n      }\n    "], ["\n      ", "\n      input, input:before, input:after {\n        border-radius: 999px;\n      }\n    "])), radioCheckboxBase(theme)); },
     },
     modal: {
-        css: function (_a) {
-            var modalAnimTimeMS = _a.modalAnimTimeMS, radius = _a.radius, color = _a.color;
-            return core.css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " ", "ms ease both;\n        &.hiding {\n          animation: ", " ", "ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "], ["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " ", "ms ease both;\n        &.hiding {\n          animation: ", " ", "ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "])), fadeIn, modalAnimTimeMS, fadeOut, modalAnimTimeMS, mediaQuery.medium, radius.big, color.canvas.light);
+        css: function (_a, props) {
+            var _b, _c;
+            var radius = _a.radius, color = _a.color;
+            return core.css(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        ", "\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "], ["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        ",
+                "\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "])), (props === null || props === void 0 ? void 0 : props.animateMS) &&
+                (props === null || props === void 0 ? void 0 : props.animateMS) > 0 && core.css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n          animation: ", " ", "ms ease both;\n          &.hiding {\n            animation: ", " ", "ms ease both;\n          }\n        "], ["\n          animation: ", " ", "ms ease both;\n          &.hiding {\n            animation: ", " ", "ms ease both;\n          }\n        "])), fadeIn, (_b = props === null || props === void 0 ? void 0 : props.animateMS) !== null && _b !== void 0 ? _b : 350, fadeOut, (_c = props === null || props === void 0 ? void 0 : props.animateMS) !== null && _c !== void 0 ? _c : 350), mediaQuery.medium, radius.big, color.canvas.light);
         },
     },
-    modalAnimTimeMS: 350,
 };
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10;
 
 // Not declared in ./util since we don't want to export this function outside the package
 var handleCSSRule = function (rules, defaultRule) {
-    if (!rules)
+    if (!(rules === null || rules === void 0 ? void 0 : rules.css))
         return { css: defaultRule.css };
+    var rulesCss = rules.css; // Typescript still thinks rules.css is empty by this point2
     if (rules.replace)
         return {
             css: rules.css,
@@ -856,7 +875,7 @@ var handleCSSRule = function (rules, defaultRule) {
     return {
         css: function (theme, props) {
             // Overwrites values from defaultStyle with the ones passed by ThemeCSSFunc
-            var styles = [defaultRule.css, rules.css]
+            var styles = [defaultRule.css, rulesCss]
                 .flat(2)
                 .map(function (st) { return st(theme, props); })
                 .flat(); // TS Complains if we don't have this, even though we've used flat()
@@ -865,72 +884,24 @@ var handleCSSRule = function (rules, defaultRule) {
     };
 };
 var makeTheme = function (theme) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27;
+    var _a, _b, _c, _d;
     // This ternary operation allow us to avoid `TypeError: theme is undefined`
-    var _28 = theme ? theme : {}, color = _28.color, radius = _28.radius, grid = _28.grid, button = _28.button, global = _28.global, input = _28.input, textArea = _28.textArea, checkbox = _28.checkbox, radio = _28.radio, modal = _28.modal, modalAnimTimeMS = _28.modalAnimTimeMS;
-    return {
-        color: {
-            secondary: {
-                dark: (_b = (_a = color === null || color === void 0 ? void 0 : color.secondary) === null || _a === void 0 ? void 0 : _a.dark) !== null && _b !== void 0 ? _b : defaultTheme.color.secondary.dark,
-                main: (_d = (_c = color === null || color === void 0 ? void 0 : color.secondary) === null || _c === void 0 ? void 0 : _c.main) !== null && _d !== void 0 ? _d : defaultTheme.color.secondary.main,
-                light: (_f = (_e = color === null || color === void 0 ? void 0 : color.secondary) === null || _e === void 0 ? void 0 : _e.light) !== null && _f !== void 0 ? _f : defaultTheme.color.secondary.light,
-            },
-            canvas: {
-                dark: (_h = (_g = color === null || color === void 0 ? void 0 : color.canvas) === null || _g === void 0 ? void 0 : _g.dark) !== null && _h !== void 0 ? _h : defaultTheme.color.canvas.dark,
-                main: (_k = (_j = color === null || color === void 0 ? void 0 : color.canvas) === null || _j === void 0 ? void 0 : _j.main) !== null && _k !== void 0 ? _k : defaultTheme.color.canvas.main,
-                light: (_m = (_l = color === null || color === void 0 ? void 0 : color.canvas) === null || _l === void 0 ? void 0 : _l.light) !== null && _m !== void 0 ? _m : defaultTheme.color.canvas.light,
-            },
-            error: {
-                dark: (_p = (_o = color === null || color === void 0 ? void 0 : color.error) === null || _o === void 0 ? void 0 : _o.dark) !== null && _p !== void 0 ? _p : defaultTheme.color.error.dark,
-                main: (_r = (_q = color === null || color === void 0 ? void 0 : color.error) === null || _q === void 0 ? void 0 : _q.main) !== null && _r !== void 0 ? _r : defaultTheme.color.error.main,
-                light: (_t = (_s = color === null || color === void 0 ? void 0 : color.error) === null || _s === void 0 ? void 0 : _s.light) !== null && _t !== void 0 ? _t : defaultTheme.color.error.light,
-            },
-            info: {
-                dark: (_v = (_u = color === null || color === void 0 ? void 0 : color.info) === null || _u === void 0 ? void 0 : _u.dark) !== null && _v !== void 0 ? _v : defaultTheme.color.info.dark,
-                main: (_x = (_w = color === null || color === void 0 ? void 0 : color.info) === null || _w === void 0 ? void 0 : _w.main) !== null && _x !== void 0 ? _x : defaultTheme.color.info.main,
-                light: (_z = (_y = color === null || color === void 0 ? void 0 : color.info) === null || _y === void 0 ? void 0 : _y.light) !== null && _z !== void 0 ? _z : defaultTheme.color.info.light,
-            },
-            ink: {
-                dark: (_1 = (_0 = color === null || color === void 0 ? void 0 : color.ink) === null || _0 === void 0 ? void 0 : _0.dark) !== null && _1 !== void 0 ? _1 : defaultTheme.color.ink.dark,
-                main: (_3 = (_2 = color === null || color === void 0 ? void 0 : color.ink) === null || _2 === void 0 ? void 0 : _2.main) !== null && _3 !== void 0 ? _3 : defaultTheme.color.ink.main,
-                light: (_5 = (_4 = color === null || color === void 0 ? void 0 : color.ink) === null || _4 === void 0 ? void 0 : _4.light) !== null && _5 !== void 0 ? _5 : defaultTheme.color.ink.light,
-            },
-            primary: {
-                dark: (_7 = (_6 = color === null || color === void 0 ? void 0 : color.primary) === null || _6 === void 0 ? void 0 : _6.dark) !== null && _7 !== void 0 ? _7 : defaultTheme.color.primary.dark,
-                main: (_9 = (_8 = color === null || color === void 0 ? void 0 : color.primary) === null || _8 === void 0 ? void 0 : _8.main) !== null && _9 !== void 0 ? _9 : defaultTheme.color.primary.main,
-                light: (_11 = (_10 = color === null || color === void 0 ? void 0 : color.primary) === null || _10 === void 0 ? void 0 : _10.light) !== null && _11 !== void 0 ? _11 : defaultTheme.color.primary.light,
-            },
-            success: {
-                dark: (_13 = (_12 = color === null || color === void 0 ? void 0 : color.success) === null || _12 === void 0 ? void 0 : _12.dark) !== null && _13 !== void 0 ? _13 : defaultTheme.color.success.dark,
-                main: (_15 = (_14 = color === null || color === void 0 ? void 0 : color.success) === null || _14 === void 0 ? void 0 : _14.main) !== null && _15 !== void 0 ? _15 : defaultTheme.color.success.main,
-                light: (_17 = (_16 = color === null || color === void 0 ? void 0 : color.success) === null || _16 === void 0 ? void 0 : _16.light) !== null && _17 !== void 0 ? _17 : defaultTheme.color.success.light,
-            },
-            warning: {
-                dark: (_19 = (_18 = color === null || color === void 0 ? void 0 : color.warning) === null || _18 === void 0 ? void 0 : _18.dark) !== null && _19 !== void 0 ? _19 : defaultTheme.color.warning.dark,
-                main: (_21 = (_20 = color === null || color === void 0 ? void 0 : color.warning) === null || _20 === void 0 ? void 0 : _20.main) !== null && _21 !== void 0 ? _21 : defaultTheme.color.warning.main,
-                light: (_23 = (_22 = color === null || color === void 0 ? void 0 : color.warning) === null || _22 === void 0 ? void 0 : _22.light) !== null && _23 !== void 0 ? _23 : defaultTheme.color.warning.light,
-            },
-        },
-        grid: {
-            replace: (_24 = grid === null || grid === void 0 ? void 0 : grid.replace) !== null && _24 !== void 0 ? _24 : false,
+    var _e = theme ? theme : {}, color = _e.color, radius = _e.radius, grid = _e.grid, button = _e.button, global = _e.global, input = _e.input, textArea = _e.textArea, checkbox = _e.checkbox, radio = _e.radio, modal = _e.modal, extended = __rest(_e, ["color", "radius", "grid", "button", "global", "input", "textArea", "checkbox", "radio", "modal"]);
+    return __assign({ color: {
+            secondary: __assign(__assign({}, defaultTheme.color.secondary), color === null || color === void 0 ? void 0 : color.secondary),
+            canvas: __assign(__assign({}, defaultTheme.color.canvas), color === null || color === void 0 ? void 0 : color.canvas),
+            error: __assign(__assign({}, defaultTheme.color.error), color === null || color === void 0 ? void 0 : color.error),
+            info: __assign(__assign({}, defaultTheme.color.info), color === null || color === void 0 ? void 0 : color.info),
+            ink: __assign(__assign({}, defaultTheme.color.ink), color === null || color === void 0 ? void 0 : color.ink),
+            primary: __assign(__assign({}, defaultTheme.color.primary), color === null || color === void 0 ? void 0 : color.primary),
+            success: __assign(__assign({}, defaultTheme.color.success), color === null || color === void 0 ? void 0 : color.success),
+            warning: __assign(__assign({}, defaultTheme.color.warning), color === null || color === void 0 ? void 0 : color.warning),
+        }, grid: {
+            replace: (_a = grid === null || grid === void 0 ? void 0 : grid.replace) !== null && _a !== void 0 ? _a : false,
             rules: (grid === null || grid === void 0 ? void 0 : grid.replace) && (grid === null || grid === void 0 ? void 0 : grid.rules)
                 ? grid.rules
                 : __assign(__assign({}, defaultTheme.grid.rules), grid === null || grid === void 0 ? void 0 : grid.rules),
-        },
-        radius: {
-            big: cssUnit((_25 = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _25 !== void 0 ? _25 : defaultTheme.radius.big),
-            main: cssUnit((_26 = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _26 !== void 0 ? _26 : defaultTheme.radius.main),
-            small: cssUnit((_27 = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _27 !== void 0 ? _27 : defaultTheme.radius.small),
-        },
-        global: handleCSSRule(global, defaultTheme.global),
-        button: handleCSSRule(button, defaultTheme.button),
-        input: handleCSSRule(input, defaultTheme.input),
-        textArea: handleCSSRule(textArea, defaultTheme.textArea),
-        checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
-        radio: handleCSSRule(radio, defaultTheme.radio),
-        modal: handleCSSRule(modal, defaultTheme.modal),
-        modalAnimTimeMS: modalAnimTimeMS !== null && modalAnimTimeMS !== void 0 ? modalAnimTimeMS : defaultTheme.modalAnimTimeMS,
-    };
+        }, radius: __assign(__assign({}, radius), { big: cssUnit((_b = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _b !== void 0 ? _b : defaultTheme.radius.big), main: cssUnit((_c = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _c !== void 0 ? _c : defaultTheme.radius.main), small: cssUnit((_d = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _d !== void 0 ? _d : defaultTheme.radius.small) }), global: handleCSSRule(global, defaultTheme.global), button: handleCSSRule(button, defaultTheme.button), input: handleCSSRule(input, defaultTheme.input), textArea: handleCSSRule(textArea, defaultTheme.textArea), checkbox: handleCSSRule(checkbox, defaultTheme.checkbox), radio: handleCSSRule(radio, defaultTheme.radio), modal: handleCSSRule(modal, defaultTheme.modal) }, extended);
 };
 
 var Button = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, p); });
@@ -941,7 +912,7 @@ var Checkbox = function (_a) {
     var theme = useTheme();
     return (core.jsx("div", { css: theme.checkbox.css(theme, props), className: className },
         core.jsx("input", __assign({}, props, { type: 'checkbox' })),
-        label && core.jsx("label", null, label)));
+        label && core.jsx("label", { htmlFor: props.id }, label)));
 };
 
 /**
@@ -973,9 +944,9 @@ var templateObject_1$2, templateObject_2$1, templateObject_3$1;
 var Input = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     var theme = useTheme();
-    var id = props.id, label = props.label;
+    var label = props.label;
     return (core.jsx("div", { css: theme.input.css(theme, props), className: className },
-        label && core.jsx("label", { htmlFor: id }, label),
+        label && core.jsx("label", { htmlFor: props.id }, label),
         core.jsx("input", __assign({}, props))));
 };
 Input.defaultProps = { type: 'text' };
@@ -988,22 +959,22 @@ var commonModalProps = function (hiding, className) { return ({
     className: "modalCard " + (className !== null && className !== void 0 ? className : '') + " " + (hiding ? 'hiding' : ''),
 }); };
 var Modal = function (_a) {
-    var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, noHideAnimation = _a.noHideAnimation, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen", "noHideAnimation"]);
+    var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, _b = _a.animateMS, animateMS = _b === void 0 ? 350 : _b, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen", "animateMS"]);
     React.useEffect(function () {
         ReactModal.setAppElement('body');
     }, []);
-    var modalAnimTimeMS = useTheme().modalAnimTimeMS;
-    var _b = React.useState(false), hiding = _b[0], setHiding = _b[1];
+    var _c = React.useState(false), hiding = _c[0], setHiding = _c[1];
+    var animated = animateMS > 0;
     var hideModal = function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!!noHideAnimation) return [3 /*break*/, 2];
+                    if (!animated) return [3 /*break*/, 2];
                     setHiding(true);
                     // + 30ms so very slow computers can have smooth animations (usually
                     // in these cases the js timeout might finish about 10-20 ms earlier
                     // than the CSS animation)
-                    return [4 /*yield*/, common.wait(modalAnimTimeMS + 30)];
+                    return [4 /*yield*/, common.wait((animateMS !== null && animateMS !== void 0 ? animateMS : 350) + 30)];
                 case 1:
                     // + 30ms so very slow computers can have smooth animations (usually
                     // in these cases the js timeout might finish about 10-20 ms earlier
@@ -1032,7 +1003,7 @@ var Modal = function (_a) {
                         _c.label = 3;
                     case 3:
                         shouldClose = _a;
-                        if (!(shouldClose && !noHideAnimation)) return [3 /*break*/, 5];
+                        if (!(shouldClose && animated)) return [3 /*break*/, 5];
                         return [4 /*yield*/, hideModal()];
                     case 4:
                         _c.sent();
@@ -1104,7 +1075,7 @@ var Radio = function (_a) {
     var theme = useTheme();
     return (core.jsx("div", { css: theme.radio.css(theme, props), className: className },
         core.jsx("input", __assign({}, props, { type: 'radio' })),
-        label && core.jsx("label", null, label)));
+        label && core.jsx("label", { htmlFor: props.id }, label)));
 };
 
 var translateDirection = function (direction, distance) {
@@ -1130,9 +1101,9 @@ var templateObject_1$4;
 var TextArea = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     var theme = useTheme();
-    var id = props.id, label = props.label;
+    var label = props.label;
     return (core.jsx("div", { css: theme.textArea.css(theme, props), className: className },
-        label && core.jsx("label", { htmlFor: id }, label),
+        label && core.jsx("label", { htmlFor: props.id }, label),
         core.jsx("textarea", __assign({}, props))));
 };
 
@@ -1313,4 +1284,5 @@ exports.inspectlet = inspectlet;
 exports.makeTheme = makeTheme;
 exports.mediaQuery = mediaQuery;
 exports.styled = styled;
+exports.untypedStyled = newStyled;
 exports.useTheme = useTheme;

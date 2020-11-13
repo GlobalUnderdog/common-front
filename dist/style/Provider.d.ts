@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
-import { ThemeProps } from './theme';
+import { GUTheme } from './theme';
 import { NeedsChildrenProps } from './util';
-export declare const GlobalProvider: React.FC<NeedsChildrenProps & ThemeProps>;
+export declare const GlobalProvider: React.FC<NeedsChildrenProps & {
+    theme: GUTheme;
+}>;

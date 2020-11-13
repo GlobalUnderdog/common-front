@@ -1,33 +1,34 @@
 import { Configuration } from 'react-grid-system';
-import { ColorTheme, PartialColorTheme } from './color';
-import { PartialRadiusTheme, RadiusTheme } from './radius';
+import { GUColorTheme } from './color';
+import { GURadiusTheme } from './radius';
 import { ThemeCSSRule } from './util';
 /**
- * Usage of generic to speed up the creation of themes using makeTheme,
- * in this way developers can pass partial themes while just adding the values
- * over the default ones.
+ * Contains only the basic properties of GUTheme, missing the rules & functions
+ * for styles, global styles, etc.
  */
-export interface ThemeBase<Complete extends boolean> {
-    readonly color: Complete extends true ? ColorTheme : PartialColorTheme;
-    readonly radius: Complete extends true ? RadiusTheme : PartialRadiusTheme;
+export interface GUThemeProps {
+    readonly color: GUColorTheme;
+    readonly radius: GURadiusTheme;
     readonly grid: {
         /** Erases the default grid settings upon writing the new one, defaults to `false` */
         readonly replace?: boolean;
         readonly rules: Configuration;
     };
+}
+export declare type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
     /**
      * Generic global style to be applied on the page, defaults to fixes,
      * normalize.css, fa-spin & removes the outline on focused inputs,
      * buttons, etc.
      */
-    readonly global: ThemeCSSRule;
+    readonly global: ThemeCSSRule<T>;
     /**
      * The default style for `<Button/>`, does not change HTML `<button/>`
      * to avoid conflicts
      *
      * Uses radius.normal by default
      */
-    readonly button: ThemeCSSRule;
+    readonly button: ThemeCSSRule<T>;
     /**
      * Don't forget that TextArea is a `<div/>` wrapping a `<label/>` + `<textarea/>`:
      *
@@ -40,7 +41,7 @@ export interface ThemeBase<Complete extends boolean> {
      * )
      * ```
      */
-    readonly input: ThemeCSSRule;
+    readonly input: ThemeCSSRule<T>;
     /**
      * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
      *
@@ -61,7 +62,7 @@ export interface ThemeBase<Complete extends boolean> {
      * }
      * ```
      */
-    readonly textArea: ThemeCSSRule;
+    readonly textArea: ThemeCSSRule<T>;
     /**
      * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
      *
@@ -79,7 +80,7 @@ export interface ThemeBase<Complete extends boolean> {
      * the checkbox background/border, and `input:after` as the filled area when
      * checked.
      */
-    readonly checkbox: ThemeCSSRule;
+    readonly checkbox: ThemeCSSRule<T>;
     /**
      * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
      *
@@ -97,7 +98,7 @@ export interface ThemeBase<Complete extends boolean> {
      * the radio background/border, and `input:after` as the filled area when
      * checked.
      */
-    readonly radio: ThemeCSSRule;
+    readonly radio: ThemeCSSRule<T>;
     /**
      * CSS Classes used:
      *
@@ -107,22 +108,5 @@ export interface ThemeBase<Complete extends boolean> {
      * These classes are global and ideally any app using this package should
      * not have overlapping classNames with them.
      */
-    readonly modal: ThemeCSSRule;
-    /**
-     * How many milliseconds does it take for the modal to show/hide on the default
-     * animation.
-     *
-     * It's possible, but not recommended, to ignore this variable when creating
-     * custom styles for modals.
-     *
-     * The side-effect of not setting this value correctly is that the modal might
-     * not complete its hiding animation before it exits
-     *
-     * Defaults to 350ms
-     */
-    readonly modalAnimTimeMS: number;
-}
-export declare type Theme = ThemeBase<true>;
-export declare type ThemeProps = {
-    theme: Theme;
+    readonly modal: ThemeCSSRule<T>;
 };

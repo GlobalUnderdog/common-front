@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ColorType } from './color';
 import { SerializedStyles } from './emotion';
-import { Theme } from './theme';
+import { GUThemeProps } from './theme';
 /** Makes TS complain about missing children */
 export interface NeedsChildrenProps {
     children: ReactNode | ReactNode[];
@@ -28,15 +28,8 @@ export declare type CommonStyleProps = SizeHelpers & {
     outline?: boolean;
     wide?: boolean;
 };
-export declare type ThemeCSSFunc = (theme: Theme, 
-/**
- * Props that might be commonly used in components, like color, size, etc.
- *
- * Available in this function so global styles (e.g. Button, InputText) can
- * benefit from these.
- */
-props?: CommonStyleProps) => SerializedStyles | SerializedStyles[];
-export interface ThemeCSSRule {
+export declare type ThemeCSSFunc<T extends GUThemeProps = GUThemeProps> = (theme: T, props?: any) => SerializedStyles | SerializedStyles[];
+export interface ThemeCSSRule<T extends GUThemeProps = GUThemeProps> {
     /**
      * If true the Style passed in css will replace the original one set by
      * @globalunderdog/common-front Theme.
@@ -44,6 +37,6 @@ export interface ThemeCSSRule {
      * Defaults to `false`
      */
     readonly replace?: boolean;
-    readonly css: ThemeCSSFunc;
+    readonly css: ThemeCSSFunc<T>;
 }
 export {};

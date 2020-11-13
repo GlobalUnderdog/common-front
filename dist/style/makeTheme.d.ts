@@ -1,2 +1,3 @@
-import { Theme, ThemeBase } from './theme';
-export declare const makeTheme: (theme?: Partial<ThemeBase<false>> | undefined) => Theme;
+import { PartialDeep } from 'type-fest';
+import { GUTheme } from './theme';
+export declare const makeTheme: <T extends GUTheme<import("./theme").GUThemeProps> = GUTheme<import("./theme").GUThemeProps>>(theme?: PartialDeep<T> | undefined) => T;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Props as _ModalProps } from 'react-modal';
-export declare type ModalProps = Omit<_ModalProps, 'shouldCloseOnEsc' | 'overlayClassName' | 'portalClassName' | 'htmlOpenClassName' | 'bodyOpenClassName' | 'onRequestClose' | 'set'> & {
+import { CommonStyleProps } from '../style';
+export declare type ModalProps = CommonStyleProps & Omit<_ModalProps, 'shouldCloseOnEsc' | 'overlayClassName' | 'portalClassName' | 'htmlOpenClassName' | 'bodyOpenClassName' | 'onRequestClose' | 'set'> & {
     setOpen: (open: boolean) => void;
     /**
      * If a boolean is returned the modal is only going to close in case
@@ -11,6 +12,12 @@ export declare type ModalProps = Omit<_ModalProps, 'shouldCloseOnEsc' | 'overlay
      * will stay in the screen.
      */
     onRequestClose?: () => Promise<boolean | void> | boolean | void;
-    noHideAnimation?: boolean;
+    /**
+     * How many milliseconds does it take for the modal to show/hide on the default
+     * animation. If `animate < 1` it disables animations.
+     *
+     * Defaults to 350ms
+     */
+    animateMS?: number;
 };
 export declare const Modal: React.FC<ModalProps>;
