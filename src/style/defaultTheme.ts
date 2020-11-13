@@ -103,6 +103,12 @@ const radioCheckboxBase: GUThemeCSSFunc = ({ color, radius }) => css`
   align-items: center;
   margin: 5px 0;
 
+  input,
+  label {
+    cursor: pointer;
+    transition: color ease 0.3s, border-color ease 0.1s;
+  }
+
   input {
     height: 20px;
     width: 20px;
@@ -151,10 +157,11 @@ const radioCheckboxBase: GUThemeCSSFunc = ({ color, radius }) => css`
       transition: opacity ease 0.2s;
       border-radius: ${radius.small};
       border: none;
+      background-color: ${color.primary.main};
     }
     &:checked:after {
       opacity: 1;
-      background-color: ${color.primary.main};
+      border-color: ${color.primary.dark};
     }
 
     &:focus {
@@ -324,6 +331,23 @@ export const guDefaultTheme = {
       ${radioCheckboxBase(theme)}
       input, input:before, input:after {
         border-radius: 999px;
+      }
+      input {
+        &:after {
+          content: ' ';
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+        }
+        &:checked:after {
+          background-image: radial-gradient(
+            circle,
+            ${theme.color.primary.main} 30%,
+            #0000 40%
+          );
+        }
       }
     `,
   },
