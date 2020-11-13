@@ -1025,14 +1025,14 @@ var Wrapper = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTempl
 var NavLink = function (_a) {
     var href = _a.href, label = _a.label, button = _a.button, color = _a.color, setExpanded = _a.setExpanded, onClick = _a.onClick;
     var theme = useTheme();
-    var childOnClick = function () {
-        if (onClick)
-            onClick();
+    // Forwarded click required by Next Link for non `<a/>`
+    var childOnClick = function (forwardedClick) {
         setExpanded(false);
     };
+    // Forwards the right events for Next.js Link
     var Child = function (_a) {
-        var href = _a.href;
-        return button ? (core.jsx(GUButton, { color: color, onClick: childOnClick }, label)) : (core.jsx("a", { onClick: childOnClick, href: href, style: { color: color ? theme.color[color].main : undefined } }, label));
+        var href = _a.href, onClick = _a.onClick;
+        return button ? (core.jsx(GUButton, { color: color, onClick: function (e) { return childOnClick(onClick ? onClick(e) : undefined); } }, label)) : (core.jsx("a", { onClick: function (e) { return childOnClick(onClick ? onClick(e) : undefined); }, href: href, style: { color: color ? theme.color[color].main : undefined } }, label));
     };
     return href ? (core.jsx(Link, { href: href, passHref: true },
         core.jsx(Child, null))) : (core.jsx(Child, null));

@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { Fragment, ReactNode, useState } from 'react'
+import { Fragment, ReactNode, SyntheticEvent, useState } from 'react'
 import {
-  GUColorType,
   Container,
   css,
   Global,
+  GUColorType,
   jsx,
   mediaQuery,
   SerializedStyles,
@@ -164,18 +164,27 @@ const NavLink: React.FC<
 > = ({ href, label, button, color, setExpanded, onClick }) => {
   const theme = useTheme()
 
-  const childOnClick = () => {
-    if (onClick) onClick()
+  // Forwarded click required by Next Link for non `<a/>`
+  const childOnClick = (forwardedClick?: void) => {
+    if (onClick) if (forwardedClick) forwardedClick
     setExpanded(false)
   }
-  const Child: React.FC<{ href?: string }> = ({ href }) => {
+
+  // Forwards the right events for Next.js Link
+  const Child: React.FC<{
+    href?: string
+    onClick?: (e: SyntheticEvent) => void
+  }> = ({ href, onClick }) => {
     return button ? (
-      <GUButton color={color} onClick={childOnClick}>
+      <GUButton
+        color={color}
+        onClick={(e) => childOnClick(onClick ? onClick(e) : undefined)}
+      >
         {label}
       </GUButton>
     ) : (
       <a
-        onClick={childOnClick}
+        onClick={(e) => childOnClick(onClick ? onClick(e) : undefined)}
         href={href}
         style={{ color: color ? theme.color[color].main : undefined }}
       >
