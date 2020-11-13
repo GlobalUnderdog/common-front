@@ -193,7 +193,7 @@ const NavLink: React.FC<
   )
 }
 
-interface Props {
+export interface GUNavbarProps {
   links: NavLinkProps[]
   css?: SerializedStyles | SerializedStyles[]
   className?: string
@@ -210,7 +210,12 @@ interface Props {
  *
  * You can replace these values using Theme.global.css
  */
-export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
+export const GUNavbar: React.FC<GUNavbarProps> = ({
+  links,
+  logo,
+  css,
+  className,
+}) => {
   const [expanded, setExpanded] = useState(false)
 
   // Declaring all links here so we can use Array.length for CSS heights,

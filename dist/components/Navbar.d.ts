@@ -7,7 +7,7 @@ interface NavLinkProps {
     color?: GUColorType;
     onClick?: VoidFunction;
 }
-interface Props {
+export interface GUNavbarProps {
     links: NavLinkProps[];
     css?: SerializedStyles | SerializedStyles[];
     className?: string;
@@ -23,5 +23,5 @@ interface Props {
  *
  * You can replace these values using Theme.global.css
  */
-export declare const Navbar: React.FC<Props>;
+export declare const GUNavbar: React.FC<GUNavbarProps>;
 export {};

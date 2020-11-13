@@ -1043,7 +1043,7 @@ var NavLink = function (_a) {
  *
  * You can replace these values using Theme.global.css
  */
-var Navbar = function (_a) {
+var GUNavbar = function (_a) {
     var links = _a.links, logo = _a.logo, css = _a.css, className = _a.className;
     var _b = useState(false), expanded = _b[0], setExpanded = _b[1];
     // Declaring all links here so we can use Array.length for CSS heights,
@@ -1143,4 +1143,4 @@ var googleAnalyticsTrackPage = function (path) {
     ReactGA.pageview(path);
 };
 
-export { Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUProvider, GURadio, GUTextArea, Navbar, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, inspectlet, makeTheme, mediaQuery, styled, newStyled as untypedStyled, useTheme };
+export { Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUNavbar, GUProvider, GURadio, GUTextArea, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, inspectlet, makeTheme, mediaQuery, styled, newStyled as untypedStyled, useTheme };

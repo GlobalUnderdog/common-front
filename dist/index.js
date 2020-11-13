@@ -1046,7 +1046,7 @@ var NavLink = function (_a) {
  *
  * You can replace these values using Theme.global.css
  */
-var Navbar = function (_a) {
+var GUNavbar = function (_a) {
     var links = _a.links, logo = _a.logo, css = _a.css, className = _a.className;
     var _b = React.useState(false), expanded = _b[0], setExpanded = _b[1];
     // Declaring all links here so we can use Array.length for CSS heights,
@@ -1265,10 +1265,10 @@ exports.GUForm = GUForm;
 exports.GUInput = GUInput;
 exports.GULoading = GULoading;
 exports.GUModal = GUModal;
+exports.GUNavbar = GUNavbar;
 exports.GUProvider = GUProvider;
 exports.GURadio = GURadio;
 exports.GUTextArea = GUTextArea;
-exports.Navbar = Navbar;
 exports.Row = Row;
 exports.SlideFade = SlideFade;
 exports.cssUnit = cssUnit;
