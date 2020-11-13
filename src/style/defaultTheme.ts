@@ -1,10 +1,9 @@
 import {
-  css,
   Breakpoints,
-  ColorTheme,
   CommonStyleProps,
-  SerializedStyles,
-  Theme,
+  css,
+  ColorTheme,
+  GUTheme,
   keyframes,
   mediaQuery,
 } from '.'
@@ -161,8 +160,7 @@ const radioCheckboxBase: ThemeCSSFunc = ({ color, radius }) => css`
 
     &:focus {
       outline: none;
-      color: ${color.ink.dark};
-      border-color: ${color.ink.dark};
+      border-color: ${color.primary.dark};
     }
   }
 
@@ -171,7 +169,7 @@ const radioCheckboxBase: ThemeCSSFunc = ({ color, radius }) => css`
   }
 `
 
-export const defaultTheme: Theme = {
+export const defaultTheme = {
   color: defaultColorTheme,
   radius: {
     big: 8,
@@ -194,7 +192,7 @@ export const defaultTheme: Theme = {
     },
   },
   global: {
-    css: ({ color }: Theme): SerializedStyles => css`
+    css: ({ color }) => css`
       ${normalizeMin}
 
       html {
@@ -246,7 +244,7 @@ export const defaultTheme: Theme = {
     `,
   },
   button: {
-    css: ({ color, radius }: Theme, p?: CommonStyleProps): SerializedStyles => {
+    css: ({ color, radius }, p?: CommonStyleProps) => {
       const buttonColor = p ? p.color : undefined
       return css`
         min-width: 92px;
@@ -308,7 +306,7 @@ export const defaultTheme: Theme = {
     css: inputTextAreaBase,
   },
   textArea: {
-    css: (theme: Theme): SerializedStyles => css`
+    css: (theme) => css`
       ${inputTextAreaBase(theme)}
 
       & > textarea {
@@ -323,7 +321,7 @@ export const defaultTheme: Theme = {
     css: radioCheckboxBase,
   },
   radio: {
-    css: (theme: Theme): SerializedStyles => css`
+    css: (theme) => css`
       ${radioCheckboxBase(theme)}
       input, input:before, input:after {
         border-radius: 999px;
@@ -331,10 +329,7 @@ export const defaultTheme: Theme = {
     `,
   },
   modal: {
-    css: (
-      { radius, color }: Theme,
-      props?: ModalProps
-    ): SerializedStyles => css`
+    css: ({ radius, color }, props?: ModalProps) => css`
       .modalOverlay {
         width: 100%;
         height: 100vh;
@@ -388,4 +383,4 @@ export const defaultTheme: Theme = {
       }
     `,
   },
-}
+} as GUTheme

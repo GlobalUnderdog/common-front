@@ -19,7 +19,7 @@ export const Radio: React.FC<RadioProps> = ({ className, label, ...props }) => {
   return (
     <div css={theme.radio.css(theme, props)} className={className}>
       <input {...props} type='radio' />
-      {label && <label>{label}</label>}
+      {label && <label htmlFor={props.id}>{label}</label>}
     </div>
   )
 }
