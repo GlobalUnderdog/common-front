@@ -905,11 +905,13 @@ var GUButton = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeT
 var templateObject_1$1;
 
 var GUCheckbox = function (_a) {
-    var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
+    var className = _a.className, label = _a.label, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "label", "invertLabelPosition"]);
     var theme = useTheme();
-    return (core.jsx("div", { css: theme.checkbox.css(theme, props), className: className },
+    return (core.jsx("div", { css: theme.checkbox.css(theme, props), className: className }, invertLabelPosition ? (core.jsx(React.Fragment, null,
+        label && core.jsx("label", { htmlFor: props.id }, label),
+        core.jsx("input", __assign({}, props, { type: 'checkbox' })))) : (core.jsx(React.Fragment, null,
         core.jsx("input", __assign({}, props, { type: 'checkbox' })),
-        label && core.jsx("label", { htmlFor: props.id }, label)));
+        label && core.jsx("label", { htmlFor: props.id }, label)))));
 };
 
 /**
@@ -939,12 +941,14 @@ var GULoading = function (_a) {
 var templateObject_1$2, templateObject_2$1, templateObject_3$1;
 
 var GUInput = function (_a) {
-    var className = _a.className, props = __rest(_a, ["className"]);
+    var className = _a.className, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "invertLabelPosition"]);
     var theme = useTheme();
     var label = props.label;
-    return (core.jsx("div", { css: theme.input.css(theme, props), className: className },
+    return (core.jsx("div", { css: theme.input.css(theme, props), className: className }, invertLabelPosition ? (core.jsx(React.Fragment, null,
+        core.jsx("input", __assign({}, props)),
+        label && core.jsx("label", { htmlFor: props.id }, label))) : (core.jsx(React.Fragment, null,
         label && core.jsx("label", { htmlFor: props.id }, label),
-        core.jsx("input", __assign({}, props))));
+        core.jsx("input", __assign({}, props))))));
 };
 GUInput.defaultProps = { type: 'text' };
 
@@ -1067,11 +1071,13 @@ var GUNavbar = function (_a) {
 var templateObject_1$3, templateObject_2$2;
 
 var GURadio = function (_a) {
-    var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
+    var className = _a.className, label = _a.label, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "label", "invertLabelPosition"]);
     var theme = useTheme();
-    return (core.jsx("div", { css: theme.radio.css(theme, props), className: className },
+    return (core.jsx("div", { css: theme.radio.css(theme, props), className: className }, invertLabelPosition ? (core.jsx(React.Fragment, null,
+        label && core.jsx("label", { htmlFor: props.id }, label),
+        core.jsx("input", __assign({}, props, { type: 'radio' })))) : (core.jsx(React.Fragment, null,
         core.jsx("input", __assign({}, props, { type: 'radio' })),
-        label && core.jsx("label", { htmlFor: props.id }, label)));
+        label && core.jsx("label", { htmlFor: props.id }, label)))));
 };
 
 var translateDirection = function (direction, distance) {
@@ -1095,12 +1101,14 @@ var SlideFade = function (_a) {
 var templateObject_1$4;
 
 var GUTextArea = function (_a) {
-    var className = _a.className, props = __rest(_a, ["className"]);
+    var className = _a.className, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "invertLabelPosition"]);
     var theme = useTheme();
     var label = props.label;
-    return (core.jsx("div", { css: theme.textArea.css(theme, props), className: className },
+    return (core.jsx("div", { css: theme.textArea.css(theme, props), className: className }, invertLabelPosition ? (core.jsx(React.Fragment, null,
+        core.jsx("textarea", __assign({}, props)),
+        label && core.jsx("label", { htmlFor: props.id }, label))) : (core.jsx(React.Fragment, null,
         label && core.jsx("label", { htmlFor: props.id }, label),
-        core.jsx("textarea", __assign({}, props))));
+        core.jsx("textarea", __assign({}, props))))));
 };
 
 var inspectlet = function (inspectletId) {

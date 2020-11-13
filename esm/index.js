@@ -902,11 +902,13 @@ var GUButton = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeT
 var templateObject_1$1;
 
 var GUCheckbox = function (_a) {
-    var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
+    var className = _a.className, label = _a.label, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "label", "invertLabelPosition"]);
     var theme = useTheme();
-    return (jsx("div", { css: theme.checkbox.css(theme, props), className: className },
+    return (jsx("div", { css: theme.checkbox.css(theme, props), className: className }, invertLabelPosition ? (jsx(Fragment, null,
+        label && jsx("label", { htmlFor: props.id }, label),
+        jsx("input", __assign({}, props, { type: 'checkbox' })))) : (jsx(Fragment, null,
         jsx("input", __assign({}, props, { type: 'checkbox' })),
-        label && jsx("label", { htmlFor: props.id }, label)));
+        label && jsx("label", { htmlFor: props.id }, label)))));
 };
 
 /**
@@ -936,12 +938,14 @@ var GULoading = function (_a) {
 var templateObject_1$2, templateObject_2$1, templateObject_3$1;
 
 var GUInput = function (_a) {
-    var className = _a.className, props = __rest(_a, ["className"]);
+    var className = _a.className, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "invertLabelPosition"]);
     var theme = useTheme();
     var label = props.label;
-    return (jsx("div", { css: theme.input.css(theme, props), className: className },
+    return (jsx("div", { css: theme.input.css(theme, props), className: className }, invertLabelPosition ? (jsx(Fragment, null,
+        jsx("input", __assign({}, props)),
+        label && jsx("label", { htmlFor: props.id }, label))) : (jsx(Fragment, null,
         label && jsx("label", { htmlFor: props.id }, label),
-        jsx("input", __assign({}, props))));
+        jsx("input", __assign({}, props))))));
 };
 GUInput.defaultProps = { type: 'text' };
 
@@ -1064,11 +1068,13 @@ var GUNavbar = function (_a) {
 var templateObject_1$3, templateObject_2$2;
 
 var GURadio = function (_a) {
-    var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
+    var className = _a.className, label = _a.label, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "label", "invertLabelPosition"]);
     var theme = useTheme();
-    return (jsx("div", { css: theme.radio.css(theme, props), className: className },
+    return (jsx("div", { css: theme.radio.css(theme, props), className: className }, invertLabelPosition ? (jsx(Fragment, null,
+        label && jsx("label", { htmlFor: props.id }, label),
+        jsx("input", __assign({}, props, { type: 'radio' })))) : (jsx(Fragment, null,
         jsx("input", __assign({}, props, { type: 'radio' })),
-        label && jsx("label", { htmlFor: props.id }, label)));
+        label && jsx("label", { htmlFor: props.id }, label)))));
 };
 
 var translateDirection = function (direction, distance) {
@@ -1092,12 +1098,14 @@ var SlideFade = function (_a) {
 var templateObject_1$4;
 
 var GUTextArea = function (_a) {
-    var className = _a.className, props = __rest(_a, ["className"]);
+    var className = _a.className, invertLabelPosition = _a.invertLabelPosition, props = __rest(_a, ["className", "invertLabelPosition"]);
     var theme = useTheme();
     var label = props.label;
-    return (jsx("div", { css: theme.textArea.css(theme, props), className: className },
+    return (jsx("div", { css: theme.textArea.css(theme, props), className: className }, invertLabelPosition ? (jsx(Fragment, null,
+        jsx("textarea", __assign({}, props)),
+        label && jsx("label", { htmlFor: props.id }, label))) : (jsx(Fragment, null,
         label && jsx("label", { htmlFor: props.id }, label),
-        jsx("textarea", __assign({}, props))));
+        jsx("textarea", __assign({}, props))))));
 };
 
 var inspectlet = function (inspectletId) {
