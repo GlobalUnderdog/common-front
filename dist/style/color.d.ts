@@ -8,4 +8,4 @@ export interface Palette {
     main: string;
     light: string;
 }
-export declare type GUColorTheme = Record<ColorType, Palette>;
+export declare type ColorTheme = Record<ColorType, Palette>;

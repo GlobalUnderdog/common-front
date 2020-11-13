@@ -1,21 +1,21 @@
 import { Configuration } from 'react-grid-system';
-import { GUColorTheme } from './color';
-import { GURadiusTheme } from './radius';
+import { ColorTheme } from './color';
+import { RadiusTheme } from './radius';
 import { ThemeCSSRule } from './util';
 /**
  * Contains only the basic properties of GUTheme, missing the rules & functions
  * for styles, global styles, etc.
  */
 export interface GUThemeProps {
-    readonly color: GUColorTheme;
-    readonly radius: GURadiusTheme;
+    readonly color: ColorTheme;
+    readonly radius: RadiusTheme;
+}
+export declare type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
     readonly grid: {
         /** Erases the default grid settings upon writing the new one, defaults to `false` */
         readonly replace?: boolean;
         readonly rules: Configuration;
     };
-}
-export declare type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
     /**
      * Generic global style to be applied on the page, defaults to fixes,
      * normalize.css, fa-spin & removes the outline on focused inputs,
