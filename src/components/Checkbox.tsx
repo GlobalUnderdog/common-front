@@ -23,7 +23,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   return (
     <div css={theme.checkbox.css(theme, props)} className={className}>
       <input {...props} type='checkbox' />
-      {label && <label>{label}</label>}
+      {label && <label htmlFor={props.id}>{label}</label>}
     </div>
   )
 }

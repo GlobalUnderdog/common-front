@@ -24,10 +24,10 @@ export type InputProps = HTMLInputProps &
 
 export const Input: React.FC<InputProps> = ({ className, ...props }) => {
   const theme = useTheme()
-  const { id, label } = props
+  const { label } = props
   return (
     <div css={theme.input.css(theme, props)} className={className}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && <label htmlFor={props.id}>{label}</label>}
       <input {...props} />
     </div>
   )

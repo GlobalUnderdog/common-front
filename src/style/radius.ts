@@ -12,5 +12,3 @@ export interface RadiusTheme {
   readonly main: CSSUnit
   readonly small: CSSUnit
 }
-
-export type PartialRadiusTheme = Partial<RadiusTheme>

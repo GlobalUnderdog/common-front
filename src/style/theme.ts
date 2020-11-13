@@ -1,17 +1,18 @@
 import { Configuration } from 'react-grid-system'
-import { ColorTheme, PartialColorTheme } from './color'
-import { PartialRadiusTheme, RadiusTheme } from './radius'
+import { ColorTheme } from './color'
+import { RadiusTheme } from './radius'
 import { ThemeCSSRule } from './util'
 
 /**
- * Usage of generic to speed up the creation of themes using makeTheme,
- * in this way developers can pass partial themes while just adding the values
- * over the default ones.
+ * Contains only the basic properties of GUTheme, missing the rules & functions
+ * for styles, global styles, etc.
  */
-export interface ThemeBase<Complete extends boolean> {
-  readonly color: Complete extends true ? ColorTheme : PartialColorTheme
-  readonly radius: Complete extends true ? RadiusTheme : PartialRadiusTheme
+export interface GUThemeProps {
+  readonly color: ColorTheme
+  readonly radius: RadiusTheme
+}
 
+export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
   readonly grid: {
     /** Erases the default grid settings upon writing the new one, defaults to `false` */
     readonly replace?: boolean
@@ -23,7 +24,7 @@ export interface ThemeBase<Complete extends boolean> {
    * normalize.css, fa-spin & removes the outline on focused inputs,
    * buttons, etc.
    */
-  readonly global: ThemeCSSRule
+  readonly global: ThemeCSSRule<T>
 
   /**
    * The default style for `<Button/>`, does not change HTML `<button/>`
@@ -31,7 +32,7 @@ export interface ThemeBase<Complete extends boolean> {
    *
    * Uses radius.normal by default
    */
-  readonly button: ThemeCSSRule
+  readonly button: ThemeCSSRule<T>
 
   /**
    * Don't forget that TextArea is a `<div/>` wrapping a `<label/>` + `<textarea/>`:
@@ -45,7 +46,7 @@ export interface ThemeBase<Complete extends boolean> {
    * )
    * ```
    */
-  readonly input: ThemeCSSRule
+  readonly input: ThemeCSSRule<T>
   /**
    * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
    *
@@ -66,7 +67,7 @@ export interface ThemeBase<Complete extends boolean> {
    * }
    * ```
    */
-  readonly textArea: ThemeCSSRule
+  readonly textArea: ThemeCSSRule<T>
 
   /**
    * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
@@ -85,7 +86,7 @@ export interface ThemeBase<Complete extends boolean> {
    * the checkbox background/border, and `input:after` as the filled area when
    * checked.
    */
-  readonly checkbox: ThemeCSSRule
+  readonly checkbox: ThemeCSSRule<T>
   /**
    * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
    *
@@ -103,7 +104,7 @@ export interface ThemeBase<Complete extends boolean> {
    * the radio background/border, and `input:after` as the filled area when
    * checked.
    */
-  readonly radio: ThemeCSSRule
+  readonly radio: ThemeCSSRule<T>
 
   /**
    * CSS Classes used:
@@ -114,8 +115,5 @@ export interface ThemeBase<Complete extends boolean> {
    * These classes are global and ideally any app using this package should
    * not have overlapping classNames with them.
    */
-  readonly modal: ThemeCSSRule
+  readonly modal: ThemeCSSRule<T>
 }
-
-export type Theme = ThemeBase<true>
-export type ThemeProps = { theme: Theme }

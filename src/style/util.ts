@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { ColorType } from './color'
 import { SerializedStyles } from './emotion'
-import { Theme } from './theme'
+import { GUThemeProps } from './theme'
 
 /** Makes TS complain about missing children */
 export interface NeedsChildrenProps {
@@ -38,13 +38,13 @@ export type CommonStyleProps = SizeHelpers & {
   wide?: boolean
 }
 
-export type ThemeCSSFunc = (
-  theme: Theme,
+export type ThemeCSSFunc<T extends GUThemeProps = GUThemeProps> = (
+  theme: T,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props?: any
 ) => SerializedStyles | SerializedStyles[]
 
-export interface ThemeCSSRule {
+export interface ThemeCSSRule<T extends GUThemeProps = GUThemeProps> {
   /**
    * If true the Style passed in css will replace the original one set by
    * @globalunderdog/common-front Theme.
@@ -52,5 +52,5 @@ export interface ThemeCSSRule {
    * Defaults to `false`
    */
   readonly replace?: boolean
-  readonly css: ThemeCSSFunc
+  readonly css: ThemeCSSFunc<T>
 }
