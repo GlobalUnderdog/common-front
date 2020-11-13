@@ -16,19 +16,19 @@ export type GUTextAreaProps = HTMLTextAreaProps &
   GUCommonStyleProps & {
     label?: ReactNode
     /** If true the label is placed after the textarea */
-    invertLabelPosition?: boolean
+    labelSecond?: boolean
   }
 
 export const GUTextArea: React.FC<GUTextAreaProps> = ({
   className,
-  invertLabelPosition,
+  labelSecond,
   ...props
 }) => {
   const theme = useTheme()
   const { label } = props
   return (
     <div css={theme.textArea.css(theme, props)} className={className}>
-      {invertLabelPosition ? (
+      {labelSecond ? (
         <Fragment>
           <textarea {...props} />
           {label && <label htmlFor={props.id}>{label}</label>}

@@ -5,7 +5,7 @@ declare type HTMLInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputEle
 export declare type GUInputProps = HTMLInputProps & GUCommonStyleProps & {
     label?: ReactNode;
     /** If true the label is placed after the input */
-    invertLabelPosition?: boolean;
+    labelSecond?: boolean;
     type?: 'date' | 'email' | 'month' | 'number' | 'password' | 'tel' | 'text' | 'time' | 'url';
 };
 export declare const GUInput: React.FC<GUInputProps>;

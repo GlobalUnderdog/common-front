@@ -17,20 +17,20 @@ export type GURadioProps = HTMLInputProps &
   GUCommonStyleProps & {
     label?: ReactNode
     /** If true the label is placed before the radio */
-    invertLabelPosition?: boolean
+    labelFirst?: boolean
     type?: 'radio'
   }
 
 export const GURadio: React.FC<GURadioProps> = ({
   className,
   label,
-  invertLabelPosition,
+  labelFirst,
   ...props
 }) => {
   const theme = useTheme()
   return (
     <div css={theme.radio.css(theme, props)} className={className}>
-      {invertLabelPosition ? (
+      {labelFirst ? (
         <Fragment>
           {label && <label htmlFor={props.id}>{label}</label>}
           <input {...props} type='radio' />

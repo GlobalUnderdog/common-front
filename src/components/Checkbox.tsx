@@ -17,20 +17,20 @@ export type GUCheckboxProps = HTMLInputProps &
   GUCommonStyleProps & {
     label?: ReactNode
     /** If true the label is placed before the checkbox */
-    invertLabelPosition?: boolean
+    labelFirst?: boolean
     type?: 'checkbox'
   }
 
 export const GUCheckbox: React.FC<GUCheckboxProps> = ({
   className,
   label,
-  invertLabelPosition,
+  labelFirst,
   ...props
 }) => {
   const theme = useTheme()
   return (
     <div css={theme.checkbox.css(theme, props)} className={className}>
-      {invertLabelPosition ? (
+      {labelFirst ? (
         <Fragment>
           {label && <label htmlFor={props.id}>{label}</label>}
           <input {...props} type='checkbox' />

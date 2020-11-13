@@ -16,7 +16,7 @@ export type GUInputProps = HTMLInputProps &
   GUCommonStyleProps & {
     label?: ReactNode
     /** If true the label is placed after the input */
-    invertLabelPosition?: boolean
+    labelSecond?: boolean
     type?:
       | 'date'
       | 'email'
@@ -31,14 +31,14 @@ export type GUInputProps = HTMLInputProps &
 
 export const GUInput: React.FC<GUInputProps> = ({
   className,
-  invertLabelPosition,
+  labelSecond,
   ...props
 }) => {
   const theme = useTheme()
   const { label } = props
   return (
     <div css={theme.input.css(theme, props)} className={className}>
-      {invertLabelPosition ? (
+      {labelSecond ? (
         <Fragment>
           <input {...props} />
           {label && <label htmlFor={props.id}>{label}</label>}

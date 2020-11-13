@@ -5,7 +5,7 @@ declare type HTMLTextAreaProps = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTe
 export declare type GUTextAreaProps = HTMLTextAreaProps & GUCommonStyleProps & {
     label?: ReactNode;
     /** If true the label is placed after the textarea */
-    invertLabelPosition?: boolean;
+    labelSecond?: boolean;
 };
 export declare const GUTextArea: React.FC<GUTextAreaProps>;
 export {};

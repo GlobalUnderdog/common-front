@@ -4,7 +4,7 @@ declare type HTMLInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputEle
 export declare type GUCheckboxProps = HTMLInputProps & GUCommonStyleProps & {
     label?: ReactNode;
     /** If true the label is placed before the checkbox */
-    invertLabelPosition?: boolean;
+    labelFirst?: boolean;
     type?: 'checkbox';
 };
 export declare const GUCheckbox: React.FC<GUCheckboxProps>;
