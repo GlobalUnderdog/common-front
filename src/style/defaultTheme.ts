@@ -7,7 +7,6 @@ import {
   keyframes,
   mediaQuery,
 } from '.'
-import { ModalProps } from '../components'
 import { ThemeCSSFunc } from './util'
 
 const normalizeMin =
@@ -329,7 +328,7 @@ export const defaultTheme = {
     `,
   },
   modal: {
-    css: ({ radius, color }, props?: ModalProps) => css`
+    css: ({ radius, color }) => css`
       .modalOverlay {
         width: 100%;
         height: 100vh;
@@ -344,14 +343,10 @@ export const defaultTheme = {
 
         background-color: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(15px);
-        ${props?.animateMS &&
-        props?.animateMS > 0 &&
-        css`
-          animation: ${fadeIn} ${props?.animateMS ?? 350}ms ease both;
-          &.hiding {
-            animation: ${fadeOut} ${props?.animateMS ?? 350}ms ease both;
-          }
-        `}
+        animation: ${fadeIn} 350ms ease both;
+        &.hiding {
+          animation: ${fadeOut} 350ms ease both;
+        }
       }
 
       .modalCard {

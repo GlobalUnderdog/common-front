@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactModal, { Props as _ModalProps } from 'react-modal'
 import { wait } from '@globalunderdog/common'
-import { CommonStyleProps, Container } from '../style'
+import { CommonStyleProps, Container, useTheme } from '../style'
 
 // To keep the functionality of `@globalunderdog/common-front` modal simple
 // we won't be exposing these props and instead use the doc-commented values
@@ -33,13 +33,6 @@ export type ModalProps = CommonStyleProps &
      * will stay in the screen.
      */
     onRequestClose?: () => Promise<boolean | void> | boolean | void
-    /**
-     * How many milliseconds does it take for the modal to show/hide on the default
-     * animation. If `animate < 1` it disables animations.
-     *
-     * Defaults to 350ms
-     */
-    animateMS?: number
   }
 
 const commonModalProps = (
@@ -59,36 +52,34 @@ export const Modal: React.FC<ModalProps> = ({
   className,
   onRequestClose,
   isOpen,
-  animateMS = 350,
   ...props
 }) => {
+  const theme = useTheme()
   useEffect(() => {
     ReactModal.setAppElement('body')
   }, [])
   const [hiding, setHiding] = useState<boolean>(false)
-  const animated = animateMS > 0
 
   const hideModal = async () => {
-    if (animated) {
-      setHiding(true)
-      // + 30ms so very slow computers can have smooth animations (usually
-      // in these cases the js timeout might finish about 10-20 ms earlier
-      // than the CSS animation)
-      await wait((animateMS ?? 350) + 30)
-      setOpen(false)
-      setHiding(false)
-    }
+    setHiding(true)
+    // + 30ms so very slow computers can have smooth animations (usually
+    // in these cases the js timeout might finish about 10-20 ms earlier
+    // than the CSS animation)
+    await wait(380)
+    setOpen(false)
+    setHiding(false)
   }
 
   return (
     <ReactModal
       {...commonModalProps(hiding, className)}
+      css={theme.modal.css(theme)}
       isOpen={isOpen || hiding}
       onRequestClose={async () => {
         const shouldClose = onRequestClose
           ? (await onRequestClose()) ?? true
           : true
-        if (shouldClose && animated) {
+        if (shouldClose) {
           await hideModal()
         } else {
           setOpen(true)
