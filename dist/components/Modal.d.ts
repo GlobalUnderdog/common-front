@@ -12,12 +12,5 @@ export declare type ModalProps = CommonStyleProps & Omit<_ModalProps, 'shouldClo
      * will stay in the screen.
      */
     onRequestClose?: () => Promise<boolean | void> | boolean | void;
-    /**
-     * How many milliseconds does it take for the modal to show/hide on the default
-     * animation. If `animate < 1` it disables animations.
-     *
-     * Defaults to 350ms
-     */
-    animateMS?: number;
 };
 export declare const Modal: React.FC<ModalProps>;

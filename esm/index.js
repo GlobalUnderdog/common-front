@@ -849,16 +849,13 @@ var defaultTheme = {
         css: function (theme) { return css(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n      ", "\n      input, input:before, input:after {\n        border-radius: 999px;\n      }\n    "], ["\n      ", "\n      input, input:before, input:after {\n        border-radius: 999px;\n      }\n    "])), radioCheckboxBase(theme)); },
     },
     modal: {
-        css: function (_a, props) {
-            var _b, _c;
+        css: function (_a) {
             var radius = _a.radius, color = _a.color;
-            return css(templateObject_10 || (templateObject_10 = __makeTemplateObject(["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        ", "\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "], ["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        ",
-                "\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "])), (props === null || props === void 0 ? void 0 : props.animateMS) &&
-                (props === null || props === void 0 ? void 0 : props.animateMS) > 0 && css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n          animation: ", " ", "ms ease both;\n          &.hiding {\n            animation: ", " ", "ms ease both;\n          }\n        "], ["\n          animation: ", " ", "ms ease both;\n          &.hiding {\n            animation: ", " ", "ms ease both;\n          }\n        "])), fadeIn, (_b = props === null || props === void 0 ? void 0 : props.animateMS) !== null && _b !== void 0 ? _b : 350, fadeOut, (_c = props === null || props === void 0 ? void 0 : props.animateMS) !== null && _c !== void 0 ? _c : 350), mediaQuery.medium, radius.big, color.canvas.light);
+            return css(templateObject_9 || (templateObject_9 = __makeTemplateObject(["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " 350ms ease both;\n        &.hiding {\n          animation: ", " 350ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "], ["\n      .modalOverlay {\n        width: 100%;\n        height: 100vh;\n        position: fixed;\n        top: 0;\n        left: 0;\n        z-index: 999;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        background-color: rgba(0, 0, 0, 0.5);\n        backdrop-filter: blur(15px);\n        animation: ", " 350ms ease both;\n        &.hiding {\n          animation: ", " 350ms ease both;\n        }\n      }\n\n      .modalCard {\n        width: 95%;\n        ", " {\n          width: 500px;\n        }\n        & > :first-of-type {\n          border-radius: ", ";\n          background-color: ", ";\n          min-height: 440px;\n          padding: 25px !important;\n          pointer-events: all;\n\n          /* Usually h1, h2, h3, etc. will have a margin at the top and be centered */\n          & > h1:first-of-type,\n          & > h2:first-of-type,\n          & > h3:first-of-type,\n          & > h4:first-of-type,\n          & > h5:first-of-type {\n            text-align: left;\n            margin-top: 0;\n          }\n        }\n        &:focus {\n          outline: none;\n        }\n        pointer-events: none;\n      }\n    "])), fadeIn, fadeOut, mediaQuery.medium, radius.big, color.canvas.light);
         },
     },
 };
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
 
 // Not declared in ./util since we don't want to export this function outside the package
 var handleCSSRule = function (rules, defaultRule) {
@@ -956,22 +953,21 @@ var commonModalProps = function (hiding, className) { return ({
     className: "modalCard " + (className !== null && className !== void 0 ? className : '') + " " + (hiding ? 'hiding' : ''),
 }); };
 var Modal = function (_a) {
-    var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, _b = _a.animateMS, animateMS = _b === void 0 ? 350 : _b, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen", "animateMS"]);
+    var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen"]);
+    var theme = useTheme();
     useEffect(function () {
         ReactModal.setAppElement('body');
     }, []);
-    var _c = useState(false), hiding = _c[0], setHiding = _c[1];
-    var animated = animateMS > 0;
+    var _b = useState(false), hiding = _b[0], setHiding = _b[1];
     var hideModal = function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!animated) return [3 /*break*/, 2];
                     setHiding(true);
                     // + 30ms so very slow computers can have smooth animations (usually
                     // in these cases the js timeout might finish about 10-20 ms earlier
                     // than the CSS animation)
-                    return [4 /*yield*/, wait((animateMS !== null && animateMS !== void 0 ? animateMS : 350) + 30)];
+                    return [4 /*yield*/, wait(380)];
                 case 1:
                     // + 30ms so very slow computers can have smooth animations (usually
                     // in these cases the js timeout might finish about 10-20 ms earlier
@@ -979,12 +975,11 @@ var Modal = function (_a) {
                     _a.sent();
                     setOpen(false);
                     setHiding(false);
-                    _a.label = 2;
-                case 2: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     }); };
-    return (React.createElement(ReactModal, __assign({}, commonModalProps(hiding, className), { isOpen: isOpen || hiding, onRequestClose: function () { return __awaiter(void 0, void 0, void 0, function () {
+    return (React.createElement(ReactModal, __assign({}, commonModalProps(hiding, className), { css: theme.modal.css(theme), isOpen: isOpen || hiding, onRequestClose: function () { return __awaiter(void 0, void 0, void 0, function () {
             var shouldClose, _a;
             var _b;
             return __generator(this, function (_c) {
@@ -1000,7 +995,7 @@ var Modal = function (_a) {
                         _c.label = 3;
                     case 3:
                         shouldClose = _a;
-                        if (!(shouldClose && animated)) return [3 /*break*/, 5];
+                        if (!shouldClose) return [3 /*break*/, 5];
                         return [4 /*yield*/, hideModal()];
                     case 4:
                         _c.sent();
