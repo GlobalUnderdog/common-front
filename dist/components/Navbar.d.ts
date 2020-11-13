@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import { ColorType, SerializedStyles } from '../style';
+import { GUColorType, SerializedStyles } from '../style';
 interface NavLinkProps {
     href?: string;
     label: string;
     button?: boolean;
-    color?: ColorType;
+    color?: GUColorType;
     onClick?: VoidFunction;
 }
 interface Props {

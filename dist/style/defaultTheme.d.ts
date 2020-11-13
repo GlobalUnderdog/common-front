@@ -1,2 +1,2 @@
 import { GUTheme } from '.';
-export declare const defaultTheme: GUTheme<import("./theme").GUThemeProps>;
+export declare const guDefaultTheme: GUTheme<import("./theme").GUThemeProps>;

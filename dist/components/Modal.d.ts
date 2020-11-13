@@ -1,7 +1,7 @@
 import React from 'react';
 import { Props as _ModalProps } from 'react-modal';
-import { CommonStyleProps } from '../style';
-export declare type ModalProps = CommonStyleProps & Omit<_ModalProps, 'shouldCloseOnEsc' | 'overlayClassName' | 'portalClassName' | 'htmlOpenClassName' | 'bodyOpenClassName' | 'onRequestClose' | 'set'> & {
+import { GUCommonStyleProps } from '../style';
+export declare type GUModalProps = GUCommonStyleProps & Omit<_ModalProps, 'shouldCloseOnEsc' | 'overlayClassName' | 'portalClassName' | 'htmlOpenClassName' | 'bodyOpenClassName' | 'onRequestClose' | 'set'> & {
     setOpen: (open: boolean) => void;
     /**
      * If a boolean is returned the modal is only going to close in case
@@ -13,4 +13,4 @@ export declare type ModalProps = CommonStyleProps & Omit<_ModalProps, 'shouldClo
      */
     onRequestClose?: () => Promise<boolean | void> | boolean | void;
 };
-export declare const Modal: React.FC<ModalProps>;
+export declare const GUModal: React.FC<GUModalProps>;

@@ -1,18 +1,21 @@
 /** @jsx jsx */
 import { DetailedHTMLProps, ReactNode, TextareaHTMLAttributes } from 'react'
-import { CommonStyleProps, jsx, useTheme } from '../style'
+import { GUCommonStyleProps, jsx, useTheme } from '../style'
 
 type HTMLTextAreaProps = DetailedHTMLProps<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   HTMLTextAreaElement
 >
 
-export type TextAreaProps = HTMLTextAreaProps &
-  CommonStyleProps & {
+export type GUTextAreaProps = HTMLTextAreaProps &
+  GUCommonStyleProps & {
     label?: ReactNode
   }
 
-export const TextArea: React.FC<TextAreaProps> = ({ className, ...props }) => {
+export const GUTextArea: React.FC<GUTextAreaProps> = ({
+  className,
+  ...props
+}) => {
   const theme = useTheme()
   const { label } = props
   return (

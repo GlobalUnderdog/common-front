@@ -6,7 +6,7 @@ import { styled, jsx, css } from '../style/emotion'
  * Automatically hides children when `loading === true`, also allows the
  * usage of `<Loading/>` Component inside it.
  */
-export const Form = styled.form<{ loading?: boolean }>`
+export const GUForm = styled.form<{ loading?: boolean }>`
   position: relative;
   /*
   We don't want to mess any component opacity when loading === false,
@@ -24,7 +24,7 @@ export const Form = styled.form<{ loading?: boolean }>`
       : ''}
 `
 
-const _Loading = styled.div<{ loading: boolean }>`
+const _GULoading = styled.div<{ loading: boolean }>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -49,13 +49,13 @@ const _Loading = styled.div<{ loading: boolean }>`
  * Can be used as the last child of a `<Form />` element to automatically
  * create a loading indicator.
  */
-export const Loading: React.FC<{ loading: boolean; className?: string }> = ({
+export const GULoading: React.FC<{ loading: boolean; className?: string }> = ({
   loading,
   className,
 }) => {
   return (
-    <_Loading loading={loading} className={className}>
+    <_GULoading loading={loading} className={className}>
       <i className='fa fa-loading fa-spin' />
-    </_Loading>
+    </_GULoading>
   )
 }

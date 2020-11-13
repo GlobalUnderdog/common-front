@@ -1,20 +1,20 @@
 /** @jsx jsx */
 import { jsx } from '../style/emotion'
 import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
-import { CommonStyleProps, useTheme } from '../style'
+import { GUCommonStyleProps, useTheme } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-export type CheckboxProps = HTMLInputProps &
-  CommonStyleProps & {
+export type GUCheckboxProps = HTMLInputProps &
+  GUCommonStyleProps & {
     label?: ReactNode
     type?: 'checkbox'
   }
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const GUCheckbox: React.FC<GUCheckboxProps> = ({
   className,
   label,
   ...props

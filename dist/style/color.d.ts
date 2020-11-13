@@ -1,5 +1,5 @@
-export declare const colorTypes: readonly ["canvas", "ink", "primary", "secondary", "error", "warning", "info", "success"];
-export declare type ColorType = typeof colorTypes[number];
+export declare const guColorTypes: readonly ["canvas", "ink", "primary", "secondary", "error", "warning", "info", "success"];
+export declare type GUColorType = typeof guColorTypes[number];
 /**
  * Used to group shades of the same color.
  */
@@ -8,4 +8,4 @@ export interface Palette {
     main: string;
     light: string;
 }
-export declare type ColorTheme = Record<ColorType, Palette>;
+export declare type GUColorTheme = Record<GUColorType, Palette>;

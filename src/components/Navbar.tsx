@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { Fragment, ReactNode, useState } from 'react'
 import {
-  ColorType,
+  GUColorType,
   Container,
   css,
   Global,
@@ -12,7 +12,7 @@ import {
   styled,
   useTheme,
 } from '../style'
-import { Button } from './Button'
+import { GUButton } from './Button'
 
 const globalVariables = (links: number) => css`
   /*
@@ -156,7 +156,7 @@ interface NavLinkProps {
   href?: string
   label: string
   button?: boolean
-  color?: ColorType
+  color?: GUColorType
   onClick?: VoidFunction
 }
 const NavLink: React.FC<
@@ -170,9 +170,9 @@ const NavLink: React.FC<
   }
   const Child: React.FC<{ href?: string }> = ({ href }) => {
     return button ? (
-      <Button color={color} onClick={childOnClick}>
+      <GUButton color={color} onClick={childOnClick}>
         {label}
-      </Button>
+      </GUButton>
     ) : (
       <a
         onClick={childOnClick}

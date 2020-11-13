@@ -1,4 +1,4 @@
-export const colorTypes = [
+export const guColorTypes = [
   'canvas',
   'ink',
   'primary',
@@ -8,7 +8,7 @@ export const colorTypes = [
   'info',
   'success',
 ] as const
-export type ColorType = typeof colorTypes[number]
+export type GUColorType = typeof guColorTypes[number]
 
 /**
  * Used to group shades of the same color.
@@ -19,4 +19,4 @@ export interface Palette {
   light: string
 }
 
-export type ColorTheme = Record<ColorType, Palette>
+export type GUColorTheme = Record<GUColorType, Palette>

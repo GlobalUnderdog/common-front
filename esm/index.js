@@ -94,7 +94,7 @@ function __spreadArrays() {
     return cooked;
 }
 
-var colorTypes = [
+var guColorTypes = [
     'canvas',
     'ink',
     'primary',
@@ -712,7 +712,7 @@ var Children = function (_a) {
         jsx(Global, { styles: theme.modal.css(theme) }),
         jsx(ScreenClassProvider, null, children)));
 };
-var GlobalProvider = function (_a) {
+var GUProvider = function (_a) {
     var children = _a.children, theme = _a.theme;
     return (jsx(ThemeProvider, { theme: theme },
         jsx(Children, { children: children })));
@@ -771,7 +771,7 @@ var radioCheckboxBase = function (_a) {
     var color = _a.color, radius = _a.radius;
     return css(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"], ["\n  display: flex;\n  align-items: center;\n  margin: 5px 0;\n\n  input {\n    height: 20px;\n    width: 20px;\n    box-sizing: border-box;\n    position: relative;\n    appearance: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin-right: 10px;\n\n    border-color: ", ";\n    background-color: ", ";\n    &:hover {\n      background-color: ", ";\n    }\n\n    &:before {\n      box-sizing: border-box;\n      content: ' ';\n      position: absolute;\n      top: 0;\n      left: 0;\n\n      height: 100%;\n      width: 100%;\n      border-width: 2px;\n      border-radius: ", ";\n      border-style: solid;\n      /* Inherits from the actual input so we don't have to re-style for focus/hover here */\n      border-color: inherit;\n      background-color: inherit;\n\n      color: ", ";\n      transition: border-color ease 0.3s, background-color ease 0.3s;\n    }\n    &:after {\n      content: ' ';\n      position: absolute;\n      top: 25%;\n      left: 25%;\n      width: 50%;\n      height: 50%;\n      opacity: 0;\n      transition: opacity ease 0.2s;\n      border-radius: ", ";\n      border: none;\n    }\n    &:checked:after {\n      opacity: 1;\n      background-color: ", ";\n    }\n\n    &:focus {\n      outline: none;\n      border-color: ", ";\n    }\n  }\n\n  label {\n    color: ", ";\n  }\n"])), color.primary.main, color.canvas.light, color.canvas.dark, radius.small, color.primary.main, radius.small, color.primary.main, color.primary.dark, color.ink.main);
 };
-var defaultTheme = {
+var guDefaultTheme = {
     color: defaultColorTheme,
     radius: {
         big: 8,
@@ -882,26 +882,26 @@ var makeTheme = function (theme) {
     // This ternary operation allow us to avoid `TypeError: theme is undefined`
     var _e = theme ? theme : {}, color = _e.color, radius = _e.radius, grid = _e.grid, button = _e.button, global = _e.global, input = _e.input, textArea = _e.textArea, checkbox = _e.checkbox, radio = _e.radio, modal = _e.modal, extended = __rest(_e, ["color", "radius", "grid", "button", "global", "input", "textArea", "checkbox", "radio", "modal"]);
     return __assign({ color: {
-            secondary: __assign(__assign({}, defaultTheme.color.secondary), color === null || color === void 0 ? void 0 : color.secondary),
-            canvas: __assign(__assign({}, defaultTheme.color.canvas), color === null || color === void 0 ? void 0 : color.canvas),
-            error: __assign(__assign({}, defaultTheme.color.error), color === null || color === void 0 ? void 0 : color.error),
-            info: __assign(__assign({}, defaultTheme.color.info), color === null || color === void 0 ? void 0 : color.info),
-            ink: __assign(__assign({}, defaultTheme.color.ink), color === null || color === void 0 ? void 0 : color.ink),
-            primary: __assign(__assign({}, defaultTheme.color.primary), color === null || color === void 0 ? void 0 : color.primary),
-            success: __assign(__assign({}, defaultTheme.color.success), color === null || color === void 0 ? void 0 : color.success),
-            warning: __assign(__assign({}, defaultTheme.color.warning), color === null || color === void 0 ? void 0 : color.warning),
+            secondary: __assign(__assign({}, guDefaultTheme.color.secondary), color === null || color === void 0 ? void 0 : color.secondary),
+            canvas: __assign(__assign({}, guDefaultTheme.color.canvas), color === null || color === void 0 ? void 0 : color.canvas),
+            error: __assign(__assign({}, guDefaultTheme.color.error), color === null || color === void 0 ? void 0 : color.error),
+            info: __assign(__assign({}, guDefaultTheme.color.info), color === null || color === void 0 ? void 0 : color.info),
+            ink: __assign(__assign({}, guDefaultTheme.color.ink), color === null || color === void 0 ? void 0 : color.ink),
+            primary: __assign(__assign({}, guDefaultTheme.color.primary), color === null || color === void 0 ? void 0 : color.primary),
+            success: __assign(__assign({}, guDefaultTheme.color.success), color === null || color === void 0 ? void 0 : color.success),
+            warning: __assign(__assign({}, guDefaultTheme.color.warning), color === null || color === void 0 ? void 0 : color.warning),
         }, grid: {
             replace: (_a = grid === null || grid === void 0 ? void 0 : grid.replace) !== null && _a !== void 0 ? _a : false,
             rules: (grid === null || grid === void 0 ? void 0 : grid.replace) && (grid === null || grid === void 0 ? void 0 : grid.rules)
                 ? grid.rules
-                : __assign(__assign({}, defaultTheme.grid.rules), grid === null || grid === void 0 ? void 0 : grid.rules),
-        }, radius: __assign(__assign({}, radius), { big: cssUnit((_b = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _b !== void 0 ? _b : defaultTheme.radius.big), main: cssUnit((_c = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _c !== void 0 ? _c : defaultTheme.radius.main), small: cssUnit((_d = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _d !== void 0 ? _d : defaultTheme.radius.small) }), global: handleCSSRule(global, defaultTheme.global), button: handleCSSRule(button, defaultTheme.button), input: handleCSSRule(input, defaultTheme.input), textArea: handleCSSRule(textArea, defaultTheme.textArea), checkbox: handleCSSRule(checkbox, defaultTheme.checkbox), radio: handleCSSRule(radio, defaultTheme.radio), modal: handleCSSRule(modal, defaultTheme.modal) }, extended);
+                : __assign(__assign({}, guDefaultTheme.grid.rules), grid === null || grid === void 0 ? void 0 : grid.rules),
+        }, radius: __assign(__assign({}, radius), { big: cssUnit((_b = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _b !== void 0 ? _b : guDefaultTheme.radius.big), main: cssUnit((_c = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _c !== void 0 ? _c : guDefaultTheme.radius.main), small: cssUnit((_d = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _d !== void 0 ? _d : guDefaultTheme.radius.small) }), global: handleCSSRule(global, guDefaultTheme.global), button: handleCSSRule(button, guDefaultTheme.button), input: handleCSSRule(input, guDefaultTheme.input), textArea: handleCSSRule(textArea, guDefaultTheme.textArea), checkbox: handleCSSRule(checkbox, guDefaultTheme.checkbox), radio: handleCSSRule(radio, guDefaultTheme.radio), modal: handleCSSRule(modal, guDefaultTheme.modal) }, extended);
 };
 
-var Button = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, p); });
+var GUButton = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, p); });
 var templateObject_1$1;
 
-var Checkbox = function (_a) {
+var GUCheckbox = function (_a) {
     var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
     var theme = useTheme();
     return (jsx("div", { css: theme.checkbox.css(theme, props), className: className },
@@ -913,12 +913,12 @@ var Checkbox = function (_a) {
  * Automatically hides children when `loading === true`, also allows the
  * usage of `<Loading/>` Component inside it.
  */
-var Form = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ", "\n"], ["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ",
+var GUForm = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ", "\n"], ["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ",
     "\n"])), function (p) {
     return p.loading
         ? css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "], ["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "]))) : '';
 });
-var _Loading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"
+var _GULoading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"
     /**
      * Can be used as the last child of a `<Form />` element to automatically
      * create a loading indicator.
@@ -928,14 +928,14 @@ var _Loading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemp
  * Can be used as the last child of a `<Form />` element to automatically
  * create a loading indicator.
  */
-var Loading = function (_a) {
+var GULoading = function (_a) {
     var loading = _a.loading, className = _a.className;
-    return (jsx(_Loading, { loading: loading, className: className },
+    return (jsx(_GULoading, { loading: loading, className: className },
         jsx("i", { className: 'fa fa-loading fa-spin' })));
 };
 var templateObject_1$2, templateObject_2$1, templateObject_3$1;
 
-var Input = function (_a) {
+var GUInput = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     var theme = useTheme();
     var label = props.label;
@@ -943,7 +943,7 @@ var Input = function (_a) {
         label && jsx("label", { htmlFor: props.id }, label),
         jsx("input", __assign({}, props))));
 };
-Input.defaultProps = { type: 'text' };
+GUInput.defaultProps = { type: 'text' };
 
 var commonModalProps = function (hiding, className) { return ({
     shouldCloseOnEsc: true,
@@ -952,7 +952,7 @@ var commonModalProps = function (hiding, className) { return ({
     overlayClassName: "modalOverlay " + (hiding ? 'hiding' : ''),
     className: "modalCard " + (className !== null && className !== void 0 ? className : '') + " " + (hiding ? 'hiding' : ''),
 }); };
-var Modal = function (_a) {
+var GUModal = function (_a) {
     var children = _a.children, setOpen = _a.setOpen, className = _a.className, onRequestClose = _a.onRequestClose, isOpen = _a.isOpen, props = __rest(_a, ["children", "setOpen", "className", "onRequestClose", "isOpen"]);
     var theme = useTheme();
     useEffect(function () {
@@ -1029,7 +1029,7 @@ var NavLink = function (_a) {
     };
     var Child = function (_a) {
         var href = _a.href;
-        return button ? (jsx(Button, { color: color, onClick: childOnClick }, label)) : (jsx("a", { onClick: childOnClick, href: href, style: { color: color ? theme.color[color].main : undefined } }, label));
+        return button ? (jsx(GUButton, { color: color, onClick: childOnClick }, label)) : (jsx("a", { onClick: childOnClick, href: href, style: { color: color ? theme.color[color].main : undefined } }, label));
     };
     return href ? (jsx(Link, { href: href, passHref: true },
         jsx(Child, null))) : (jsx(Child, null));
@@ -1063,7 +1063,7 @@ var Navbar = function (_a) {
 };
 var templateObject_1$3, templateObject_2$2;
 
-var Radio = function (_a) {
+var GURadio = function (_a) {
     var className = _a.className, label = _a.label, props = __rest(_a, ["className", "label"]);
     var theme = useTheme();
     return (jsx("div", { css: theme.radio.css(theme, props), className: className },
@@ -1091,7 +1091,7 @@ var SlideFade = function (_a) {
 };
 var templateObject_1$4;
 
-var TextArea = function (_a) {
+var GUTextArea = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     var theme = useTheme();
     var label = props.label;
@@ -1143,4 +1143,4 @@ var googleAnalyticsTrackPage = function (path) {
     ReactGA.pageview(path);
 };
 
-export { Breakpoints, Button, Checkbox, Col, Container, Form, GlobalProvider, Input, Loading, Modal, Navbar, Radio, Row, SlideFade, TextArea, colorTypes, cssUnit, defaultTheme, googleAnalyticsInit, googleAnalyticsTrackPage, inspectlet, makeTheme, mediaQuery, styled, newStyled as untypedStyled, useTheme };
+export { Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUProvider, GURadio, GUTextArea, Navbar, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, inspectlet, makeTheme, mediaQuery, styled, newStyled as untypedStyled, useTheme };

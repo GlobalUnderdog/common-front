@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
-import { CommonStyleProps, useTheme, jsx } from '../style'
+import { GUCommonStyleProps, useTheme, jsx } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-export type InputProps = HTMLInputProps &
-  CommonStyleProps & {
+export type GUInputProps = HTMLInputProps &
+  GUCommonStyleProps & {
     label?: ReactNode
     type?:
       | 'date'
@@ -22,7 +22,7 @@ export type InputProps = HTMLInputProps &
       | 'url'
   }
 
-export const Input: React.FC<InputProps> = ({ className, ...props }) => {
+export const GUInput: React.FC<GUInputProps> = ({ className, ...props }) => {
   const theme = useTheme()
   const { label } = props
   return (
@@ -33,4 +33,4 @@ export const Input: React.FC<InputProps> = ({ className, ...props }) => {
   )
 }
 
-Input.defaultProps = { type: 'text' }
+GUInput.defaultProps = { type: 'text' }
