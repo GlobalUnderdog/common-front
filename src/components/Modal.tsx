@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactModal, { Props as _ModalProps } from 'react-modal'
 import { wait } from '@globalunderdog/common'
-import { CommonStyleProps } from '../style'
+import { CommonStyleProps, Container } from '../style'
 
 // To keep the functionality of `@globalunderdog/common-front` modal simple
 // we won't be exposing these props and instead use the doc-commented values
@@ -96,7 +96,7 @@ export const Modal: React.FC<ModalProps> = ({
       }}
       {...props}
     >
-      {children}
+      <Container>{children}</Container>
     </ReactModal>
   )
 }
