@@ -1,18 +1,18 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { Fragment, ReactNode, useState } from 'react'
+import { Fragment, ReactNode, SyntheticEvent, useState } from 'react'
 import {
-  ColorType,
   Container,
   css,
   Global,
+  GUColorType,
   jsx,
   mediaQuery,
   SerializedStyles,
   styled,
   useTheme,
 } from '../style'
-import { Button } from './Button'
+import { GUButton } from './Button'
 
 const globalVariables = (links: number) => css`
   /*
@@ -156,7 +156,7 @@ interface NavLinkProps {
   href?: string
   label: string
   button?: boolean
-  color?: ColorType
+  color?: GUColorType
   onClick?: VoidFunction
 }
 const NavLink: React.FC<
@@ -164,18 +164,27 @@ const NavLink: React.FC<
 > = ({ href, label, button, color, setExpanded, onClick }) => {
   const theme = useTheme()
 
-  const childOnClick = () => {
-    if (onClick) onClick()
+  // Forwarded click required by Next Link for non `<a/>`
+  const childOnClick = (forwardedClick?: void) => {
+    if (onClick) if (forwardedClick) forwardedClick
     setExpanded(false)
   }
-  const Child: React.FC<{ href?: string }> = ({ href }) => {
+
+  // Forwards the right events for Next.js Link
+  const Child: React.FC<{
+    href?: string
+    onClick?: (e: SyntheticEvent) => void
+  }> = ({ href, onClick }) => {
     return button ? (
-      <Button color={color} onClick={childOnClick}>
+      <GUButton
+        color={color}
+        onClick={(e) => childOnClick(onClick ? onClick(e) : undefined)}
+      >
         {label}
-      </Button>
+      </GUButton>
     ) : (
       <a
-        onClick={childOnClick}
+        onClick={(e) => childOnClick(onClick ? onClick(e) : undefined)}
         href={href}
         style={{ color: color ? theme.color[color].main : undefined }}
       >
@@ -193,7 +202,7 @@ const NavLink: React.FC<
   )
 }
 
-interface Props {
+export interface GUNavbarProps {
   links: NavLinkProps[]
   css?: SerializedStyles | SerializedStyles[]
   className?: string
@@ -210,7 +219,12 @@ interface Props {
  *
  * You can replace these values using Theme.global.css
  */
-export const Navbar: React.FC<Props> = ({ links, logo, css, className }) => {
+export const GUNavbar: React.FC<GUNavbarProps> = ({
+  links,
+  logo,
+  css,
+  className,
+}) => {
   const [expanded, setExpanded] = useState(false)
 
   // Declaring all links here so we can use Array.length for CSS heights,

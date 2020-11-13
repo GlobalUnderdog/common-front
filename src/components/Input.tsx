@@ -1,15 +1,22 @@
 /** @jsx jsx */
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
-import { CommonStyleProps, useTheme, jsx } from '../style'
+import {
+  DetailedHTMLProps,
+  Fragment,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react'
+import { GUCommonStyleProps, useTheme, jsx } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-export type InputProps = HTMLInputProps &
-  CommonStyleProps & {
+export type GUInputProps = HTMLInputProps &
+  GUCommonStyleProps & {
     label?: ReactNode
+    /** If true the label is placed after the input */
+    labelSecond?: boolean
     type?:
       | 'date'
       | 'email'
@@ -22,15 +29,28 @@ export type InputProps = HTMLInputProps &
       | 'url'
   }
 
-export const Input: React.FC<InputProps> = ({ className, ...props }) => {
+export const GUInput: React.FC<GUInputProps> = ({
+  className,
+  labelSecond,
+  ...props
+}) => {
   const theme = useTheme()
   const { label } = props
   return (
     <div css={theme.input.css(theme, props)} className={className}>
-      {label && <label htmlFor={props.id}>{label}</label>}
-      <input {...props} />
+      {labelSecond ? (
+        <Fragment>
+          <input {...props} />
+          {label && <label htmlFor={props.id}>{label}</label>}
+        </Fragment>
+      ) : (
+        <Fragment>
+          {label && <label htmlFor={props.id}>{label}</label>}
+          <input {...props} />
+        </Fragment>
+      )}
     </div>
   )
 }
 
-Input.defaultProps = { type: 'text' }
+GUInput.defaultProps = { type: 'text' }

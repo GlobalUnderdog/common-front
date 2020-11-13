@@ -1,9 +1,11 @@
 /** @jsx jsx */
 import { DetailedHTMLProps, ReactNode, TextareaHTMLAttributes } from 'react';
-import { CommonStyleProps } from '../style';
+import { GUCommonStyleProps } from '../style';
 declare type HTMLTextAreaProps = DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
-export declare type TextAreaProps = HTMLTextAreaProps & CommonStyleProps & {
+export declare type GUTextAreaProps = HTMLTextAreaProps & GUCommonStyleProps & {
     label?: ReactNode;
+    /** If true the label is placed after the textarea */
+    labelSecond?: boolean;
 };
-export declare const TextArea: React.FC<TextAreaProps>;
+export declare const GUTextArea: React.FC<GUTextAreaProps>;
 export {};

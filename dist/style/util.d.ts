@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ColorType } from './color';
+import { GUColorType } from './color';
 import { SerializedStyles } from './emotion';
 import { GUThemeProps } from './theme';
 /** Makes TS complain about missing children */
@@ -23,13 +23,17 @@ declare type SizeHelpers = {
     big?: never | false;
     small?: true;
 };
-export declare type CommonStyleProps = SizeHelpers & {
-    color?: ColorType;
+/**
+ * Can be used by components, contains typical props that are often used
+ * for styling, e.g. `<Button big outline color='primary'/>`
+ */
+export declare type GUCommonStyleProps = SizeHelpers & {
+    color?: GUColorType;
     outline?: boolean;
     wide?: boolean;
 };
-export declare type ThemeCSSFunc<T extends GUThemeProps = GUThemeProps> = (theme: T, props?: any) => SerializedStyles | SerializedStyles[];
-export interface ThemeCSSRule<T extends GUThemeProps = GUThemeProps> {
+export declare type GUThemeCSSFunc<T extends GUThemeProps = GUThemeProps> = (theme: T, props?: any) => SerializedStyles | SerializedStyles[];
+export interface GUThemeCSSRule<T extends GUThemeProps = GUThemeProps> {
     /**
      * If true the Style passed in css will replace the original one set by
      * @globalunderdog/common-front Theme.
@@ -37,6 +41,6 @@ export interface ThemeCSSRule<T extends GUThemeProps = GUThemeProps> {
      * Defaults to `false`
      */
     readonly replace?: boolean;
-    readonly css: ThemeCSSFunc<T>;
+    readonly css: GUThemeCSSFunc<T>;
 }
 export {};

@@ -1,29 +1,46 @@
 /** @jsx jsx */
 import { jsx } from '../style/emotion'
-import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
-import { CommonStyleProps, useTheme } from '../style'
+import React, {
+  DetailedHTMLProps,
+  Fragment,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react'
+import { GUCommonStyleProps, useTheme } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-export type CheckboxProps = HTMLInputProps &
-  CommonStyleProps & {
+export type GUCheckboxProps = HTMLInputProps &
+  GUCommonStyleProps & {
     label?: ReactNode
+    /** If true the label is placed before the checkbox */
+    labelFirst?: boolean
     type?: 'checkbox'
   }
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const GUCheckbox: React.FC<GUCheckboxProps> = ({
   className,
   label,
+  labelFirst,
   ...props
 }) => {
   const theme = useTheme()
   return (
     <div css={theme.checkbox.css(theme, props)} className={className}>
-      <input {...props} type='checkbox' />
-      {label && <label htmlFor={props.id}>{label}</label>}
+      {labelFirst ? (
+        <Fragment>
+          {label && <label htmlFor={props.id}>{label}</label>}
+          <input {...props} type='checkbox' />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <input {...props} type='checkbox' />
+          {label && <label htmlFor={props.id}>{label}</label>}
+        </Fragment>
+      )}
     </div>
   )
 }

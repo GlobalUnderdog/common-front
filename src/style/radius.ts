@@ -7,7 +7,7 @@ import { CSSUnit } from './util'
  * a smaller one for checkboxes, small buttons, tooltips, and a bigger one for components
  * that are often detached from the page, e.g. modals, cards.
  */
-export interface RadiusTheme {
+export interface GURadiusTheme {
   readonly big: CSSUnit
   readonly main: CSSUnit
   readonly small: CSSUnit

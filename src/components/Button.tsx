@@ -1,13 +1,13 @@
 /** @jsx jsx */
-import { CommonStyleProps, styled, jsx } from '../style'
+import { GUCommonStyleProps, styled, jsx } from '../style'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
-export type ButtonProps = DetailedHTMLProps<
+export type GUButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > &
-  CommonStyleProps
+  GUCommonStyleProps
 
-export const Button = styled.button<ButtonProps>`
+export const GUButton = styled.button<GUButtonProps>`
   ${(p) => p.theme.button.css(p.theme, p)}
 `

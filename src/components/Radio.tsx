@@ -1,25 +1,46 @@
 /** @jsx jsx */
 import { jsx } from '../style/emotion'
-import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react'
-import { CommonStyleProps, useTheme } from '../style'
+import React, {
+  DetailedHTMLProps,
+  Fragment,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react'
+import { GUCommonStyleProps, useTheme } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-export type RadioProps = HTMLInputProps &
-  CommonStyleProps & {
+export type GURadioProps = HTMLInputProps &
+  GUCommonStyleProps & {
     label?: ReactNode
+    /** If true the label is placed before the radio */
+    labelFirst?: boolean
     type?: 'radio'
   }
 
-export const Radio: React.FC<RadioProps> = ({ className, label, ...props }) => {
+export const GURadio: React.FC<GURadioProps> = ({
+  className,
+  label,
+  labelFirst,
+  ...props
+}) => {
   const theme = useTheme()
   return (
     <div css={theme.radio.css(theme, props)} className={className}>
-      <input {...props} type='radio' />
-      {label && <label htmlFor={props.id}>{label}</label>}
+      {labelFirst ? (
+        <Fragment>
+          {label && <label htmlFor={props.id}>{label}</label>}
+          <input {...props} type='radio' />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <input {...props} type='radio' />
+          {label && <label htmlFor={props.id}>{label}</label>}
+        </Fragment>
+      )}
     </div>
   )
 }

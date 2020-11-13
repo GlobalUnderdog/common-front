@@ -1,15 +1,15 @@
 import { Configuration } from 'react-grid-system'
-import { ColorTheme } from './color'
-import { RadiusTheme } from './radius'
-import { ThemeCSSRule } from './util'
+import { GUColorTheme } from './color'
+import { GURadiusTheme } from './radius'
+import { GUThemeCSSRule } from './util'
 
 /**
  * Contains only the basic properties of GUTheme, missing the rules & functions
  * for styles, global styles, etc.
  */
 export interface GUThemeProps {
-  readonly color: ColorTheme
-  readonly radius: RadiusTheme
+  readonly color: GUColorTheme
+  readonly radius: GURadiusTheme
 }
 
 export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
@@ -24,7 +24,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * normalize.css, fa-spin & removes the outline on focused inputs,
    * buttons, etc.
    */
-  readonly global: ThemeCSSRule<T>
+  readonly global: GUThemeCSSRule<T>
 
   /**
    * The default style for `<Button/>`, does not change HTML `<button/>`
@@ -32,7 +32,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    *
    * Uses radius.normal by default
    */
-  readonly button: ThemeCSSRule<T>
+  readonly button: GUThemeCSSRule<T>
 
   /**
    * Don't forget that TextArea is a `<div/>` wrapping a `<label/>` + `<textarea/>`:
@@ -46,7 +46,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * )
    * ```
    */
-  readonly input: ThemeCSSRule<T>
+  readonly input: GUThemeCSSRule<T>
   /**
    * Don't forget that Input is a `<div/>` wrapping a `<label/>` + `<input/>`:
    *
@@ -67,7 +67,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * }
    * ```
    */
-  readonly textArea: ThemeCSSRule<T>
+  readonly textArea: GUThemeCSSRule<T>
 
   /**
    * Don't forget that Checkbox is a `<div/>` wrapping a `<input/>` + `<label/>`:
@@ -86,7 +86,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * the checkbox background/border, and `input:after` as the filled area when
    * checked.
    */
-  readonly checkbox: ThemeCSSRule<T>
+  readonly checkbox: GUThemeCSSRule<T>
   /**
    * Don't forget that Radio is a `<div/>` wrapping a `<input/>` + `<label/>`:
    *
@@ -104,7 +104,7 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * the radio background/border, and `input:after` as the filled area when
    * checked.
    */
-  readonly radio: ThemeCSSRule<T>
+  readonly radio: GUThemeCSSRule<T>
 
   /**
    * CSS Classes used:
@@ -115,5 +115,5 @@ export type GUTheme<T extends GUThemeProps = GUThemeProps> = T & {
    * These classes are global and ideally any app using this package should
    * not have overlapping classNames with them.
    */
-  readonly modal: ThemeCSSRule<T>
+  readonly modal: GUThemeCSSRule<T>
 }

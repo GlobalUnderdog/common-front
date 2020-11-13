@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import ReactModal, { Props as _ModalProps } from 'react-modal'
 import { wait } from '@globalunderdog/common'
-import { CommonStyleProps, Container, useTheme } from '../style'
+import { GUCommonStyleProps, Container, useTheme } from '../style'
 
 // To keep the functionality of `@globalunderdog/common-front` modal simple
 // we won't be exposing these props and instead use the doc-commented values
 // for simplicity.
-export type ModalProps = CommonStyleProps &
+export type GUModalProps = GUCommonStyleProps &
   Omit<
     _ModalProps,
     // Counter-intuitive and breaks accessibility usage when false, we're going
@@ -46,7 +46,7 @@ const commonModalProps = (
   className: `modalCard ${className ?? ''} ${hiding ? 'hiding' : ''}`,
 })
 
-export const Modal: React.FC<ModalProps> = ({
+export const GUModal: React.FC<GUModalProps> = ({
   children,
   setOpen,
   className,

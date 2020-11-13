@@ -1,13 +1,13 @@
 import { PartialDeep } from 'type-fest'
-import { defaultTheme } from './defaultTheme'
+import { guDefaultTheme } from './defaultTheme'
 import { GUTheme } from './theme'
-import { cssUnit, ThemeCSSRule } from './util'
+import { cssUnit, GUThemeCSSRule } from './util'
 
 // Not declared in ./util since we don't want to export this function outside the package
 const handleCSSRule = (
-  rules: ThemeCSSRule | Partial<ThemeCSSRule> | undefined,
-  defaultRule: ThemeCSSRule
-): ThemeCSSRule => {
+  rules: GUThemeCSSRule | Partial<GUThemeCSSRule> | undefined,
+  defaultRule: GUThemeCSSRule
+): GUThemeCSSRule => {
   if (!rules?.css) return { css: defaultRule.css }
   const rulesCss = rules.css // Typescript still thinks rules.css is empty by this point2
 
@@ -48,35 +48,35 @@ export const makeTheme = <T extends GUTheme = GUTheme>(
   return {
     color: {
       secondary: {
-        ...defaultTheme.color.secondary,
+        ...guDefaultTheme.color.secondary,
         ...color?.secondary,
       },
       canvas: {
-        ...defaultTheme.color.canvas,
+        ...guDefaultTheme.color.canvas,
         ...color?.canvas,
       },
       error: {
-        ...defaultTheme.color.error,
+        ...guDefaultTheme.color.error,
         ...color?.error,
       },
       info: {
-        ...defaultTheme.color.info,
+        ...guDefaultTheme.color.info,
         ...color?.info,
       },
       ink: {
-        ...defaultTheme.color.ink,
+        ...guDefaultTheme.color.ink,
         ...color?.ink,
       },
       primary: {
-        ...defaultTheme.color.primary,
+        ...guDefaultTheme.color.primary,
         ...color?.primary,
       },
       success: {
-        ...defaultTheme.color.success,
+        ...guDefaultTheme.color.success,
         ...color?.success,
       },
       warning: {
-        ...defaultTheme.color.warning,
+        ...guDefaultTheme.color.warning,
         ...color?.warning,
       },
     },
@@ -86,23 +86,23 @@ export const makeTheme = <T extends GUTheme = GUTheme>(
         grid?.replace && grid?.rules
           ? grid.rules
           : {
-              ...defaultTheme.grid.rules,
+              ...guDefaultTheme.grid.rules,
               ...grid?.rules,
             },
     },
     radius: {
       ...radius,
-      big: cssUnit(radius?.big ?? defaultTheme.radius.big),
-      main: cssUnit(radius?.main ?? defaultTheme.radius.main),
-      small: cssUnit(radius?.small ?? defaultTheme.radius.small),
+      big: cssUnit(radius?.big ?? guDefaultTheme.radius.big),
+      main: cssUnit(radius?.main ?? guDefaultTheme.radius.main),
+      small: cssUnit(radius?.small ?? guDefaultTheme.radius.small),
     },
-    global: handleCSSRule(global, defaultTheme.global),
-    button: handleCSSRule(button, defaultTheme.button),
-    input: handleCSSRule(input, defaultTheme.input),
-    textArea: handleCSSRule(textArea, defaultTheme.textArea),
-    checkbox: handleCSSRule(checkbox, defaultTheme.checkbox),
-    radio: handleCSSRule(radio, defaultTheme.radio),
-    modal: handleCSSRule(modal, defaultTheme.modal),
+    global: handleCSSRule(global, guDefaultTheme.global),
+    button: handleCSSRule(button, guDefaultTheme.button),
+    input: handleCSSRule(input, guDefaultTheme.input),
+    textArea: handleCSSRule(textArea, guDefaultTheme.textArea),
+    checkbox: handleCSSRule(checkbox, guDefaultTheme.checkbox),
+    radio: handleCSSRule(radio, guDefaultTheme.radio),
+    modal: handleCSSRule(modal, guDefaultTheme.modal),
     ...extended,
   } as T
 }

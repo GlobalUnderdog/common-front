@@ -17,7 +17,7 @@ const Children: React.FC = ({ children }) => {
   )
 }
 
-export const GlobalProvider: React.FC<
+export const GUProvider: React.FC<
   NeedsChildrenProps & {
     theme: GUTheme
   }
