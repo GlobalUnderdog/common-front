@@ -921,12 +921,12 @@ var GUForm = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTempl
     return p.loading
         ? core.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "], ["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "]))) : '';
 });
-var _GULoading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n  background-color: ", ";\n\n  i {\n    color: ", ";\n  }\n"
+var _GULoading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n\n  i {\n    color: ", ";\n  }\n"
     /**
      * Can be used as the last child of a `<Form />` element to automatically
      * create a loading indicator.
      */
-])), function (p) { return (p.loading ? 1 : 0); }, function (p) { return (p.loading ? 'all' : 'none'); }, function (p) { return p.theme.color.canvas.light; }, function (p) { return p.theme.color.ink.main; });
+])), function (p) { return (p.loading ? 1 : 0); }, function (p) { return (p.loading ? 'all' : 'none'); }, function (p) { return p.theme.color.ink.main; });
 /**
  * Can be used as the last child of a `<Form />` element to automatically
  * create a loading indicator.

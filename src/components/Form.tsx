@@ -38,7 +38,6 @@ const _GULoading = styled.div<{ loading: boolean }>`
   opacity: ${(p) => (p.loading ? 1 : 0)} !important;
   transition: opacity ease 0.2s;
   pointer-events: ${(p) => (p.loading ? 'all' : 'none')};
-  background-color: ${(p) => p.theme.color.canvas.light};
 
   i {
     color: ${(p) => p.theme.color.ink.main};
