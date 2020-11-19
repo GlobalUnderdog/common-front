@@ -4,9 +4,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
 var React = require('react');
 var React__default = _interopDefault(React);
+var Head = _interopDefault(require('next/head'));
+var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
 var core = require('@emotion/core');
 var emotionTheming = require('emotion-theming');
 var reactGridSystem = require('react-grid-system');
@@ -16,6 +17,32 @@ var Link = _interopDefault(require('next/link'));
 var Reveal = require('react-awesome-reveal');
 var Reveal__default = _interopDefault(Reveal);
 var ReactGA = _interopDefault(require('react-ga'));
+var client = require('@tianhuil/simple-trpc/dist/client');
+
+var AppHead = function (_a) {
+    var title = _a.title, description = _a.description, url = _a.url, image = _a.image, children = _a.children;
+    return (React__default.createElement(Head, null,
+        React__default.createElement("meta", { charSet: 'UTF-8' }),
+        React__default.createElement("meta", { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }),
+        React__default.createElement("link", { rel: 'manifest', href: '/site.webmanifest' }),
+        React__default.createElement("link", { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }),
+        React__default.createElement("link", { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }),
+        React__default.createElement("link", { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }),
+        React__default.createElement("title", null, title),
+        React__default.createElement("meta", { name: 'title', content: title }),
+        React__default.createElement("meta", { name: 'description', content: description }),
+        React__default.createElement("meta", { property: 'og:type', content: 'website' }),
+        React__default.createElement("meta", { property: 'og:url', content: url }),
+        React__default.createElement("meta", { property: 'og:title', content: title }),
+        React__default.createElement("meta", { property: 'og:description', content: description }),
+        image && React__default.createElement("meta", { property: 'og:image', content: image }),
+        React__default.createElement("meta", { property: 'twitter:card', content: 'summary_large_image' }),
+        React__default.createElement("meta", { property: 'twitter:url', content: url }),
+        React__default.createElement("meta", { property: 'twitter:title', content: title }),
+        React__default.createElement("meta", { property: 'twitter:description', content: description }),
+        image && React__default.createElement("meta", { property: 'twitter:image', content: image }),
+        children));
+};
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -1113,6 +1140,59 @@ var GUTextArea = function (_a) {
         core.jsx("textarea", __assign({}, props))))));
 };
 
+var randomId = function (length) {
+    if (length === void 0) { length = 10; }
+    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
+};
+var googleAnalyticsInit = function (googleUa) {
+    var _a;
+    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
+    ReactGA.initialize(googleUa, {
+        titleCase: false,
+        gaOptions: {
+            userId: userId,
+        },
+    });
+    localStorage.setItem('google_ua_id', userId);
+};
+var googleAnalyticsTrackPage = function (path) {
+    ReactGA.pageview(path);
+};
+
+/**
+ * The default client uses localhost:8080 as its url and 3000ms as timeout,
+ * use trpcConfig to change these values (this is automatically set up if
+ * guLibConfig is called)
+ */
+exports.trpc = client.makeClient(client.httpConnector('http://localhost:8080', { timeout: 3000 }));
+var trpcConfig = function (url, timeout) {
+    if (timeout === void 0) { timeout = 3000; }
+    exports.trpc = client.makeClient(client.httpConnector(url, { timeout: timeout }));
+};
+
+/**
+ * Returns the back-end URL + a simple calculation done with `trpc`
+ */
+var guStatusConfig = function (backend) {
+    window.guStatus = function (x, y) { return __awaiter(void 0, void 0, void 0, function () {
+        var start, resp, finish;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    start = new Date().valueOf();
+                    window.console.log("Pinging " + backend + " with add(" + x + ", " + y + ")");
+                    return [4 /*yield*/, exports.trpc.add(x, y)];
+                case 1:
+                    resp = _a.sent();
+                    finish = new Date().valueOf();
+                    console.log(backend + " responded:");
+                    console.log(__assign(__assign({}, resp), { responseMS: finish - start }));
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+};
+
 var inspectlet = function (inspectletId) {
     window.__insp = window.__insp || [];
     window.__insp.push(['wid', inspectletId]);
@@ -1137,135 +1217,130 @@ var inspectlet = function (inspectletId) {
     setTimeout(window.ldinsp, 0);
 };
 
-var randomId = function (length) {
-    if (length === void 0) { length = 10; }
-    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
-};
-var googleAnalyticsInit = function (googleUa) {
-    var _a;
-    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
-    ReactGA.initialize(googleUa, {
-        titleCase: false,
-        gaOptions: {
-            userId: userId,
-        },
-    });
-    localStorage.setItem('google_ua_id', userId);
-};
-var googleAnalyticsTrackPage = function (path) {
-    ReactGA.pageview(path);
+var guLibConfig = function (env) {
+    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout;
+    if (serverUrl) {
+        guStatusConfig(serverUrl);
+        var timeout = serverTimeout ? +serverTimeout : undefined;
+        trpcConfig(serverUrl, timeout);
+    }
+    if (googleUa)
+        googleAnalyticsInit(googleUa);
+    if (inspectletId)
+        inspectlet(inspectletId);
 };
 
 Object.defineProperty(exports, 'Global', {
-    enumerable: true,
-    get: function () {
-        return core.Global;
-    }
+  enumerable: true,
+  get: function () {
+    return core.Global;
+  }
 });
 Object.defineProperty(exports, 'css', {
-    enumerable: true,
-    get: function () {
-        return core.css;
-    }
+  enumerable: true,
+  get: function () {
+    return core.css;
+  }
 });
 Object.defineProperty(exports, 'jsx', {
-    enumerable: true,
-    get: function () {
-        return core.jsx;
-    }
+  enumerable: true,
+  get: function () {
+    return core.jsx;
+  }
 });
 Object.defineProperty(exports, 'keyframes', {
-    enumerable: true,
-    get: function () {
-        return core.keyframes;
-    }
+  enumerable: true,
+  get: function () {
+    return core.keyframes;
+  }
 });
 Object.defineProperty(exports, 'ThemeProvider', {
-    enumerable: true,
-    get: function () {
-        return emotionTheming.ThemeProvider;
-    }
+  enumerable: true,
+  get: function () {
+    return emotionTheming.ThemeProvider;
+  }
 });
 Object.defineProperty(exports, 'Hidden', {
-    enumerable: true,
-    get: function () {
-        return reactGridSystem.Hidden;
-    }
+  enumerable: true,
+  get: function () {
+    return reactGridSystem.Hidden;
+  }
 });
 Object.defineProperty(exports, 'Visible', {
-    enumerable: true,
-    get: function () {
-        return reactGridSystem.Visible;
-    }
+  enumerable: true,
+  get: function () {
+    return reactGridSystem.Visible;
+  }
 });
 Object.defineProperty(exports, 'useScreenClass', {
-    enumerable: true,
-    get: function () {
-        return reactGridSystem.useScreenClass;
-    }
+  enumerable: true,
+  get: function () {
+    return reactGridSystem.useScreenClass;
+  }
 });
 Object.defineProperty(exports, 'AttentionSeeker', {
-    enumerable: true,
-    get: function () {
-        return Reveal.AttentionSeeker;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.AttentionSeeker;
+  }
 });
 Object.defineProperty(exports, 'Bounce', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Bounce;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Bounce;
+  }
 });
 Object.defineProperty(exports, 'Fade', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Fade;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Fade;
+  }
 });
 Object.defineProperty(exports, 'Flip', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Flip;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Flip;
+  }
 });
 Object.defineProperty(exports, 'Hinge', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Hinge;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Hinge;
+  }
 });
 Object.defineProperty(exports, 'JackInTheBox', {
-    enumerable: true,
-    get: function () {
-        return Reveal.JackInTheBox;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.JackInTheBox;
+  }
 });
 exports.Reveal = Reveal__default;
 Object.defineProperty(exports, 'Roll', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Roll;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Roll;
+  }
 });
 Object.defineProperty(exports, 'Rotate', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Rotate;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Rotate;
+  }
 });
 Object.defineProperty(exports, 'Slide', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Slide;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Slide;
+  }
 });
 Object.defineProperty(exports, 'Zoom', {
-    enumerable: true,
-    get: function () {
-        return Reveal.Zoom;
-    }
+  enumerable: true,
+  get: function () {
+    return Reveal.Zoom;
+  }
 });
 exports.ReactGA = ReactGA;
+exports.AppHead = AppHead;
 exports.Breakpoints = Breakpoints;
 exports.Col = Col;
 exports.Container = Container;
@@ -1286,9 +1361,12 @@ exports.googleAnalyticsInit = googleAnalyticsInit;
 exports.googleAnalyticsTrackPage = googleAnalyticsTrackPage;
 exports.guColorTypes = guColorTypes;
 exports.guDefaultTheme = guDefaultTheme;
+exports.guLibConfig = guLibConfig;
+exports.guStatusConfig = guStatusConfig;
 exports.inspectlet = inspectlet;
 exports.makeTheme = makeTheme;
 exports.mediaQuery = mediaQuery;
 exports.styled = styled;
+exports.trpcConfig = trpcConfig;
 exports.untypedStyled = newStyled;
 exports.useTheme = useTheme;

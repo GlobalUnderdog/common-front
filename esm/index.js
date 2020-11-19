@@ -1,5 +1,6 @@
-import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import React, { createElement, Fragment, useEffect, useState } from 'react';
+import Head from 'next/head';
+import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import { withEmotionCache, ThemeContext, jsx, Global, keyframes, css } from '@emotion/core';
 export { Global, css, jsx, keyframes } from '@emotion/core';
 import { useTheme as useTheme$1, ThemeProvider } from 'emotion-theming';
@@ -13,6 +14,32 @@ import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
 import ReactGA from 'react-ga';
 export { default as ReactGA } from 'react-ga';
+import { makeClient, httpConnector } from '@tianhuil/simple-trpc/dist/client';
+
+var AppHead = function (_a) {
+    var title = _a.title, description = _a.description, url = _a.url, image = _a.image, children = _a.children;
+    return (React.createElement(Head, null,
+        React.createElement("meta", { charSet: 'UTF-8' }),
+        React.createElement("meta", { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }),
+        React.createElement("link", { rel: 'manifest', href: '/site.webmanifest' }),
+        React.createElement("link", { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }),
+        React.createElement("link", { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }),
+        React.createElement("link", { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }),
+        React.createElement("title", null, title),
+        React.createElement("meta", { name: 'title', content: title }),
+        React.createElement("meta", { name: 'description', content: description }),
+        React.createElement("meta", { property: 'og:type', content: 'website' }),
+        React.createElement("meta", { property: 'og:url', content: url }),
+        React.createElement("meta", { property: 'og:title', content: title }),
+        React.createElement("meta", { property: 'og:description', content: description }),
+        image && React.createElement("meta", { property: 'og:image', content: image }),
+        React.createElement("meta", { property: 'twitter:card', content: 'summary_large_image' }),
+        React.createElement("meta", { property: 'twitter:url', content: url }),
+        React.createElement("meta", { property: 'twitter:title', content: title }),
+        React.createElement("meta", { property: 'twitter:description', content: description }),
+        image && React.createElement("meta", { property: 'twitter:image', content: image }),
+        children));
+};
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -1110,6 +1137,59 @@ var GUTextArea = function (_a) {
         jsx("textarea", __assign({}, props))))));
 };
 
+var randomId = function (length) {
+    if (length === void 0) { length = 10; }
+    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
+};
+var googleAnalyticsInit = function (googleUa) {
+    var _a;
+    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
+    ReactGA.initialize(googleUa, {
+        titleCase: false,
+        gaOptions: {
+            userId: userId,
+        },
+    });
+    localStorage.setItem('google_ua_id', userId);
+};
+var googleAnalyticsTrackPage = function (path) {
+    ReactGA.pageview(path);
+};
+
+/**
+ * The default client uses localhost:8080 as its url and 3000ms as timeout,
+ * use trpcConfig to change these values (this is automatically set up if
+ * guLibConfig is called)
+ */
+var trpc = makeClient(httpConnector('http://localhost:8080', { timeout: 3000 }));
+var trpcConfig = function (url, timeout) {
+    if (timeout === void 0) { timeout = 3000; }
+    trpc = makeClient(httpConnector(url, { timeout: timeout }));
+};
+
+/**
+ * Returns the back-end URL + a simple calculation done with `trpc`
+ */
+var guStatusConfig = function (backend) {
+    window.guStatus = function (x, y) { return __awaiter(void 0, void 0, void 0, function () {
+        var start, resp, finish;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    start = new Date().valueOf();
+                    window.console.log("Pinging " + backend + " with add(" + x + ", " + y + ")");
+                    return [4 /*yield*/, trpc.add(x, y)];
+                case 1:
+                    resp = _a.sent();
+                    finish = new Date().valueOf();
+                    console.log(backend + " responded:");
+                    console.log(__assign(__assign({}, resp), { responseMS: finish - start }));
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+};
+
 var inspectlet = function (inspectletId) {
     window.__insp = window.__insp || [];
     window.__insp.push(['wid', inspectletId]);
@@ -1134,23 +1214,17 @@ var inspectlet = function (inspectletId) {
     setTimeout(window.ldinsp, 0);
 };
 
-var randomId = function (length) {
-    if (length === void 0) { length = 10; }
-    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
-};
-var googleAnalyticsInit = function (googleUa) {
-    var _a;
-    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
-    ReactGA.initialize(googleUa, {
-        titleCase: false,
-        gaOptions: {
-            userId: userId,
-        },
-    });
-    localStorage.setItem('google_ua_id', userId);
-};
-var googleAnalyticsTrackPage = function (path) {
-    ReactGA.pageview(path);
+var guLibConfig = function (env) {
+    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout;
+    if (serverUrl) {
+        guStatusConfig(serverUrl);
+        var timeout = serverTimeout ? +serverTimeout : undefined;
+        trpcConfig(serverUrl, timeout);
+    }
+    if (googleUa)
+        googleAnalyticsInit(googleUa);
+    if (inspectletId)
+        inspectlet(inspectletId);
 };
 
-export { Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUNavbar, GUProvider, GURadio, GUTextArea, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, inspectlet, makeTheme, mediaQuery, styled, newStyled as untypedStyled, useTheme };
+export { AppHead, Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUNavbar, GUProvider, GURadio, GUTextArea, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, guLibConfig, guStatusConfig, inspectlet, makeTheme, mediaQuery, styled, trpc, trpcConfig, newStyled as untypedStyled, useTheme };
