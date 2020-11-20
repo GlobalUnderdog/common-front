@@ -1,3 +1,4 @@
+import { TagManagerArgs } from 'react-gtm-module';
 export * from './googleGA';
 export * from './guStatus';
 export * from './inspectlet';
@@ -7,4 +8,5 @@ export declare const guLibConfig: (env: {
     googleUa?: string | undefined;
     inspectletId?: string | undefined;
     serverTimeout?: string | number | undefined;
+    googleTm?: TagManagerArgs | undefined;
 }) => void;

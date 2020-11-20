@@ -1,3 +1,4 @@
+import TagManager, { TagManagerArgs } from 'react-gtm-module'
 import { googleAnalyticsInit } from './googleGA'
 import { guStatusConfig } from './guStatus'
 import { inspectlet } from './inspectlet'
@@ -13,8 +14,9 @@ export const guLibConfig = (env: {
   googleUa?: string
   inspectletId?: string
   serverTimeout?: string | number
+  googleTm?: TagManagerArgs
 }): void => {
-  const { serverUrl, googleUa, inspectletId, serverTimeout } = env
+  const { serverUrl, googleUa, inspectletId, serverTimeout, googleTm } = env
 
   if (serverUrl) {
     guStatusConfig(serverUrl)
@@ -23,4 +25,6 @@ export const guLibConfig = (env: {
   }
   if (googleUa) googleAnalyticsInit(googleUa)
   if (inspectletId) inspectlet(inspectletId)
+
+  if (googleTm) TagManager.initialize(googleTm)
 }

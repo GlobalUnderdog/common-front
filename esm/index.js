@@ -12,6 +12,7 @@ import { wait } from '@globalunderdog/common';
 import Link from 'next/link';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, Fade, Flip, Hinge, JackInTheBox, default as Reveal, Roll, Rotate, Slide, Zoom } from 'react-awesome-reveal';
+import TagManager from 'react-gtm-module';
 import ReactGA from 'react-ga';
 export { default as ReactGA } from 'react-ga';
 import { makeClient, httpConnector } from '@tianhuil/simple-trpc/dist/client';
@@ -1215,7 +1216,7 @@ var inspectlet = function (inspectletId) {
 };
 
 var guLibConfig = function (env) {
-    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout;
+    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout, googleTm = env.googleTm;
     if (serverUrl) {
         guStatusConfig(serverUrl);
         var timeout = serverTimeout ? +serverTimeout : undefined;
@@ -1225,6 +1226,8 @@ var guLibConfig = function (env) {
         googleAnalyticsInit(googleUa);
     if (inspectletId)
         inspectlet(inspectletId);
+    if (googleTm)
+        TagManager.initialize(googleTm);
 };
 
 export { AppHead, Breakpoints, Col, Container, GUButton, GUCheckbox, GUForm, GUInput, GULoading, GUModal, GUNavbar, GUProvider, GURadio, GUTextArea, Row, SlideFade, cssUnit, googleAnalyticsInit, googleAnalyticsTrackPage, guColorTypes, guDefaultTheme, guLibConfig, guStatusConfig, inspectlet, makeTheme, mediaQuery, styled, trpc, trpcConfig, newStyled as untypedStyled, useTheme };

@@ -16,6 +16,7 @@ var common = require('@globalunderdog/common');
 var Link = _interopDefault(require('next/link'));
 var Reveal = require('react-awesome-reveal');
 var Reveal__default = _interopDefault(Reveal);
+var TagManager = _interopDefault(require('react-gtm-module'));
 var ReactGA = _interopDefault(require('react-ga'));
 var client = require('@tianhuil/simple-trpc/dist/client');
 
@@ -1218,7 +1219,7 @@ var inspectlet = function (inspectletId) {
 };
 
 var guLibConfig = function (env) {
-    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout;
+    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout, googleTm = env.googleTm;
     if (serverUrl) {
         guStatusConfig(serverUrl);
         var timeout = serverTimeout ? +serverTimeout : undefined;
@@ -1228,6 +1229,8 @@ var guLibConfig = function (env) {
         googleAnalyticsInit(googleUa);
     if (inspectletId)
         inspectlet(inspectletId);
+    if (googleTm)
+        TagManager.initialize(googleTm);
 };
 
 Object.defineProperty(exports, 'Global', {
