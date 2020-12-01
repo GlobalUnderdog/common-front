@@ -43,6 +43,7 @@ export const AppHead: React.FC<AppMetadata> = ({
       <title>{title}</title>
       <meta name='title' content={title} />
       <meta name='description' content={description} />
+      <link ref='canonical' href={url} />
 
       {/* <!-- Open Graph / Facebook --> */}
       <meta property='og:type' content='website' />
