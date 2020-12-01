@@ -23,10 +23,7 @@ const plugins = [
     configFile: false,
     include: 'src',
     presets: [
-      [
-        '@babel/preset-react',
-        { runtime: 'automatic', importSource: '@emotion/core' },
-      ],
+      ['@babel/preset-react', { runtime: 'automatic' }],
       [
         '@babel/preset-typescript',
         {
@@ -34,7 +31,7 @@ const plugins = [
           allExtensions: true,
         },
       ],
-      '@emotion/babel-preset-css-prop',
+      'emotion',
     ],
     plugins: ['@babel/plugin-transform-runtime', 'emotion'],
     exclude: 'node_modules/**',
@@ -67,11 +64,13 @@ export default [
     // Please, never transform '@babel/runtime' to a string, as per documentation:
     // https://www.npmjs.com/package/@rollup/plugin-babel#babelhelpers
     external: [
-      /@babel\/runtime/,
-      // For some reason this is not being automatically imported
-      '@babel/runtime/helpers/defineProperty',
       ...Object.keys(pkg.peerDependencies || {}),
+      /@babel\/runtime/,
+      // For some reason these nested imports are not being automatically handled
+      '@babel/runtime/helpers/defineProperty',
+      '@tianhuil/simple-trpc/dist/client',
       'next/link',
+      'next/head',
     ],
   },
 ]
