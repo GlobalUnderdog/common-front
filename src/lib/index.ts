@@ -1,5 +1,5 @@
 import TagManager, { TagManagerArgs } from 'react-gtm-module'
-import { googleAnalyticsInit } from './googleGA'
+import { googleAnalyticsInit, setDataLayer } from './googleGA'
 import { guStatusConfig } from './guStatus'
 import { inspectlet } from './inspectlet'
 import { trpcConfig } from './trpc'
@@ -26,5 +26,8 @@ export const guLibConfig = (env: {
   if (googleUa) googleAnalyticsInit(googleUa)
   if (inspectletId) inspectlet(inspectletId)
 
-  if (googleTm) TagManager.initialize(googleTm)
+  if (googleTm) {
+    TagManager.initialize(googleTm)
+    setDataLayer(googleTm?.dataLayerName)
+  }
 }

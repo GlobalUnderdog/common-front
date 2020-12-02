@@ -7,6 +7,9 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var React = require('react');
 var React__default = _interopDefault(React);
 var Head = _interopDefault(require('next/head'));
+var TagManager = _interopDefault(require('react-gtm-module'));
+var ReactGA = _interopDefault(require('react-ga'));
+var client = require('@tianhuil/simple-trpc/dist/client');
 var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
 var core = require('@emotion/core');
 var emotionTheming = require('emotion-theming');
@@ -16,9 +19,6 @@ var common = require('@globalunderdog/common');
 var Link = _interopDefault(require('next/link'));
 var Reveal = require('react-awesome-reveal');
 var Reveal__default = _interopDefault(Reveal);
-var TagManager = _interopDefault(require('react-gtm-module'));
-var ReactGA = _interopDefault(require('react-ga'));
-var client = require('@tianhuil/simple-trpc/dist/client');
 
 var AppHead = function (_a) {
     var title = _a.title, description = _a.description, url = _a.url, image = _a.image, children = _a.children;
@@ -124,6 +124,111 @@ function __spreadArrays() {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 }
+
+var randomId = function (length) {
+    if (length === void 0) { length = 10; }
+    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
+};
+var _dataLayer = undefined;
+/** Returns the current data layer from Google Tag Manager */
+var dataLayer = function () { return _dataLayer; };
+/**
+ * NOT to be used outside `common-front`. Used internally withing the
+ * package to avoid unnecessary hooks/complicated containers to store this
+ * the data layer used by GTM.
+ */
+var setDataLayer = function (s) {
+    _dataLayer = s;
+};
+var googleAnalyticsInit = function (googleUa) {
+    var _a;
+    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
+    ReactGA.initialize(googleUa, {
+        titleCase: false,
+        gaOptions: {
+            userId: userId,
+        },
+    });
+    localStorage.setItem('google_ua_id', userId);
+};
+var googleAnalyticsTrackPage = function (path) {
+    ReactGA.pageview(path);
+};
+
+/**
+ * The default client uses localhost:8080 as its url and 3000ms as timeout,
+ * use trpcConfig to change these values (this is automatically set up if
+ * guLibConfig is called)
+ */
+exports.trpc = client.makeClient(client.httpConnector('http://localhost:8080', { timeout: 3000 }));
+var trpcConfig = function (url, timeout) {
+    if (timeout === void 0) { timeout = 3000; }
+    exports.trpc = client.makeClient(client.httpConnector(url, { timeout: timeout }));
+};
+
+/**
+ * Returns the back-end URL + a simple calculation done with `trpc`
+ */
+var guStatusConfig = function (backend) {
+    window.guStatus = function (x, y) { return __awaiter(void 0, void 0, void 0, function () {
+        var start, resp, finish;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    start = new Date().valueOf();
+                    window.console.log("Pinging " + backend + " with add(" + x + ", " + y + ")");
+                    return [4 /*yield*/, exports.trpc.add(x, y)];
+                case 1:
+                    resp = _a.sent();
+                    finish = new Date().valueOf();
+                    console.log(backend + " responded:");
+                    console.log(__assign(__assign({}, resp), { responseMS: finish - start }));
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+};
+
+var inspectlet = function (inspectletId) {
+    window.__insp = window.__insp || [];
+    window.__insp.push(['wid', inspectletId]);
+    window.ldinsp = function () {
+        var _a;
+        if (typeof window.__inspld != 'undefined')
+            return;
+        window.__inspld = 1;
+        var insp = document.createElement('script');
+        insp.type = 'text/javascript';
+        insp.async = true;
+        insp.id = 'inspsync';
+        insp.src =
+            ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://cdn.inspectlet.com/inspectlet.js?wid=' +
+                inspectletId +
+                '&r=' +
+                Math.floor(new Date().getTime() / 3600000);
+        var x = document.getElementsByTagName('script')[0];
+        (_a = x.parentNode) === null || _a === void 0 ? void 0 : _a.insertBefore(insp, x);
+    };
+    setTimeout(window.ldinsp, 0);
+};
+
+var guLibConfig = function (env) {
+    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout, googleTm = env.googleTm;
+    if (serverUrl) {
+        guStatusConfig(serverUrl);
+        var timeout = serverTimeout ? +serverTimeout : undefined;
+        trpcConfig(serverUrl, timeout);
+    }
+    if (googleUa)
+        googleAnalyticsInit(googleUa);
+    if (inspectletId)
+        inspectlet(inspectletId);
+    if (googleTm) {
+        TagManager.initialize(googleTm);
+        setDataLayer(googleTm === null || googleTm === void 0 ? void 0 : googleTm.dataLayerName);
+    }
+};
 
 var guColorTypes = [
     'canvas',
@@ -929,8 +1034,33 @@ var makeTheme = function (theme) {
         }, radius: __assign(__assign({}, radius), { big: cssUnit((_b = radius === null || radius === void 0 ? void 0 : radius.big) !== null && _b !== void 0 ? _b : guDefaultTheme.radius.big), main: cssUnit((_c = radius === null || radius === void 0 ? void 0 : radius.main) !== null && _c !== void 0 ? _c : guDefaultTheme.radius.main), small: cssUnit((_d = radius === null || radius === void 0 ? void 0 : radius.small) !== null && _d !== void 0 ? _d : guDefaultTheme.radius.small) }), global: handleCSSRule(global, guDefaultTheme.global), button: handleCSSRule(button, guDefaultTheme.button), input: handleCSSRule(input, guDefaultTheme.input), textArea: handleCSSRule(textArea, guDefaultTheme.textArea), checkbox: handleCSSRule(checkbox, guDefaultTheme.checkbox), radio: handleCSSRule(radio, guDefaultTheme.radio), modal: handleCSSRule(modal, guDefaultTheme.modal) }, extended);
 };
 
-var GUButton = styled.button(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (p) { return p.theme.button.css(p.theme, p); });
-var templateObject_1$1;
+var GUButton = function (props) {
+    var theme = useTheme();
+    var analytics = props.analytics, tagManager = props.tagManager;
+    var onClick = function (e) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!props.onClick) return [3 /*break*/, 2];
+                    return [4 /*yield*/, props.onClick(e)];
+                case 1:
+                    _a.sent();
+                    _a.label = 2;
+                case 2:
+                    if (analytics)
+                        ReactGA.event(__assign({ category: 'Button Click' }, analytics));
+                    if (tagManager) {
+                        TagManager.dataLayer({
+                            dataLayerName: dataLayer(),
+                            dataLayer: __assign({ category: 'Button Click' }, tagManager),
+                        });
+                    }
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    return (core.jsx("button", __assign({ css: theme.button.css(theme, props) }, props, { onClick: onClick }), props.children));
+};
 
 var GUCheckbox = function (_a) {
     var className = _a.className, label = _a.label, labelFirst = _a.labelFirst, props = __rest(_a, ["className", "label", "labelFirst"]);
@@ -949,7 +1079,7 @@ var GUCheckbox = function (_a) {
 var GUForm = styled.form(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ", "\n"], ["\n  position: relative;\n  /*\n  We don't want to mess any component opacity when loading === false,\n  considering that there might be elements with opacity = 0.2 we only\n  load the opacity rule when loading === true\n  */\n  ",
     "\n"])), function (p) {
     return p.loading
-        ? core.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "], ["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "]))) : '';
+        ? core.css(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "], ["\n          & > * {\n            opacity: 0;\n            transition: ease 0.2s;\n          }\n        "]))) : '';
 });
 var _GULoading = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n\n  i {\n    color: ", ";\n  }\n"], ["\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  opacity: ", " !important;\n  transition: opacity ease 0.2s;\n  pointer-events: ", ";\n\n  i {\n    color: ", ";\n  }\n"
     /**
@@ -966,7 +1096,7 @@ var GULoading = function (_a) {
     return (core.jsx(_GULoading, { loading: loading, className: className },
         core.jsx("i", { className: 'fa fa-loading fa-spin' })));
 };
-var templateObject_1$2, templateObject_2$1, templateObject_3$1;
+var templateObject_1$1, templateObject_2$1, templateObject_3$1;
 
 var GUInput = function (_a) {
     var className = _a.className, labelSecond = _a.labelSecond, props = __rest(_a, ["className", "labelSecond"]);
@@ -1045,7 +1175,7 @@ var GUModal = function (_a) {
         React__default.createElement(Container, null, children)));
 };
 
-var globalVariables = function (links) { return core.css(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
+var globalVariables = function (links) { return core.css(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"], ["\n  /*\n  Declaring these as CSS variables since they change according to devices'\n  breakpoints.\n  */\n  :root {\n    --navbarHeight: 56px;\n    --navbarLinkHeight: 56px;\n    --navbarExpandedHeight: calc(\n      var(--navbarHeight) + (", " * var(--navbarLinkHeight))\n    );\n  }\n  ", " {\n    :root {\n      --navbarHeight: 68px;\n      --navbarExpandedHeight: var(--navbarHeight);\n    }\n  }\n  body {\n    margin-top: var(--navbarHeight);\n  }\n"])), links, mediaQuery.medium); };
 var Wrapper = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ", ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ", ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"], ["\n  width: 100%;\n  height: var(\n    ", "\n  );\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  color: ", ";\n  background-color: ", ";\n  box-shadow: ",
     ";\n  transition: ease 0.3s;\n\n  /* Ensures it is on top of all content, but the Modal */\n  z-index: 888;\n\n  /* Container */\n  & > div {\n    display: flex;\n    align-items: center;\n\n    ", " {\n      flex-flow: row wrap;\n      justify-content: space-between;\n    }\n    height: 100%;\n\n    & > img {\n      width: 80px;\n      object-fit: contain;\n    }\n\n    .toggleNavLinks {\n      width: var(--navbarHeight);\n      height: var(--navbarHeight);\n      font-size: 18px;\n\n      display: flex;\n      justify-content: flex-end;\n      align-items: center;\n      &:focus {\n        outline: none;\n      }\n\n      background: none;\n      border: none;\n      color: ",
     ";\n      transition: color ease 0.3s;\n      ", " {\n        display: none;\n      }\n    }\n\n    & > .links {\n      display: flex;\n      align-items: center;\n\n      ", " {\n        width: 100%;\n        height: calc(var(--navbarExpandedHeight) - var(--navbarHeight));\n        padding: 0;\n        margin: 0;\n        flex-direction: column;\n        align-items: center;\n        justify-content: space-around;\n\n        opacity: ", ";\n        pointer-events: ", ";\n        /*\n    The animation is faster when showing the menu in order for the text\n    to render inside the wrapper.\n    */\n        transition: opacity ease ", ";\n      }\n\n      ", " {\n        flex: 4;\n        justify-content: flex-end;\n      }\n    }\n  }\n\n  a {\n    font-size: 16px;\n    text-decoration: none;\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n    transition: color ease 0.2s;\n    ", " {\n      margin-bottom: 25px;\n      display: flex;\n      align-items: center;\n      margin: 0;\n    }\n    ", " {\n      margin-right: 25px;\n    }\n\n    font-weight: 400;\n    &.bold {\n      font-weight: 700;\n    }\n  }\n"])), function (p) { return (p.expanded ? '--navbarExpandedHeight' : '--navbarHeight'); }, function (p) { return p.theme.color.ink.light; }, function (p) { return p.theme.color.canvas.light; }, function (p) {
@@ -1098,7 +1228,7 @@ var GUNavbar = function (_a) {
                     core.jsx("i", { className: 'fa fa-menu' })),
                 core.jsx("div", { className: 'links' }, mappedLinks)))));
 };
-var templateObject_1$3, templateObject_2$2;
+var templateObject_1$2, templateObject_2$2;
 
 var GURadio = function (_a) {
     var className = _a.className, label = _a.label, labelFirst = _a.labelFirst, props = __rest(_a, ["className", "label", "labelFirst"]);
@@ -1123,12 +1253,12 @@ var translateDirection = function (direction, distance) {
             return "translate3d(-" + distance + ", 0, 0)";
     }
 };
-var animation = function (direction, distance) { return core.keyframes(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
+var animation = function (direction, distance) { return core.keyframes(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"], ["\n  from {\n    transform: ", ";\n    opacity: 0;\n  }\n\n  to {\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n"])), translateDirection(direction, distance)); };
 var SlideFade = function (_a) {
     var direction = _a.direction, distance = _a.distance, props = __rest(_a, ["direction", "distance"]);
     return (core.jsx(Reveal__default, __assign({}, props, { keyframes: animation(direction !== null && direction !== void 0 ? direction : 'left', distance !== null && distance !== void 0 ? distance : '100%') })));
 };
-var templateObject_1$4;
+var templateObject_1$3;
 
 var GUTextArea = function (_a) {
     var className = _a.className, labelSecond = _a.labelSecond, props = __rest(_a, ["className", "labelSecond"]);
@@ -1141,98 +1271,8 @@ var GUTextArea = function (_a) {
         core.jsx("textarea", __assign({}, props))))));
 };
 
-var randomId = function (length) {
-    if (length === void 0) { length = 10; }
-    return __spreadArrays(Array(length)).map(function () { return ((Math.random() * 36) | 0).toString(36); }).join('');
-};
-var googleAnalyticsInit = function (googleUa) {
-    var _a;
-    var userId = (_a = localStorage.getItem('google_ua_id')) !== null && _a !== void 0 ? _a : randomId();
-    ReactGA.initialize(googleUa, {
-        titleCase: false,
-        gaOptions: {
-            userId: userId,
-        },
-    });
-    localStorage.setItem('google_ua_id', userId);
-};
-var googleAnalyticsTrackPage = function (path) {
-    ReactGA.pageview(path);
-};
-
-/**
- * The default client uses localhost:8080 as its url and 3000ms as timeout,
- * use trpcConfig to change these values (this is automatically set up if
- * guLibConfig is called)
- */
-exports.trpc = client.makeClient(client.httpConnector('http://localhost:8080', { timeout: 3000 }));
-var trpcConfig = function (url, timeout) {
-    if (timeout === void 0) { timeout = 3000; }
-    exports.trpc = client.makeClient(client.httpConnector(url, { timeout: timeout }));
-};
-
-/**
- * Returns the back-end URL + a simple calculation done with `trpc`
- */
-var guStatusConfig = function (backend) {
-    window.guStatus = function (x, y) { return __awaiter(void 0, void 0, void 0, function () {
-        var start, resp, finish;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    start = new Date().valueOf();
-                    window.console.log("Pinging " + backend + " with add(" + x + ", " + y + ")");
-                    return [4 /*yield*/, exports.trpc.add(x, y)];
-                case 1:
-                    resp = _a.sent();
-                    finish = new Date().valueOf();
-                    console.log(backend + " responded:");
-                    console.log(__assign(__assign({}, resp), { responseMS: finish - start }));
-                    return [2 /*return*/];
-            }
-        });
-    }); };
-};
-
-var inspectlet = function (inspectletId) {
-    window.__insp = window.__insp || [];
-    window.__insp.push(['wid', inspectletId]);
-    window.ldinsp = function () {
-        var _a;
-        if (typeof window.__inspld != 'undefined')
-            return;
-        window.__inspld = 1;
-        var insp = document.createElement('script');
-        insp.type = 'text/javascript';
-        insp.async = true;
-        insp.id = 'inspsync';
-        insp.src =
-            ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://cdn.inspectlet.com/inspectlet.js?wid=' +
-                inspectletId +
-                '&r=' +
-                Math.floor(new Date().getTime() / 3600000);
-        var x = document.getElementsByTagName('script')[0];
-        (_a = x.parentNode) === null || _a === void 0 ? void 0 : _a.insertBefore(insp, x);
-    };
-    setTimeout(window.ldinsp, 0);
-};
-
-var guLibConfig = function (env) {
-    var serverUrl = env.serverUrl, googleUa = env.googleUa, inspectletId = env.inspectletId, serverTimeout = env.serverTimeout, googleTm = env.googleTm;
-    if (serverUrl) {
-        guStatusConfig(serverUrl);
-        var timeout = serverTimeout ? +serverTimeout : undefined;
-        trpcConfig(serverUrl, timeout);
-    }
-    if (googleUa)
-        googleAnalyticsInit(googleUa);
-    if (inspectletId)
-        inspectlet(inspectletId);
-    if (googleTm)
-        TagManager.initialize(googleTm);
-};
-
+exports.TagManager = TagManager;
+exports.ReactGA = ReactGA;
 Object.defineProperty(exports, 'Global', {
   enumerable: true,
   get: function () {
@@ -1342,7 +1382,6 @@ Object.defineProperty(exports, 'Zoom', {
     return Reveal.Zoom;
   }
 });
-exports.ReactGA = ReactGA;
 exports.AppHead = AppHead;
 exports.Breakpoints = Breakpoints;
 exports.Col = Col;
@@ -1360,6 +1399,7 @@ exports.GUTextArea = GUTextArea;
 exports.Row = Row;
 exports.SlideFade = SlideFade;
 exports.cssUnit = cssUnit;
+exports.dataLayer = dataLayer;
 exports.googleAnalyticsInit = googleAnalyticsInit;
 exports.googleAnalyticsTrackPage = googleAnalyticsTrackPage;
 exports.guColorTypes = guColorTypes;
@@ -1369,6 +1409,7 @@ exports.guStatusConfig = guStatusConfig;
 exports.inspectlet = inspectlet;
 exports.makeTheme = makeTheme;
 exports.mediaQuery = mediaQuery;
+exports.setDataLayer = setDataLayer;
 exports.styled = styled;
 exports.trpcConfig = trpcConfig;
 exports.untypedStyled = newStyled;
