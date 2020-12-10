@@ -29,6 +29,7 @@ var AppHead = function (_a) {
         React.createElement("title", null, title),
         React.createElement("meta", { name: 'title', content: title }),
         React.createElement("meta", { name: 'description', content: description }),
+        React.createElement("link", { ref: 'canonical', href: url }),
         React.createElement("meta", { property: 'og:type', content: 'website' }),
         React.createElement("meta", { property: 'og:url', content: url }),
         React.createElement("meta", { property: 'og:title', content: title }),

@@ -32,6 +32,7 @@ var AppHead = function (_a) {
         React__default.createElement("title", null, title),
         React__default.createElement("meta", { name: 'title', content: title }),
         React__default.createElement("meta", { name: 'description', content: description }),
+        React__default.createElement("link", { ref: 'canonical', href: url }),
         React__default.createElement("meta", { property: 'og:type', content: 'website' }),
         React__default.createElement("meta", { property: 'og:url', content: url }),
         React__default.createElement("meta", { property: 'og:title', content: title }),
