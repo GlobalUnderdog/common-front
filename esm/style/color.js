@@ -1,0 +1,1 @@
+export var guColorTypes=['canvas','ink','primary','secondary','error','warning','info','success'];
