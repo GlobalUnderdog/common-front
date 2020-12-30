@@ -10,5 +10,7 @@
   "importSorter.importStringConfiguration.hasSemicolon": false,
   "editor.tabSize": 2,
   "editor.formatOnPaste": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Prevents issues with newest React changes
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

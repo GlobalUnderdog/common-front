@@ -1,10 +1,9 @@
-/** @jsx jsx */
 import Reveal from 'react-awesome-reveal'
-import { keyframes, jsx } from '../style'
+import { keyframes } from '../style'
 export {
-  default as Reveal,
   AttentionSeeker,
   Bounce,
+  default as Reveal,
   Fade,
   Flip,
   Hinge,

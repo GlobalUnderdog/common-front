@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import {
+import React, {
   DetailedHTMLProps,
   Fragment,
   InputHTMLAttributes,
   ReactNode,
 } from 'react'
-import { GUCommonStyleProps, useTheme, jsx } from '../style'
+import { GUCommonStyleProps, jsx, useTheme } from '../style'
 
 type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,

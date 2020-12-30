@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
 import { GUCommonStyleProps } from '../style';
 declare type HTMLInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 export declare type GUInputProps = HTMLInputProps & GUCommonStyleProps & {

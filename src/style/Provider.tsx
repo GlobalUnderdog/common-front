@@ -1,7 +1,6 @@
-/** @jsx jsx */
 import React, { Fragment } from 'react'
 import { ScreenClassProvider, setConfiguration } from 'react-grid-system'
-import { Global, jsx, ThemeProvider, useTheme } from './emotion'
+import { Global, ThemeProvider, useTheme } from './emotion'
 import { GUTheme } from './theme'
 import { NeedsChildrenProps } from './util'
 

@@ -9,7 +9,17 @@ export const Breakpoints = {
   xlarge: 1200,
 } as const
 
-export const mediaQuery = {
+interface MediaQuery {
+  readonly small: string
+  readonly smallLandscape: string
+  readonly medium: string
+  readonly mediumOnly: string
+  readonly large: string
+  readonly largeOnly: string
+  readonly xlarge: string
+}
+
+export const mediaQuery: MediaQuery = {
   /**
    * Matches big and small phones (Bootstrap has two breakpoints for mobile devices).
    */
@@ -49,4 +59,4 @@ export const mediaQuery = {
    * Matches ultra wide desktops (1200px)
    */
   xlarge: `${media} ${minWidth(Breakpoints.xlarge)}`,
-} as const
+}

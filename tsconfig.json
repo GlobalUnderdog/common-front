@@ -1,23 +1,25 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "declarationDir": "dist",
     "esModuleInterop": true,
-    "importHelpers": true,
-    "jsx": "react",
-    "lib": ["es2015", "esnext.asynciterable", "dom", "ES2019.Array"],
-    "module": "esnext",
-    "target": "es5",
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": false,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "allowJs": false
+    "importHelpers": true,
+    "declaration": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "lib": ["es2015", "esnext.asynciterable", "dom", "ES2019.Array"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es5",
+    "noEmit": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "./types"]
+  "exclude": ["node_modules", "dist"],
+  "include": ["src"]
 }

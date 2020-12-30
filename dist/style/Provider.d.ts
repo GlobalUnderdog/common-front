@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import React from 'react';
 import { GUTheme } from './theme';
 import { NeedsChildrenProps } from './util';
