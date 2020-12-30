@@ -1,7 +1,8 @@
+/** @jsx jsx */
+import { wait } from '@globalunderdog/common'
 import React, { useEffect, useState } from 'react'
 import ReactModal, { Props as _ModalProps } from 'react-modal'
-import { wait } from '@globalunderdog/common'
-import { GUCommonStyleProps, Container, useTheme } from '../style'
+import { Container, GUCommonStyleProps, jsx, useTheme } from '../style'
 
 // To keep the functionality of `@globalunderdog/common-front` modal simple
 // we won't be exposing these props and instead use the doc-commented values

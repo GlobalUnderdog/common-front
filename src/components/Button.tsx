@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import { GUCommonStyleProps, styled, jsx } from '../style'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import { GUCommonStyleProps, styled } from '../style'
 
 export type GUButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,

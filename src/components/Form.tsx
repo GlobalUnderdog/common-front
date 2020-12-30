@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react'
-import { styled, jsx, css } from '../style/emotion'
+import { css, styled } from '../style/emotion'
 
 /**
  * Automatically hides children when `loading === true`, also allows the
