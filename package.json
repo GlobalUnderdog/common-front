@@ -1,9 +1,9 @@
 {
   "name": "@globalunderdog/common-front",
-  "version": "2.0.3",
-  "private": true,
+  "version": "2.0.4",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rm -Rf dist && rm -Rf esm",
     "build": "yarn build:esm && yarn build:cjs",
@@ -11,27 +11,6 @@
     "build:cjs": "NODE_ENV=production babel --config-file ./babel.config.cjs.json src --out-dir dist --extensions '.ts,.tsx'",
     "postbuild:cjs": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir dist",
     "postbuild:esm": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir esm"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.1.1",
-    "@emotion/styled": "^11.0.0",
-    "@globalunderdog/common": "https://github.com/GlobalUnderdog/common#1.4.1",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-gtm-module": "^2.0.0",
-    "@types/react-modal": "^3.1.2",
-    "@types/react": "^17.0.0",
-    "emotion-theming": "^10.0.27",
-    "next": "10.0.0",
-    "react-awesome-reveal": "^3.3.1",
-    "react-dom": "^17.0.1",
-    "react-ga": "^3.1.2",
-    "react-grid-system": "^7.1.1",
-    "react-gtm-module": "^2.0.11",
-    "react-modal": "^3.11.2",
-    "react-scripts": "2.1.5",
-    "react-ssr-prepass": "^1.2.1",
-    "react": "^17.0.1",
-    "unstated-next": "^1.1.0"
   },
   "peerDependencies": {
     "@emotion/react": "^11.1.1",
@@ -62,21 +41,34 @@
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
     "@emotion/babel-plugin": "^11.0.0-next.17",
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
+    "@globalunderdog/common": "https://github.com/GlobalUnderdog/common#1.4.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-gtm-module": "^2.0.0",
+    "@types/react-modal": "^3.1.2",
+    "@types/react": "^17.0.0",
+    "emotion-theming": "^10.0.27",
+    "next": "10.0.0",
+    "react-awesome-reveal": "^3.3.1",
+    "react-dom": "^17.0.1",
+    "react-ga": "^3.1.2",
+    "react-grid-system": "^7.1.1",
+    "react-gtm-module": "^2.0.11",
+    "react-modal": "^3.11.2",
+    "react-scripts": "2.1.5",
+    "react-ssr-prepass": "^1.2.1",
+    "react": "^17.0.1",
     "tslib": "^2.0.3",
     "type-fest": "^0.19.0",
     "typescript": "^4.0.3",
+    "unstated-next": "^1.1.0",
     "web-vitals": "^0.2.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
