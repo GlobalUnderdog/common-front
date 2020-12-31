@@ -1,1 +1,0 @@
-function _templateObject(){var data=babelHelpers.taggedTemplateLiteral(["\n  ","\n"]);_templateObject=function _templateObject(){return data;};return data;}import{styled}from'../style';export var GUButton=styled.button(_templateObject(),function(p){return p.theme.button.css(p.theme,p);});
