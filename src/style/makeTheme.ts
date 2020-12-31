@@ -18,7 +18,7 @@ const handleCSSRule = (
 
   return {
     css: (theme, props) => {
-      // Overwrites values from defaultStyle with the ones passed by ThemeCSSFunc
+      // Overwrites values from defaultStyle with the ones passed by ThemeCSSFunc.
       const styles = [defaultRule.css, rulesCss]
         .flat(2)
         .map((st) => st(theme, props))
