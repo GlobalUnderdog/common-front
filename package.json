@@ -1,9 +1,9 @@
 {
   "name": "@globalunderdog/common-front",
   "version": "2.0.3",
-  "private": true,
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rm -Rf dist && rm -Rf esm",
     "build": "yarn build:esm && yarn build:cjs",
