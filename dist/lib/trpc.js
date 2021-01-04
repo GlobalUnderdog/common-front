@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.trpcConfig=exports.trpc=void 0;var _client=require("@tianhuil/simple-trpc/dist/client");/**
+"use strict";var _Object$defineProperty=require("@babel/runtime-corejs3/core-js-stable/object/define-property");_Object$defineProperty(exports,"__esModule",{value:true});exports.trpcConfig=exports.trpc=void 0;var _client=require("@tianhuil/simple-trpc/dist/client");/**
  * The default client uses localhost:8080 as its url and 3000ms as timeout,
  * use trpcConfig to change these values (this is automatically set up if
  * guLibConfig is called)

@@ -12,5 +12,14 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["@emotion", "@babel/plugin-transform-runtime"]
+  "plugins": [
+    "@emotion",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true,
+        "corejs": 3
+      }
+    ]
+  ]
 }

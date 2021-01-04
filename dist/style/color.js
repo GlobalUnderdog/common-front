@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.guColorTypes=void 0;var guColorTypes=['canvas','ink','primary','secondary','error','warning','info','success'];exports.guColorTypes=guColorTypes;
+"use strict";var _Object$defineProperty=require("@babel/runtime-corejs3/core-js-stable/object/define-property");_Object$defineProperty(exports,"__esModule",{value:true});exports.guColorTypes=void 0;var guColorTypes=['canvas','ink','primary','secondary','error','warning','info','success'];exports.guColorTypes=guColorTypes;
