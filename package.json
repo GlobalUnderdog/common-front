@@ -12,6 +12,11 @@
     "postbuild:cjs": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir dist",
     "postbuild:esm": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir esm"
   },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@babel/runtime-corejs3": "7.11.2",
+    "core-js-pure": "^3.8.2"
+  },
   "peerDependencies": {
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
