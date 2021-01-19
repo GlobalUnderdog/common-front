@@ -2,9 +2,14 @@ import { ReactNode } from 'react';
 import { GUColorType, SerializedStyles } from '../style';
 interface NavLinkProps {
     href?: string;
-    label: string;
+    child?: ReactNode;
+    /** Compatibility leftover, you should be using child for customizing this instead. */
+    label?: string;
+    /** Compatibility leftover, you should be using child for customizing this instead. */
     button?: boolean;
+    /** Compatibility leftover, you should be using child for customizing this instead. */
     color?: GUColorType;
+    /** Compatibility leftover, you should be using child for customizing this instead. */
     onClick?: VoidFunction;
 }
 export interface GUNavbarProps {
