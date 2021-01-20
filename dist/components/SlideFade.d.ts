@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import Reveal from 'react-awesome-reveal';
 export { AttentionSeeker, Bounce, default as Reveal, Fade, Flip, Hinge, JackInTheBox, Roll, Rotate, Slide, Zoom, } from 'react-awesome-reveal';
 declare type Direction = 'up' | 'down' | 'left' | 'right';
