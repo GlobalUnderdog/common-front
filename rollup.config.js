@@ -67,14 +67,12 @@ export default [
     // Please, never transform '@babel/runtime' to a string, as per documentation:
     // https://www.npmjs.com/package/@rollup/plugin-babel#babelhelpers
     external: [
+      ...Object.keys(pkg.peerDependencies || {}),
       /@babel\/runtime/,
       // For some reason these are not being automatically imported
       '@babel/runtime/helpers/defineProperty',
-      '@babel/runtime/helpers/extends',
-      '@babel/runtime/helpers/esm/extends',
       'react/jsx-runtime',
       'next/head',
-      ...Object.keys(pkg.peerDependencies || {}),
       'next/link',
       '@tianhuil/simple-trpc/dist/client',
     ],

@@ -1,12 +1,12 @@
 {
   "name": "@globalunderdog/common-front",
   "version": "2.1.0",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "esm/index.js",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist && rimraf esm",
-    "build": "rollup -c",
+    "build": "rollup -c && mv dist/index.js dist/index.cjs",
     "postbuild": "yarn typings:cjs && yarn typings:esm",
     "typings:cjs": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir dist",
     "typings:esm": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir esm"
