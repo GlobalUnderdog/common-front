@@ -51,13 +51,13 @@ export default [
     input,
     output: [
       {
-        dir: 'dist',
+        file: 'dist/index.cjs',
         format: 'cjs',
         name: '@globalunderdog/common-front',
         globals,
       },
       {
-        dir: 'esm',
+        file: 'dist/index.js',
         format: 'esm',
         name: '@globalunderdog/common-front',
         globals,

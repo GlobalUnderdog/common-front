@@ -2,14 +2,14 @@
   "name": "@globalunderdog/common-front",
   "version": "2.1.0",
   "main": "dist/index.cjs",
-  "module": "esm/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist && rimraf esm",
-    "build": "rollup -c && mv dist/index.js dist/index.cjs",
-    "postbuild": "yarn typings:cjs && yarn typings:esm",
-    "typings:cjs": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir dist",
-    "typings:esm": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir esm"
+    "prebuild": "rimraf dist",
+    "build": "rollup -c",
+    "postbuild": "yarn typings",
+    "typings": "tsc --noEmit false --emitDeclarationOnly --declaration --declarationDir dist"
   },
   "peerDependencies": {
     "@emotion/react": "^11.1.1",
