@@ -27,6 +27,3 @@ yarn-error.log*
 # Pre-built code, can stay in the project folder if an error happens during
 # Rollup builds
 pre
-
-# Types are available at dist
-esm/**/*.d.ts
