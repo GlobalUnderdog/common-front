@@ -154,16 +154,32 @@ const Wrapper = styled.div<WrapperProps>`
 
 interface NavLinkProps {
   href?: string
-  label: string
+  child?: ReactNode
+  /** Compatibility leftover, you should be using child for customizing this instead. */
+  label?: string
+  /** Compatibility leftover, you should be using child for customizing this instead. */
   button?: boolean
+  /** Compatibility leftover, you should be using child for customizing this instead. */
   color?: GUColorType
+  /** Compatibility leftover, you should be using child for customizing this instead. */
   onClick?: VoidFunction
 }
 const NavLink: React.FC<
   NavLinkProps & { setExpanded: (_: boolean) => void }
-> = ({ href, label, button, color, setExpanded, onClick }) => {
-  const theme = useTheme()
+> = ({ href, label, button, color, setExpanded, onClick, child }) => {
+  if (child) {
+    return href ? (
+      <Link href={href} passHref>
+        {child}
+      </Link>
+    ) : (
+      <Fragment>{child}</Fragment>
+    )
+  }
 
+  // Compatibility code for older versions of common-front
+
+  const theme = useTheme()
   // Forwarded click required by Next Link for non `<a/>`
   const childOnClick = (forwardedClick?: void) => {
     if (onClick) onClick()
@@ -230,14 +246,11 @@ export const GUNavbar: React.FC<GUNavbarProps> = ({
 
   // Declaring all links here so we can use Array.length for CSS heights,
   // note that in this case Preact doesn't need `key` prop in components.
-  const mappedLinks = links.map(({ href, label, color, button, onClick }) => (
+  const mappedLinks = links.map((props, index) => (
     <NavLink
-      href={href}
-      label={label}
+      key={`navbar-el-${index}-${props.href ?? props.label}`}
+      {...props}
       setExpanded={setExpanded}
-      color={color}
-      button={button}
-      onClick={onClick}
     />
   ))
 

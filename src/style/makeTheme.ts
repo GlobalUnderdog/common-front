@@ -47,6 +47,7 @@ export const makeTheme = <T extends GUTheme = GUTheme>(
   } = theme ? theme : ({} as T)
   return {
     color: {
+      ...color,
       secondary: {
         ...guDefaultTheme.color.secondary,
         ...color?.secondary,
